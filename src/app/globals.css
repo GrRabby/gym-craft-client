@@ -1,2 +1,51 @@
 @import "tailwindcss";
 @import "@heroui/styles"; 
+
+/* ============================================================
+   GymCraft animations — Tailwind v4 @theme registers each one
+   as an animate-* utility (e.g. `animate-gc-kb-0`).
+   ============================================================ */
+@theme {
+    --animate-gc-kb-0:     gcKB0 22s ease-in-out infinite alternate;
+    --animate-gc-kb-1:     gcKB1 22s ease-in-out infinite alternate;
+    --animate-gc-kb-2:     gcKB2 22s ease-in-out infinite alternate;
+    --animate-gc-fade-up:  gcFadeUp 700ms cubic-bezier(.2,.85,.25,1) forwards;
+    --animate-gc-progress: gcProgress linear forwards;
+}
+@theme {
+    --font-display: var(--font-oswald), sans-serif;
+    --font-heading: var(--font-bebas), sans-serif;
+    --font-sans: var(--font-inter), system-ui, sans-serif;
+}
+@keyframes gcKB0 {
+    0%   { transform: scale(1.08) translate3d(0, 0, 0); }
+    100% { transform: scale(1.18) translate3d(-2%, -1%, 0); }
+}
+@keyframes gcKB1 {
+    0%   { transform: scale(1.18) translate3d(2%, 1%, 0); }
+    100% { transform: scale(1.08) translate3d(0, 0, 0); }
+}
+@keyframes gcKB2 {
+    0%   { transform: scale(1.1)  translate3d(0, 2%, 0); }
+    100% { transform: scale(1.18) translate3d(-1.5%, -2%, 0); }
+}
+@keyframes gcFadeUp {
+    0%   { opacity: 0; transform: translate3d(0, 18px, 0); }
+    100% { opacity: 1; transform: none; }
+}
+@keyframes gcProgress {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .animate-gc-kb-0,
+    .animate-gc-kb-1,
+    .animate-gc-kb-2,
+    .animate-gc-fade-up,
+    .animate-gc-progress {
+        animation: none !important;
+    }
+    .animate-gc-fade-up { opacity: 1 !important; }
+    .animate-gc-progress { transform: scaleX(1) !important; }
+}

@@ -1,14 +1,6 @@
 import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { FaFacebookF, FaXTwitter, FaInstagram, FaYoutube } from "react-icons/fa6";
-/**
- * GymCraft — Footer
- * Place at: components/GymCraftFooter.jsx
- *
- * Renders at the bottom of every layout. Pairs visually with the navbar
- * (same gold hairline at the seam) and the login/register pages (faint
- * diamond-plate texture).
- */
 
 const QUICK_LINKS = [
     { label: "Home", href: "/" },
@@ -33,15 +25,13 @@ const SOCIAL = [
     { label: "YouTube",   href: "https://youtube.com/@gymcraft",  Icon: FaYoutube },
 ];
 
-export default function FooterSection() {
+export default function Footer() {
     const year = new Date().getFullYear();
 
     return (
         <footer className="relative bg-[#070707] font-sans text-[#cfc6b8] overflow-hidden">
-            {/* Gold hairline at the top — mirrors the navbar's bottom edge */}
             <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-[#C9962E]/55 to-transparent" />
 
-            {/* Subtle diamond-plate texture, very faint */}
             <div
                 className="absolute inset-0 opacity-[0.04] pointer-events-none"
                 style={{
@@ -49,30 +39,21 @@ export default function FooterSection() {
                         "repeating-linear-gradient(45deg, rgba(247,228,163,0.4) 0 1px, transparent 1px 18px), repeating-linear-gradient(-45deg, rgba(247,228,163,0.4) 0 1px, transparent 1px 18px)",
                 }}
             />
-            {/* Ambient gold glow behind the brand */}
-            <div className="absolute -left-20 -bottom-32 w-[480px] h-[300px] bg-[radial-gradient(closest-side,rgba(201,150,46,0.18),transparent)] pointer-events-none" />
+            <div className="absolute -left-20 -bottom-32 w-120 h-75 bg-[radial-gradient(closest-side,rgba(201,150,46,0.18),transparent)] pointer-events-none" />
 
             <div className="relative z-10 max-w-310 mx-auto px-6 pt-16 pb-8">
-                <style>{`@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&display=swap');`}</style>
-
-                {/* Main grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
 
-                    {/* Brand block */}
-                    <div className="lg:col-span-4">
-                        <Link href="/" className="inline-flex items-center gap-3 no-underline" aria-label="GymCraft home">
-                            <LogoMark />
-                            <div className="font-['Oswald'] font-bold text-2xl tracking-wider uppercase leading-none">
-                                <span className="bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] bg-clip-text text-transparent mr-1">GYM</span>
-                                <span className="text-white">CRAFT</span>
-                            </div>
+                    <div className="lg:col-span-5">
+                        <Link href="/" className="inline-flex items-center gap-0 no-underline" aria-label="GymCraft home">
+                            <img src="/Logo.png" width={150} height={150} />
                         </Link>
-                        <p className="text-[#8c8478] text-sm leading-relaxed mt-4 max-w-sm">
+                        <p className="text-[#8c8478] text-sm leading-relaxed max-w-sm">
                             A fitness and gym management platform built for those who treat
                             training like a craft. Book classes, follow trainers, and track every rep.
                         </p>
 
-                        {/* Social */}
+ 
                         <div className="mt-6">
                             <span className="font-['Oswald'] text-[#cfc6b8] text-xs font-semibold tracking-[3px] uppercase block mb-3">
                                 Follow Along
@@ -95,13 +76,10 @@ export default function FooterSection() {
                         </div>
                     </div>
 
-                    {/* Quick Links */}
                     <FooterColumn title="Quick Links" links={QUICK_LINKS} className="lg:col-span-2 lg:col-start-6" />
 
-                    {/* Resources */}
                     <FooterColumn title="Resources" links={RESOURCES} className="lg:col-span-2" />
 
-                    {/* Contact */}
                     <div className="lg:col-span-3">
                         <h3 className="font-['Oswald'] text-[#E8C667] text-xs font-semibold tracking-[3px] uppercase mb-4">
                             Get In Touch
@@ -125,10 +103,8 @@ export default function FooterSection() {
                     </div>
                 </div>
 
-                {/* Divider */}
                 <div className="mt-14 border-t border-[#C9962E]/15" />
 
-                {/* Bottom strip */}
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 text-[#7c7468] text-xs">
                     <p>
                         © {year} GymCraft. All rights reserved. Forged in Sylhet.
@@ -142,7 +118,6 @@ export default function FooterSection() {
     );
 }
 
-/* ---------- pieces ---------- */
 
 function FooterColumn({ title, links, className = "" }) {
     return (

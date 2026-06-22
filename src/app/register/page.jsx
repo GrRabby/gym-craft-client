@@ -101,7 +101,6 @@ export default function RegisterPage() {
 
     return (
         <main className="min-h-screen grid lg:grid-cols-2 bg-[#050505] font-sans text-white">
-            <style>{`@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Bebas+Neue&display=swap');`}</style>
             <aside className="relative hidden lg:flex flex-col justify-between overflow-hidden p-12 border-r border-[#C9962E]/20">
                 <div
                     className="absolute inset-0 bg-cover bg-center"

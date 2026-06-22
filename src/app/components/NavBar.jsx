@@ -168,12 +168,9 @@ export function GymCraftNavbar() {
     };
     return (
         <header className="sticky top-0 z-50 bg-linear-to-b from-[#0a0a0a] to-[#040404] backdrop-blur-xl saturate-160 border-b border-[#C9962E]/16 shadow-[0_10px_34px_rgba(0,0,0,0.5)] font-sans before:content-[''] before:absolute before:inset-0 before:z-0 before:pointer-events-none before:bg-[radial-gradient(460px_130px_at_16%_-20%,rgba(201,150,46,0.14),transparent_70%)] after:content-[''] after:absolute after:left-0 after:right-0 after:-bottom-px after:h-px after:z-1 after:bg-linear-to-r after:from-transparent after:via-[#F7E4A3]/55 after:to-transparent">
-            {/* Import clean alternative heading font */}
-            <style>{`@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&display=swap');`}</style>
 
             <div className="relative z-10 max-w-310 mx-auto px-6 h-18.5 flex items-center gap-7">
 
-                {/* Brand */}
                 <Link href="/" className="flex items-center gap-3 no-underline shrink-0" aria-label="GymCraft home">
                     <LogoMark />
                     <span className="flex flex-col justify-center leading-none">
@@ -187,7 +184,7 @@ export function GymCraftNavbar() {
                     </span>
                 </Link>
 
-                {/* Desktop links */}
+
                 <nav className="hidden md:flex items-center gap-2 ml-auto" aria-label="Primary">
                     {NAV_LINKS.map((link) => (
                         <Link
@@ -214,7 +211,6 @@ export function GymCraftNavbar() {
                     )}
                 </nav>
 
-                {/* Auth zone */}
                 <div className="flex items-center gap-3.5 ml-auto md:ml-0">
                     {isPending ? 
                         <Loader2 size={16} className="animate-spin" />
@@ -239,7 +235,6 @@ export function GymCraftNavbar() {
                 </div>
             </div>
 
-            {/* Mobile drawer */}
             <div className={`flex md:hidden flex-col gap-0.5 px-4 overflow-hidden bg-[#070707] transition-all duration-300 border-b ${mobileOpen ? "max-h-85 pt-2.5 pb-4 border-[#C9962E]/22" : "max-h-0 border-transparent"}`}>
                 {NAV_LINKS.map((link) => {
                     const Icon = link.icon;
