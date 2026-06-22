@@ -10,7 +10,10 @@ import {
     Menu,
     X,
     ChevronDown,
+    Loader2,
 } from "lucide-react";
+import { authClient } from "@/lib/auth-client";
+import { usePathname, useRouter } from "next/navigation";
 
 const NAV_LINKS = [
     { label: "Home", href: "/", icon: Home },
@@ -139,15 +142,30 @@ function UserMenu({ user, onLogout }) {
     );
 }
 
-export function GymCraftNavbar({
-    user = null,
-    active = "/",
-    onLogin = () => { },
-    onLogout = () => { },
-}) {
+export function GymCraftNavbar() {
+    const pathname = usePathname();
+    const router = useRouter();
     const [mobileOpen, setMobileOpen] = useState(false);
+    const { data: session, isPending } = authClient.useSession();
+    const [loggingOut, setLoggingOut] = useState(false);
+    const user = session?.user;
     const dashHref = user ? DASHBOARD_BY_ROLE[user.role] || "/dashboard" : null;
-
+    const isActive = (href) =>
+        href === "/" ? pathname === "/" : pathname.startsWith(href);
+    const handleLogout = async () => {
+        if (loggingOut) return;
+        setLoggingOut(true);
+        await authClient.signOut({
+            fetchOptions: {
+                onSuccess: () => {
+                    // Push home + refresh so server components reading the session re-render
+                    router.push("/login");
+                    router.refresh();
+                },
+                onError: () => setLoggingOut(false),
+            },
+        });
+    };
     return (
         <header className="sticky top-0 z-50 bg-linear-to-b from-[#0a0a0a] to-[#040404] backdrop-blur-xl saturate-160 border-b border-[#C9962E]/16 shadow-[0_10px_34px_rgba(0,0,0,0.5)] font-sans before:content-[''] before:absolute before:inset-0 before:z-0 before:pointer-events-none before:bg-[radial-gradient(460px_130px_at_16%_-20%,rgba(201,150,46,0.14),transparent_70%)] after:content-[''] after:absolute after:left-0 after:right-0 after:-bottom-px after:h-px after:z-1 after:bg-linear-to-r after:from-transparent after:via-[#F7E4A3]/55 after:to-transparent">
             {/* Import clean alternative heading font */}
@@ -175,9 +193,9 @@ export function GymCraftNavbar({
                         <Link
                             key={link.href}
                             href={link.href}
-                            className={`relative isolate overflow-hidden px-4.5 py-2.25 no-underline font-['Oswald'] font-medium text-[15px] tracking-wider uppercase border border-[#C9962E]/30 bg-white/2.5 [clip-path:polygon(8px_0,100%_0,100%_calc(100%-8px),calc(100%-8px)_100%,0_100%,0_8px)] transition-all duration-220 before:content-[''] before:absolute before:inset-0 before:z-[-1] before:bg-linear-to-br before:from-[#F7E4A3] before:via-[#E8C667] before:to-[#C9962E] before:translate-y-[101%] before:transition-transform before:duration-340 before:ease-[cubic-bezier(0.2,0.85,0.25,1)] hover:text-[#1a1304] hover:border-transparent hover:before:translate-y-0 ${active === link.href
-                                    ? "text-[#f7e4a3] border-[#C9962E]/55 bg-linear-to-b from-[#C9962E]/18 to-[#C9962E]/04 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-0.75 after:z-2 after:bg-linear-to-br after:from-[#F7E4A3] after:via-[#E8C667] after:to-[#C9962E] after:shadow-[0_0_12px_rgba(247,228,163,0.65)] hover:text-[#1a1304]"
-                                    : "text-[#e7e0d2]"
+                            className={`relative isolate overflow-hidden px-4.5 py-2.25 no-underline font-['Oswald'] font-medium text-[15px] tracking-wider uppercase border border-[#C9962E]/30 bg-white/2.5 [clip-path:polygon(8px_0,100%_0,100%_calc(100%-8px),calc(100%-8px)_100%,0_100%,0_8px)] transition-all duration-220 before:content-[''] before:absolute before:inset-0 before:z-[-1] before:bg-linear-to-br before:from-[#F7E4A3] before:via-[#E8C667] before:to-[#C9962E] before:translate-y-[101%] before:transition-transform before:duration-340 before:ease-[cubic-bezier(0.2,0.85,0.25,1)] hover:text-[#1a1304] hover:border-transparent hover:before:translate-y-0 ${isActive(link.href)
+                                ? "text-[#f7e4a3] border-[#C9962E]/55 bg-linear-to-b from-[#C9962E]/18 to-[#C9962E]/04 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-0.75 after:z-2 after:bg-linear-to-br after:from-[#F7E4A3] after:via-[#E8C667] after:to-[#C9962E] after:shadow-[0_0_12px_rgba(247,228,163,0.65)] hover:text-[#1a1304]"
+                                : "text-[#e7e0d2]"
                                 }`}
                         >
                             <span>{link.label}</span>
@@ -186,9 +204,9 @@ export function GymCraftNavbar({
                     {user && (
                         <Link
                             href={dashHref}
-                            className={`relative isolate overflow-hidden px-4.5 py-2.25 no-underline font-['Oswald'] font-medium text-[15px] tracking-wider uppercase border bg-white/2.5 [clip-path:polygon(8px_0,100%_0,100%_calc(100%-8px),calc(100%-8px)_100%,0_100%,0_8px)] transition-all duration-220 before:content-[''] before:absolute before:inset-0 before:z-[-1] before:bg-linear-to-br before:from-[#F7E4A3] before:via-[#E8C667] before:to-[#C9962E] before:translate-y-[101%] before:transition-transform before:duration-340 before:ease-[cubic-bezier(0.2,0.85,0.25,1)] hover:text-[#1a1304] hover:border-transparent hover:before:translate-y-0 text-[#e8c667] border-[#C9962E]/36 ${active === dashHref
-                                    ? "text-[#f7e4a3] border-[#C9962E]/55 bg-linear-to-b from-[#C9962E]/18 to-[#C9962E]/04 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-0.75 after:z-2 after:bg-linear-to-br after:from-[#F7E4A3] after:via-[#E8C667] after:to-[#C9962E] after:shadow-[0_0_12px_rgba(247,228,163,0.65)] hover:text-[#1a1304]"
-                                    : ""
+                            className={`relative isolate overflow-hidden px-4.5 py-2.25 no-underline font-['Oswald'] font-medium text-[15px] tracking-wider uppercase border bg-white/2.5 [clip-path:polygon(8px_0,100%_0,100%_calc(100%-8px),calc(100%-8px)_100%,0_100%,0_8px)] transition-all duration-220 before:content-[''] before:absolute before:inset-0 before:z-[-1] before:bg-linear-to-br before:from-[#F7E4A3] before:via-[#E8C667] before:to-[#C9962E] before:translate-y-[101%] before:transition-transform before:duration-340 before:ease-[cubic-bezier(0.2,0.85,0.25,1)] hover:text-[#1a1304] hover:border-transparent hover:before:translate-y-0 text-[#e8c667] border-[#C9962E]/36 ${isActive(dashHref)
+                                ? "text-[#f7e4a3] border-[#C9962E]/55 bg-linear-to-b from-[#C9962E]/18 to-[#C9962E]/04 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-0.75 after:z-2 after:bg-linear-to-br after:from-[#F7E4A3] after:via-[#E8C667] after:to-[#C9962E] after:shadow-[0_0_12px_rgba(247,228,163,0.65)] hover:text-[#1a1304]"
+                                : ""
                                 }`}
                         >
                             <span>Dashboard</span>
@@ -198,16 +216,13 @@ export function GymCraftNavbar({
 
                 {/* Auth zone */}
                 <div className="flex items-center gap-3.5 ml-auto md:ml-0">
-                    {user ? (
-                        <UserMenu user={user} onLogout={onLogout} />
+                    {isPending ? 
+                        <Loader2 size={16} className="animate-spin" />
+                     : user ? (
+                        <UserMenu user={user} onLogout={handleLogout} loggingOut={loggingOut} />
                     ) : (
-                        <Link
-                            href = '/login'
-                        >
-                            <button
-                                className="font-['Oswald'] font-semibold text-[15px] tracking-wider uppercase text-[#1a1304] bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] border-none cursor-pointer py-2.5 px-6 [clip-path:polygon(9px_0,100%_0,100%_calc(100%-9px),calc(100%-9px)_100%,0_100%,0_9px)] shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_4px_18px_rgba(201,150,46,0.3)] transition-all active:translate-y-0 hover:-translate-y-px hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_7px_26px_rgba(201,150,46,0.45)]"
-                                onClick={onLogin}
-                            >
+                        <Link href="/login">
+                            <button className="font-['Oswald'] font-semibold text-[15px] tracking-wider uppercase text-[#1a1304] bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] border-none cursor-pointer py-2.5 px-6 [clip-path:polygon(9px_0,100%_0,100%_calc(100%-9px),calc(100%-9px)_100%,0_100%,0_9px)] shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_4px_18px_rgba(201,150,46,0.3)] transition-all active:translate-y-0 hover:-translate-y-px hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_7px_26px_rgba(201,150,46,0.45)]">
                                 Log In
                             </button>
                         </Link>
@@ -232,7 +247,7 @@ export function GymCraftNavbar({
                         <Link
                             key={link.href}
                             href={link.href}
-                            className={`flex items-center gap-3 p-3.25 no-underline font-['Oswald'] font-medium text-base tracking-wide uppercase rounded-lg transition-colors text-[#cfc6b8] hover:bg-[#C9962E]/10 hover:text-white ${active === link.href ? "bg-[#C9962E]/10 text-white!" : ""}`}
+                            className={`flex items-center gap-3 p-3.25 no-underline font-['Oswald'] font-medium text-base tracking-wide uppercase rounded-lg transition-colors text-[#cfc6b8] hover:bg-[#C9962E]/10 hover:text-white ${isActive(link.href) ? "bg-[#C9962E]/10 text-white!" : ""}`}
                             onClick={() => setMobileOpen(false)}
                         >
                             <Icon size={18} className="text-[#e8c667]" />
@@ -243,7 +258,7 @@ export function GymCraftNavbar({
                 {user && (
                     <Link
                         href={dashHref}
-                        className={`flex items-center gap-3 p-3.25 no-underline font-['Oswald'] font-medium text-base tracking-wide uppercase rounded-lg transition-colors text-[#cfc6b8] hover:bg-[#C9962E]/10 hover:text-white ${active === dashHref ? "bg-[#C9962E]/10 text-white!" : ""}`}
+                        className={`flex items-center gap-3 p-3.25 no-underline font-['Oswald'] font-medium text-base tracking-wide uppercase rounded-lg transition-colors text-[#cfc6b8] hover:bg-[#C9962E]/10 hover:text-white ${isActive(dashHref) ? "bg-[#C9962E]/10 text-white!" : ""}`}
                         onClick={() => setMobileOpen(false)}
                     >
                         <LayoutDashboard size={18} className="text-[#e8c667]" />

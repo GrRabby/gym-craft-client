@@ -266,7 +266,7 @@ function Field({ id, label, icon: Icon, error, rightLink, children }) {
                 {rightLink}
             </div>
             <div
-                className={`relative bg-[#070707] border-t border-t-black/80 border-b border-b-[#2a2218] border-x border-x-[#1a1612] shadow-[inset_0_2px_4px_rgba(0,0,0,0.7)] transition-colors focus-within:border-b-[#E8C667]/70 focus-within:shadow-[inset_0_2px_4px_rgba(0,0,0,0.7),0_0_0_1px_rgba(232,198,103,0.25),0_0_18px_rgba(232,198,103,0.18)] ${error ? "!border-b-[#ff5a5a]/70" : ""}`}
+                className={`relative bg-[#070707] border-t border-t-black/80 border-b border-b-[#2a2218] border-x border-x-[#1a1612] shadow-[inset_0_2px_4px_rgba(0,0,0,0.7)] transition-colors focus-within:border-b-[#E8C667]/70 focus-within:shadow-[inset_0_2px_4px_rgba(0,0,0,0.7),0_0_0_1px_rgba(232,198,103,0.25),0_0_18px_rgba(232,198,103,0.18)] ${error ? "border-b-[#ff5a5a]/70!" : ""}`}
             >
                 <Icon size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#7c7468] pointer-events-none" />
                 {children}
