@@ -150,6 +150,10 @@ export function GymCraftNavbar() {
     const [loggingOut, setLoggingOut] = useState(false);
     const user = session?.user;
     const dashHref = user ? DASHBOARD_BY_ROLE[user.role] || "/dashboard" : null;
+    const HIDE_ON = ["/dashboard", "/login", "/register"];
+    if (HIDE_ON.some((p) => pathname === p || pathname.startsWith(p + "/"))) {
+        return null;
+    }
     const isActive = (href) =>
         href === "/" ? pathname === "/" : pathname.startsWith(href);
     const handleLogout = async () => {

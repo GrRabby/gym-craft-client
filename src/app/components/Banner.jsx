@@ -111,12 +111,12 @@ export default function GymCraftBanner() {
                             Explore Classes
                         </Button>
 
-                        <Link
+                        {/* <Link
                             href="/classes/schedule"
                             className="inline-flex items-center gap-2 font-['Oswald'] font-medium text-sm tracking-[2px] uppercase text-[#cfc6b8] hover:text-white no-underline py-3 px-2 border-b border-[#C9962E]/30 hover:border-[#E8C667] transition-colors"
                         >
                             View This Week's Schedule
-                        </Link>
+                        </Link> */}
                     </div>
 
                     <div className="hidden sm:flex items-center gap-8 mt-12 pt-6 border-t border-[#C9962E]/15 max-w-md opacity-0 animate-gc-fade-up [animation-delay:400ms]">

@@ -1,6 +1,8 @@
+'use client'
 import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { FaFacebookF, FaXTwitter, FaInstagram, FaYoutube } from "react-icons/fa6";
+import { usePathname } from "next/navigation";
 
 const QUICK_LINKS = [
     { label: "Home", href: "/" },
@@ -27,7 +29,11 @@ const SOCIAL = [
 
 export default function Footer() {
     const year = new Date().getFullYear();
-
+    const pathname = usePathname()
+    const HIDE_ON = ["/dashboard", "/login", "/register"];
+    if (HIDE_ON.some((p) => pathname === p || pathname.startsWith(p + "/"))) {
+        return null;
+    }
     return (
         <footer className="relative bg-[#070707] font-sans text-[#cfc6b8] overflow-hidden">
             <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-[#C9962E]/55 to-transparent" />
