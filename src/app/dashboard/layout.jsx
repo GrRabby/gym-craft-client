@@ -1,6 +1,6 @@
 import DashboardNavbar from "@/app/components/Dashboardnavbar";
 import DashboardSidebar from "@/app/components/Dashboardsidebar";
-
+import { Toaster } from "sonner";
 
 export default function DashboardLayout ({ children }) {
     return (
@@ -10,6 +10,7 @@ export default function DashboardLayout ({ children }) {
                 <DashboardNavbar></DashboardNavbar>
                 <main className="p-6 lg:p-10">{children}</main>
             </main>
+            <Toaster theme="dark" position="top-right" richColors />
         </div>
     );
 }
