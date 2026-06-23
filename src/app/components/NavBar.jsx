@@ -10,10 +10,10 @@ import {
     Menu,
     X,
     ChevronDown,
-    Loader2,
 } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
 import { usePathname, useRouter } from "next/navigation";
+import { DumbbellSpinner } from "./DumbbellSpinner";
 
 const NAV_LINKS = [
     { label: "Home", href: "/", icon: Home },
@@ -217,7 +217,7 @@ export function GymCraftNavbar() {
 
                 <div className="flex items-center gap-3.5 ml-auto md:ml-0">
                     {isPending ? 
-                        <Loader2 size={16} className="animate-spin" />
+                        <DumbbellSpinner size={14} />
                      : user ? (
                         <UserMenu user={user} onLogout={handleLogout} loggingOut={loggingOut} />
                     ) : (

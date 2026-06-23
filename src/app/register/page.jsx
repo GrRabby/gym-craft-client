@@ -4,11 +4,11 @@ import { useSearchParams } from "next/navigation";
 import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import {
-    Eye, EyeOff, Mail, Lock, User, Upload, Camera, Check, X,
-    Loader2, Dumbbell, Flame,
+    Eye, EyeOff, Mail, Lock, User, Upload, Camera, Check, X, Dumbbell, Flame,
 } from "lucide-react";
 import { registerUserAction } from "./register";
 import { authClient } from "@/lib/auth-client";
+import { DumbbellSpinner } from "../components/DumbbellSpinner";
 
 const PW_RULES = {
     length: (v) => v.length >= 6,
@@ -322,7 +322,7 @@ export default function RegisterPage() {
                             <span className="flex items-center justify-center gap-2">
                                 {isSubmitting ? (
                                     <>
-                                        <Loader2 size={16} className="animate-spin" />
+                                        <DumbbellSpinner size={16} />
                                         Forging your account…
                                     </>
                                 ) : (
@@ -346,7 +346,7 @@ export default function RegisterPage() {
                             disabled={googleLoading}
                             className="w-full flex items-center justify-center gap-3 bg-[#1a1a1a] hover:bg-[#222] border border-[#C9962E]/30 hover:border-[#C9962E]/60 text-[#e7e0d2] font-['Oswald'] text-sm tracking-wider uppercase font-medium py-3.5 px-6 cursor-pointer transition-colors"
                         >
-                            {googleLoading ? <Loader2 size={16} className="animate-spin" /> : <GoogleIcon />}
+                            {googleLoading ? <DumbbellSpinner size={16} /> : <GoogleIcon />}
                             Google
                         </button>
 

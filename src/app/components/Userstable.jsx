@@ -4,17 +4,18 @@ import { useState, useMemo, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import {
-    Search, Shield, ShieldOff, Crown, Loader2, ChevronLeft, ChevronRight,
+    Search, Shield, ShieldOff, Crown, ChevronLeft, ChevronRight,
 } from "lucide-react";
 import {
     blockUserAction, unblockUserAction, makeAdminAction,
 } from "@/actions/users";
+import { DumbbellSpinner } from "./DumbbellSpinner";
 
 const ROLE_LABELS = { member: "Member", trainer: "Trainer", admin: "Admin" };
 const ROLE_STYLES = {
-    member:  "text-[#cfc6b8] bg-[#1a1612] border-[#3a342a]",
+    member: "text-[#cfc6b8] bg-[#1a1612] border-[#3a342a]",
     trainer: "text-[#7dd3fc] bg-[#0a1a24] border-[#1e3a52]",
-    admin:   "text-[#E8C667] bg-[#1f1810] border-[#C9962E]/40",
+    admin: "text-[#E8C667] bg-[#1f1810] border-[#C9962E]/40",
 };
 const PAGE_SIZE = 10;
 
@@ -52,16 +53,22 @@ export default function UsersTable({ initialUsers = [] }) {
         });
     };
 
-    const onBlock   = (u) => runAction(blockUserAction,   u, `${u.name} blocked.`);
+    const onBlock = (u) => runAction(blockUserAction, u, `${u.name} blocked.`);
     const onUnblock = (u) => runAction(unblockUserAction, u, `${u.name} unblocked.`);
     const onPromote = (u) => {
-        if (!confirm(`Promote ${u.name} to admin?\n\nAdmins have full access. This can't be easily undone.`)) return;
-        runAction(makeAdminAction, u, `${u.name} promoted to admin.`);
+        toast(`Promote ${u.name} to admin?`, {
+            description: "Admins have full access. This can't be easily undone.",
+            duration: 10000,
+            action: {
+                label: "Promote",
+                onClick: () => runAction(makeAdminAction, u, `${u.name} promoted to admin.`),
+            },
+            cancel: { label: "Cancel" },
+        });
     };
 
     return (
         <div className="space-y-6">
-            {/* Header + filters */}
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
                 <div>
                     <h2 className="font-['Bebas_Neue'] text-3xl tracking-wide text-white leading-none">All Users</h2>
@@ -94,8 +101,6 @@ export default function UsersTable({ initialUsers = [] }) {
                     ]} />
                 </div>
             </div>
-
-            {/* Table */}
             <div className="bg-[#0a0a0a] border border-[#C9962E]/15 overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-sm">
@@ -172,7 +177,7 @@ function UserRow({ user, pending, onBlock, onUnblock, onPromote }) {
             <td className="px-5 py-3.5">
                 <div className="flex items-center justify-end gap-2">
                     {pending ? (
-                        <Loader2 size={16} className="animate-spin text-[#E8C667]" />
+                        <DumbbellSpinner size={16} />
                     ) : (
                         <>
                             {user.role !== "admin" && (
@@ -201,8 +206,8 @@ function Th({ children, align = "left" }) {
 
 function ActionBtn({ icon: Icon, variant, children, onClick }) {
     const styles = {
-        gold:   "bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] text-[#1a1304] hover:-translate-y-px shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_3px_10px_rgba(201,150,46,0.25)]",
-        ghost:  "bg-white/5 border border-[#C9962E]/30 hover:border-[#E8C667] text-[#cfc6b8] hover:text-white",
+        gold: "bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] text-[#1a1304] hover:-translate-y-px shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_3px_10px_rgba(201,150,46,0.25)]",
+        ghost: "bg-white/5 border border-[#C9962E]/30 hover:border-[#E8C667] text-[#cfc6b8] hover:text-white",
         danger: "bg-[#ff5a5a]/8 border border-[#ff5a5a]/40 hover:border-[#ff5a5a] text-[#ff8585] hover:text-[#ffadad]",
     };
     return (

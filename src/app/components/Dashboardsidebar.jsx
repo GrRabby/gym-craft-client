@@ -21,9 +21,9 @@ import {
     Menu,
     X,
     ChevronRight,
-    Loader2,
 } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
+import { DumbbellSpinner } from "./DumbbellSpinner";
 
 const ROLE_LABELS = {
     member:  "Member",
@@ -186,7 +186,7 @@ export default function DashboardSidebar() {
                         disabled={loggingOut}
                         className="mt-3 group w-full flex items-center gap-2.5 px-3 py-2.5 text-[#8c8478] hover:text-[#ff8585] hover:bg-[#ff5a5a]/5 font-['Oswald'] text-xs tracking-[2px] uppercase font-semibold transition-colors disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
                     >
-                        {loggingOut ? <Loader2 size={14} className="animate-spin" /> : <LogOut size={14} />}
+                        {loggingOut ? <DumbbellSpinner size={14} /> : <LogOut size={14} />}
                         {loggingOut ? "Logging out…" : "Log out"}
                     </button>
                 </div>

@@ -4,15 +4,6 @@ import { requireAdmin } from "@/lib/permissions";
 import { revalidatePath } from "next/cache";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
-
-/**
- * Server-side fetches to the Express API.
- *
- * Pattern matches CarFleet: server action verifies admin via Better Auth, then
- * calls Express directly. No shared key — the Express API is on a private
- * network in deployment (Render internal URL / VPC), so direct calls are fine.
- */
-
 export async function getAllUsers() {
     const { error } = await requireAdmin();
     if (error) throw new Error(error);

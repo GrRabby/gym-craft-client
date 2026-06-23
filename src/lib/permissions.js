@@ -6,7 +6,7 @@ export async function getCurrentUser() {
     return session?.user || null;
 }
 
-/** Gate: only admins past this point. */
+
 export async function requireAdmin() {
     const user = await getCurrentUser();
     if (!user) return { user: null, error: "Not authenticated" };
@@ -14,11 +14,6 @@ export async function requireAdmin() {
     return { user, error: null };
 }
 
-/**
- * Gate for state-changing actions. Returns blocked: true distinctly so
- * the UI can show "Action restricted by Admin" instead of a generic error.
- * Use at the top of: bookClassAction, applyTrainerAction, postCommentAction.
- */
 export async function requireActiveUser() {
     const user = await getCurrentUser();
     if (!user) return { user: null, error: "Not authenticated" };

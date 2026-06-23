@@ -3,8 +3,9 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Eye, EyeOff, Mail, Lock, Loader2, Dumbbell, Flame } from "lucide-react";
+import { Eye, EyeOff, Mail, Lock, Dumbbell, Flame } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
+import { DumbbellSpinner } from "../components/DumbbellSpinner";
 // TODO: replace with your real better-auth client
 
 
@@ -209,7 +210,7 @@ export default function LoginPage() {
                             <span className="flex items-center justify-center gap-2">
                                 {isSubmitting ? (
                                     <>
-                                        <Loader2 size={16} className="animate-spin" />
+                                        <DumbbellSpinner size={16} />
                                         Locking in…
                                     </>
                                 ) : (
@@ -233,7 +234,7 @@ export default function LoginPage() {
                             disabled={googleLoading}
                             className="w-full flex items-center justify-center gap-3 bg-[#1a1a1a] hover:bg-[#222] border border-[#C9962E]/30 hover:border-[#C9962E]/60 text-[#e7e0d2] font-['Oswald'] text-sm tracking-wider uppercase font-medium py-3.5 px-6 cursor-pointer transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
                         >
-                            {googleLoading ? <Loader2 size={16} className="animate-spin" /> : <GoogleIcon />}
+                            {googleLoading ? <DumbbellSpinner size={16} /> : <GoogleIcon />}
                             Google
                         </button>
                     </form>
