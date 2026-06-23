@@ -5,8 +5,18 @@ import { useState } from "react";
 import {
     LayoutDashboard,
     CalendarCheck,
+    CalendarPlus,
+    CalendarDays,
     Award,
     Heart,
+    Users,
+    UserPlus,
+    BadgeCheck,
+    Dumbbell,
+    MessageSquare,
+    MessageSquarePlus,
+    MessagesSquare,
+    Receipt,
     LogOut,
     Menu,
     X,
@@ -15,13 +25,42 @@ import {
 } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
 
+const ROLE_LABELS = {
+    member:  "Member",
+    trainer: "Trainer",
+    admin:   "Admin",
+};
 
-const NAV_LINKS = [
-    { label: "Overview",         href: "/dashboard/member",           icon: LayoutDashboard, exact: true },
-    { label: "Booked Classes",   href: "/dashboard/member/bookings",  icon: CalendarCheck },
-    { label: "Apply as Trainer", href: "/dashboard/member/apply",     icon: Award },
-    { label: "Favorite Classes", href: "/dashboard/member/favorites", icon: Heart },
-];
+const SECTION_LABELS = {
+    member:  "Your Area",
+    trainer: "Coach Tools",
+    admin:   "Admin Tools",
+};
+const NAV_BY_ROLE = {
+    member: [
+        { label: "Overview",         href: "/dashboard/member",           icon: LayoutDashboard, exact: true },
+        { label: "Booked Classes",   href: "/dashboard/member/bookings",  icon: CalendarCheck },
+        { label: "Apply as Trainer", href: "/dashboard/member/apply",     icon: Award },
+        { label: "Favorite Classes", href: "/dashboard/member/favorites", icon: Heart },
+    ],
+    trainer: [
+        { label: "Overview",       href: "/dashboard/trainer",             icon: LayoutDashboard, exact: true },
+        { label: "Add Class",      href: "/dashboard/trainer/classes/new", icon: CalendarPlus },
+        { label: "My Classes",     href: "/dashboard/trainer/classes",     icon: CalendarDays,    exact: true },
+        { label: "Add Forum Post", href: "/dashboard/trainer/forum/new",   icon: MessageSquarePlus },
+        { label: "My Forum Posts", href: "/dashboard/trainer/forum",       icon: MessageSquare,   exact: true },
+    ],
+    admin: [
+        { label: "Overview",          href: "/dashboard/admin",                       icon: LayoutDashboard, exact: true },
+        { label: "Manage Users",      href: "/dashboard/admin/users",                 icon: Users },
+        { label: "Applied Trainers",  href: "/dashboard/admin/trainers/applications", icon: UserPlus },
+        { label: "Manage Trainers",   href: "/dashboard/admin/trainers",              icon: BadgeCheck,      exact: true },
+        { label: "Manage Classes",    href: "/dashboard/admin/classes",               icon: Dumbbell },
+        { label: "Add Forum Post",    href: "/dashboard/admin/forum/new",             icon: MessageSquarePlus },
+        { label: "Forum Post Manage", href: "/dashboard/admin/forum",                 icon: MessagesSquare,  exact: true },
+        { label: "Transactions",      href: "/dashboard/admin/transactions",          icon: Receipt },
+    ],
+};
 
 export default function DashboardSidebar() {
     const pathname = usePathname();
@@ -31,6 +70,9 @@ export default function DashboardSidebar() {
 
     const { data: session } = authClient.useSession();
     const user = session?.user;
+
+    const role = ROLE_LABELS[user?.role] ? user.role : "member";
+    const navLinks = NAV_BY_ROLE[role];
 
     const isActive = (href, exact = false) =>
         exact ? pathname === href : pathname === href || pathname.startsWith(href + "/");
@@ -51,7 +93,6 @@ export default function DashboardSidebar() {
 
     return (
         <>
-            {/* Mobile trigger — floating, hidden on lg+ */}
             <button
                 type="button"
                 onClick={() => setMobileOpen(true)}
@@ -61,7 +102,6 @@ export default function DashboardSidebar() {
                 <Menu size={20} />
             </button>
 
-            {/* Mobile backdrop */}
             {mobileOpen && (
                 <div
                     onClick={() => setMobileOpen(false)}
@@ -70,7 +110,6 @@ export default function DashboardSidebar() {
                 />
             )}
 
-            {/* ===== SIDEBAR ===== */}
             <aside
                 className={`
                     fixed inset-y-0 left-0 z-50 w-[280px] flex flex-col
@@ -80,17 +119,13 @@ export default function DashboardSidebar() {
                     ${mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
                 `}
             >
-                {/* Subtle brushed-metal texture */}
                 <div
                     className="absolute inset-0 opacity-[0.035] pointer-events-none [background-image:repeating-linear-gradient(0deg,rgba(247,228,163,0.6)_0_1px,transparent_1px_3px)]"
                     aria-hidden="true"
                 />
-                {/* Ambient gold glow at the top */}
                 <div className="absolute top-0 left-0 right-0 h-32 bg-[radial-gradient(closest-side,rgba(201,150,46,0.18),transparent)] pointer-events-none" />
-                {/* Gold seam on the right edge */}
                 <div className="absolute right-0 top-0 bottom-0 w-px bg-linear-to-b from-transparent via-[#C9962E]/40 to-transparent pointer-events-none" />
 
-                {/* Header: brand + mobile close */}
                 <div className="relative px-6 pt-6 pb-5 flex items-center justify-between">
                     <Link href="/" className="flex items-center gap-2.5 no-underline" aria-label="GymCraft home">
                         <LogoMark size={36} />
@@ -100,7 +135,7 @@ export default function DashboardSidebar() {
                                 <span className="text-white">CRAFT</span>
                             </span>
                             <span className="font-['Oswald'] text-[9px] tracking-[3px] uppercase text-[#7c7468] mt-1">
-                                Member Dashboard
+                                {ROLE_LABELS[role]} Dashboard
                             </span>
                         </div>
                     </Link>
@@ -115,17 +150,15 @@ export default function DashboardSidebar() {
                     </button>
                 </div>
 
-                {/* Section label */}
                 <div className="relative px-6 mt-4 mb-3 flex items-center gap-2.5">
                     <div className="h-px w-6 bg-[#E8C667]" />
                     <span className="font-['Oswald'] text-[#E8C667] text-[10px] font-semibold tracking-[3px] uppercase">
-                        Navigation
+                        {SECTION_LABELS[role]}
                     </span>
                 </div>
 
-                {/* Nav */}
-                <nav className="relative flex flex-col gap-1 px-3" aria-label="Member dashboard">
-                    {NAV_LINKS.map((link) => (
+                <nav className="relative flex flex-col gap-1 px-3 pb-4 overflow-y-auto" aria-label={`${ROLE_LABELS[role]} dashboard`}>
+                    {navLinks.map((link) => (
                         <NavItem
                             key={link.href}
                             {...link}
@@ -135,7 +168,6 @@ export default function DashboardSidebar() {
                     ))}
                 </nav>
 
-                {/* Footer: user card + logout */}
                 <div className="relative mt-auto p-4 border-t border-[#C9962E]/15">
                     {user && (
                         <div className="flex items-center gap-3 p-3 bg-white/[0.02] border border-[#C9962E]/15 [clip-path:polygon(8px_0,100%_0,100%_calc(100%-8px),calc(100%-8px)_100%,0_100%,0_8px)]">
@@ -143,7 +175,7 @@ export default function DashboardSidebar() {
                             <div className="flex-1 min-w-0">
                                 <p className="text-white text-sm font-medium truncate">{user.name}</p>
                                 <p className="text-[#E8C667] text-[10px] uppercase tracking-[2px] font-['Oswald'] font-semibold">
-                                    {user.role || "Member"}
+                                    {ROLE_LABELS[user.role] || "Member"}
                                 </p>
                             </div>
                         </div>
@@ -163,8 +195,6 @@ export default function DashboardSidebar() {
     );
 }
 
-/* ---------- Nav item — rack-rail style ---------- */
-
 function NavItem({ href, label, icon: Icon, active, onNavigate }) {
     return (
         <Link
@@ -180,7 +210,6 @@ function NavItem({ href, label, icon: Icon, active, onNavigate }) {
                 }
             `}
         >
-            {/* Active gold rail */}
             <span
                 aria-hidden="true"
                 className={`
@@ -192,7 +221,6 @@ function NavItem({ href, label, icon: Icon, active, onNavigate }) {
                 `}
             />
 
-            {/* Icon "key" — chamfered gold plate on active, dark box on idle */}
             <span
                 className={`
                     inline-flex items-center justify-center h-9 w-9 shrink-0 transition-all duration-200
@@ -206,7 +234,6 @@ function NavItem({ href, label, icon: Icon, active, onNavigate }) {
                 <Icon size={16} strokeWidth={active ? 2.2 : 1.8} />
             </span>
 
-            {/* Label */}
             <span
                 className={`
                     flex-1 font-['Oswald'] font-medium text-[13px] tracking-[1.5px] uppercase transition-colors
@@ -216,7 +243,6 @@ function NavItem({ href, label, icon: Icon, active, onNavigate }) {
                 {label}
             </span>
 
-            {/* Active chevron */}
             <ChevronRight
                 size={14}
                 className={`shrink-0 transition-all duration-200 ${
@@ -228,8 +254,6 @@ function NavItem({ href, label, icon: Icon, active, onNavigate }) {
         </Link>
     );
 }
-
-/* ---------- bits ---------- */
 
 function Avatar({ user, size = 38 }) {
     const initials = (user?.name || "U")
