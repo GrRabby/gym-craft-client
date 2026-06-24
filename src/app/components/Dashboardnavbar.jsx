@@ -1,6 +1,5 @@
 'use client'
 import { authClient } from "@/lib/auth-client";
-
 const ROLE_LABELS = {
     member:  "Member",
     trainer: "Trainer",

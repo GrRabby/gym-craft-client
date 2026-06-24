@@ -6,7 +6,17 @@ const client = new MongoClient(process.env.MONNGODB_URL);
 const db = client.db('gym-craft');
 export const auth = betterAuth({
     plugins: [
-        jwt()
+        jwt({
+            // Bake the fields Express needs to authorize requests right into
+            // the JWT payload — no DB lookup needed on every API call.
+            jwt: {
+                definePayload: ({ user }) => ({
+                    id: user.id,
+                    role: user.role,
+                    status: user.status,
+                }),
+            },
+        }),
     ],
     session : {
         cookieCache : {

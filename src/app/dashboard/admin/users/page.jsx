@@ -9,6 +9,14 @@ export default async function ManageUsersPage() {
     const { error } = await requireAdmin();
     if (error) redirect("/login?redirect=/dashboard/admin/users");
 
-    const users = await getAllUsers();
+    const { users, error: fetchError } = await getAllUsers();
+    if (fetchError) {
+        return (
+            <div className="p-8 border border-[#ff5a5a]/30 bg-[#ff5a5a]/5 text-[#ff8585]">
+                <p className="font-['Oswald'] text-xs tracking-[3px] uppercase mb-2">Error</p>
+                <p className="text-sm">{fetchError}</p>
+            </div>
+        );
+    }
     return <UsersTable initialUsers={users} />;
 }

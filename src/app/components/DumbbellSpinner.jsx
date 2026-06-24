@@ -50,14 +50,12 @@ export function ContainedLoader({ label = "Loading", className = "" }) {
         <div
             role="status"
             aria-live="polite"
-            className={`flex flex-col items-center justify-center py-24 font-sans ${className}`}
+            className={`flex-1 flex flex-col items-center justify-center font-sans ${className}`}
         >
             <SpinnerCluster scale={0.75} />
- 
             <p className="font-['Oswald'] text-[10px] tracking-[5px] uppercase text-[#7c7468] mt-6 animate-pulse">
                 {label}
             </p>
- 
             <span className="sr-only">{label}</span>
         </div>
     );

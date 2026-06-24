@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import { Eye, EyeOff, Mail, Lock, Dumbbell, Flame } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
 import { DumbbellSpinner } from "../components/DumbbellSpinner";
-// TODO: replace with your real better-auth client
 
 
 export default function LoginPage() {

@@ -1,16 +1,38 @@
 "use server";
 
-import { requireAdmin } from "@/lib/permissions";
 import { revalidatePath } from "next/cache";
+import { requireAdmin } from "@/lib/permissions";
+import { getAuthJwt } from "@/lib/api-token";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+
+/**
+ * Wraps fetch with the Better Auth JWT forwarded as Authorization header.
+ * The token is signed by Better Auth and verified by Express via JWKS.
+ */
+async function authedFetch(path, opts = {}) {
+    const token = await getAuthJwt();
+    return fetch(`${API_URL}${path}`, {
+        ...opts,
+        cache: "no-store",
+        headers: {
+            "Content-Type": "application/json",
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+            ...opts.headers,
+        },
+    });
+}
+
 export async function getAllUsers() {
     const { error } = await requireAdmin();
     if (error) throw new Error(error);
 
-    const res = await fetch(`${API_URL}/api/users`, { cache: "no-store" });
-    if (!res.ok) throw new Error("Failed to fetch users");
-    return await res.json();
+    const res = await authedFetch("/api/users");
+    if (!res.ok) {
+        const body = await res.json().catch(() => null);
+        return { users: [], error: body?.error || `Request failed (${res.status})` };
+    }
+    return { users: await res.json(), error: null };
 }
 
 export async function blockUserAction(userId) {
@@ -19,9 +41,8 @@ export async function blockUserAction(userId) {
     if (admin.id === userId) return { ok: false, error: "You can't block yourself." };
 
     try {
-        const res = await fetch(`${API_URL}/api/users/${userId}/status`, {
+        const res = await authedFetch(`/api/users/${userId}/status`, {
             method: "PATCH",
-            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ status: "blocked" }),
         });
         const data = await res.json();
@@ -40,9 +61,8 @@ export async function unblockUserAction(userId) {
     if (error) return { ok: false, error };
 
     try {
-        const res = await fetch(`${API_URL}/api/users/${userId}/status`, {
+        const res = await authedFetch(`/api/users/${userId}/status`, {
             method: "PATCH",
-            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ status: "active" }),
         });
         const data = await res.json();
@@ -62,9 +82,8 @@ export async function makeAdminAction(userId) {
     if (admin.id === userId) return { ok: false, error: "You can't change your own role." };
 
     try {
-        const res = await fetch(`${API_URL}/api/users/${userId}/role`, {
+        const res = await authedFetch(`/api/users/${userId}/role`, {
             method: "PATCH",
-            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ role: "admin" }),
         });
         const data = await res.json();
