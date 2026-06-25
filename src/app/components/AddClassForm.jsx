@@ -76,10 +76,10 @@ export default function AddClassForm() {
         );
 
     const onSubmit = (values) => {
-        if (!category)              return toast.error("Pick a category.");
-        if (!difficulty)            return toast.error("Pick a difficulty level.");
-        if (selectedDays.length===0) return toast.error("Pick at least one schedule day.");
-        if (!imageFile)             return toast.error("Upload a class image.");
+        if (!category)                return toast.error("Pick a category.");
+        if (!difficulty)              return toast.error("Pick a difficulty level.");
+        if (selectedDays.length === 0) return toast.error("Pick at least one schedule day.");
+        if (!imageFile)               return toast.error("Upload a class image.");
 
         const fd = new FormData();
         fd.append("title", values.title);
@@ -125,7 +125,13 @@ export default function AddClassForm() {
                 approve before it goes live on the schedule.
             </p>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="mt-10 space-y-10">
+            {/* THE PANEL — form sits inside a dark surface that doesn't blend with the page */}
+            <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="relative overflow-hidden mt-10 bg-[#0a0a0a] border border-[#C9962E]/15 p-6 lg:p-10 space-y-10 [clip-path:polygon(14px_0,100%_0,100%_calc(100%-14px),calc(100%-14px)_100%,0_100%,0_14px)]"
+            >
+                {/* Ambient gold glow — decorative, doesn't affect layout */}
+                <div className="absolute -top-32 -right-32 w-64 h-64 bg-[radial-gradient(closest-side,rgba(201,150,46,0.10),transparent)] pointer-events-none" />
 
                 {/* SECTION: Image */}
                 <Section title="Class Image" subtitle="A hero shot. PNG, JPG, or WEBP, up to 5MB.">
@@ -140,7 +146,7 @@ export default function AddClassForm() {
                         <button
                             type="button"
                             onClick={() => fileInputRef.current?.click()}
-                            className="group w-full aspect-[2/1] border-2 border-dashed border-[#C9962E]/30 hover:border-[#E8C667]/60 bg-[#070707] hover:bg-[#0a0a0a] transition-colors flex flex-col items-center justify-center gap-3 cursor-pointer"
+                            className="group w-full aspect-[2/1] border-2 border-dashed border-[#C9962E]/30 hover:border-[#E8C667]/60 bg-black/40 hover:bg-black/60 transition-colors flex flex-col items-center justify-center gap-3 cursor-pointer"
                         >
                             <span className="inline-flex items-center justify-center h-14 w-14 bg-linear-to-br from-[#F7E4A3]/10 via-[#E8C667]/10 to-[#C9962E]/10 border border-[#C9962E]/30 group-hover:border-[#E8C667] [clip-path:polygon(8px_0,100%_0,100%_calc(100%-8px),calc(100%-8px)_100%,0_100%,0_8px)] transition-colors">
                                 <ImageIcon size={22} className="text-[#E8C667]" />
@@ -177,11 +183,7 @@ export default function AddClassForm() {
                 {/* SECTION: Basic info */}
                 <Section title="Basics" subtitle="What people will see first.">
                     <div className="space-y-5">
-                        <Field
-                            id="title"
-                            label="Class Name"
-                            error={errors.title?.message}
-                        >
+                        <Field id="title" label="Class Name" error={errors.title?.message}>
                             <input
                                 id="title"
                                 type="text"
@@ -194,12 +196,7 @@ export default function AddClassForm() {
                                 className="w-full bg-transparent text-white placeholder:text-[#4a4339] text-[15px] outline-none px-3 py-3"
                             />
                         </Field>
-                        <Field
-                            id="description"
-                            label="Description"
-                            error={errors.description?.message}
-                            hint="What members can expect — vibe, structure, who it's for."
-                        >
+                        <Field id="description" label="Description" error={errors.description?.message} hint="What members can expect — vibe, structure, who it's for.">
                             <textarea
                                 id="description"
                                 rows={5}
@@ -392,10 +389,9 @@ export default function AddClassForm() {
 function Section({ title, subtitle, children }) {
     return (
         <section>
-            <div className="mb-4">
+            <div className="mb-5 pb-3 border-b border-[#C9962E]/10">
                 <h3 className="font-['Bebas_Neue'] text-2xl tracking-wide text-white leading-none">{title}</h3>
                 {subtitle && <p className="text-[#7c7468] text-xs mt-1.5">{subtitle}</p>}
-                <div className="h-px w-12 bg-[#E8C667] mt-3" />
             </div>
             {children}
         </section>
@@ -408,7 +404,7 @@ function Field({ id, label, hint, error, children }) {
             <label htmlFor={id} className="block font-['Oswald'] text-[#cfc6b8] text-xs font-semibold tracking-[3px] uppercase mb-2">
                 {label}
             </label>
-            <div className={`bg-[#070707] border-t border-t-black/80 border-x border-x-[#1a1612] shadow-[inset_0_2px_4px_rgba(0,0,0,0.7)] transition-colors focus-within:border-b-[#E8C667]/70 border-b ${error ? "border-b-[#ff5a5a]/70" : "border-b-[#2a2218]"}`}>
+            <div className={`bg-black/50 border-t border-t-black/80 border-x border-x-[#1a1612] shadow-[inset_0_2px_4px_rgba(0,0,0,0.7)] transition-colors focus-within:border-b-[#E8C667]/70 border-b ${error ? "border-b-[#ff5a5a]/70" : "border-b-[#2a2218]"}`}>
                 {children}
             </div>
             {hint && !error && <p className="text-[#5a5247] text-[11px] mt-1.5">{hint}</p>}
