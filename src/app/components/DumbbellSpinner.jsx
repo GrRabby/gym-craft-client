@@ -1,17 +1,25 @@
 import { Dumbbell } from "lucide-react";
 
 
-export function DumbbellSpinner({ size = 16, className = "" }) {
+export function DumbbellSpinner({ size = 16, className = "", label = "" }) {
     return (
-        <Dumbbell
-            size={size}
-            className={`animate-spin text-[#E8C667] ${className}`}
-            aria-hidden="true"
-        />
+        <>
+            <Dumbbell
+                size={size}
+                className={`animate-spin text-[#E8C667] ${className}`}
+                aria-hidden="true"
+            />
+            {label && (
+                <p className="font-['Oswald'] text-[10px] tracking-[5px] uppercase text-[#7c7468] mt-6 animate-pulse">
+                    {label}
+                </p>
+            )}
+        </>
+
     );
 }
 function SpinnerCluster({ scale = 1 }) {
-    const px = 128 * scale;    
+    const px = 128 * scale;
     const dumbbellSize = 42 * scale;
     return (
         <div className="relative" style={{ width: px, height: px }}>
@@ -31,7 +39,7 @@ function SpinnerCluster({ scale = 1 }) {
                 <circle cx="50" cy="50" r="46" fill="none" stroke="rgba(201,150,46,0.10)" strokeWidth="2" />
                 <circle cx="50" cy="50" r="46" fill="none" stroke="url(#gcLoaderArc)" strokeWidth="2" strokeDasharray="70 220" strokeLinecap="round" />
             </svg>
- 
+
             <div
                 className="absolute inset-0 flex items-center justify-center animate-spin"
                 style={{ animationDuration: "1.8s", animationDirection: "reverse" }}
