@@ -1,5 +1,5 @@
 import { ContainedLoader } from "@/app/components/DumbbellSpinner";
 
 export default function Loading() {
-    return <ContainedLoader label="Loading Classes" />;
+    return <ContainedLoader label="Loading Bookings" />;
 }

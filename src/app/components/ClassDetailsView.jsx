@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { toast } from "sonner";
@@ -38,22 +38,25 @@ const CHAMFER_MD = "[clip-path:polygon(12px_0,100%_0,100%_calc(100%-12px),calc(1
 const CHAMFER_SM = "[clip-path:polygon(6px_0,100%_0,100%_calc(100%-6px),calc(100%-6px)_100%,0_100%,0_6px)]";
 const CHAMFER_XS = "[clip-path:polygon(4px_0,100%_0,100%_calc(100%-4px),calc(100%-4px)_100%,0_100%,0_4px)]";
 
-export default function ClassDetailsView({ cls, initialBooked, initialFavorited }) {
+// Map the validated ?from= value to a real back link
+const BACK_LINKS = {
+    bookings: { href: "/dashboard/member/bookings", label: "Back to bookings" },
+    favorites: { href: "/dashboard/member/favorites", label: "Back to favorites" },
+};
+const DEFAULT_BACK = { href: "/classes", label: "Back to all classes" };
+
+export default function ClassDetailsView({ cls, initialBooked, initialFavorited, from }) {
     const router = useRouter();
 
-    // Favorite state managed locally for optimistic updates
     const [isFavorited, setIsFavorited] = useState(initialFavorited);
     const [isFavoritePending, startFavoriteTransition] = useTransition();
 
-    // Booking state stays as-prop — we don't create bookings on this page,
-    // only check + redirect. If the user comes back after Stripe, the page
-    // re-fetches with fresh isBooked.
     const isBooked = initialBooked;
+    const back = BACK_LINKS[from] || DEFAULT_BACK;
+
     /* ---------- handlers ---------- */
 
     function handleBookClick() {
-        // Spec: button text changes but stays clickable. If they click while
-        // already booked, show error toast instead of navigating.
         if (isBooked) {
             toast.error("You have already booked this class");
             return;
@@ -64,31 +67,39 @@ export default function ClassDetailsView({ cls, initialBooked, initialFavorited 
     function toggleFavorite() {
         if (isFavoritePending) return;
 
-        // Optimistic update — flip state immediately for instant feedback
         const wasFavorited = isFavorited;
+
+        // Optimistic flip — UI updates instantly
         setIsFavorited(!wasFavorited);
 
         startFavoriteTransition(async () => {
-            const result = wasFavorited
-                ? await removeFavoriteAction(cls.id)
-                : await addFavoriteAction(cls.id);
+            try {
+                const res = await fetch(`/api/favorites/${cls.id}`, {
+                    method: wasFavorited ? "DELETE" : "POST",
+                });
 
-            if (!result.ok) {
-                // Roll back the optimistic update
-                setIsFavorited(wasFavorited);
-                if (result.blocked) {
-                    toast.error("Action restricted by Admin");
-                } else {
-                    toast.error(result.error || "Failed to update favorite");
+                const data = await res.json().catch(() => ({}));
+
+                if (!res.ok) {
+                    // Roll back the optimistic update
+                    setIsFavorited(wasFavorited);
+                    if (data.blocked) {
+                        toast.error("Action restricted by Admin");
+                    } else {
+                        toast.error(data.error || "Failed to update favorite");
+                    }
+                    return;
                 }
-                return;
-            }
 
-            toast.success(
-                wasFavorited
-                    ? "Removed from favorites"
-                    : "Successfully added to your favorites!",
-            );
+                toast.success(
+                    wasFavorited
+                        ? "Removed from favorites"
+                        : "Successfully added to your favorites!",
+                );
+            } catch (err) {
+                setIsFavorited(wasFavorited);
+                toast.error("Network error. Please try again.");
+            }
         });
     }
 
@@ -99,15 +110,15 @@ export default function ClassDetailsView({ cls, initialBooked, initialFavorited 
     const diffMeta = DIFFICULTY_META[cls.difficulty] || { label: cls.difficulty, dot: "bg-[#7c7468]", text: "text-[#cfc6b8]" };
 
     return (
-        <div className="bg-[#070707] min-h-screen flex flex-col">
+        <div className="bg-[#070707] min-h-screen">
             <div className="max-w-7xl mx-auto px-6 lg:px-10 pt-8 pb-20">
-                {/* Back link */}
+                {/* Context-aware back link */}
                 <Link
-                    href="/classes"
+                    href={back.href}
                     className="inline-flex items-center gap-2 text-[#7c7468] hover:text-[#E8C667] text-xs font-['Oswald'] tracking-[2px] uppercase transition-colors"
                 >
                     <ArrowLeft size={14} />
-                    Back to all classes
+                    {back.label}
                 </Link>
 
                 {/* Hero */}
@@ -127,7 +138,6 @@ export default function ClassDetailsView({ cls, initialBooked, initialFavorited 
                     )}
                     <div className="absolute inset-0 bg-linear-to-t from-black via-black/50 to-transparent" />
 
-                    {/* Top-left badges */}
                     <div className="absolute top-6 left-6 flex flex-wrap items-center gap-2">
                         <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 bg-black/70 backdrop-blur-sm border border-[#C9962E]/40 text-[#E8C667] text-[11px] font-['Oswald'] font-semibold tracking-[2px] uppercase ${CHAMFER_XS}`}>
                             <CatIcon size={12} />
@@ -139,7 +149,6 @@ export default function ClassDetailsView({ cls, initialBooked, initialFavorited 
                         </span>
                     </div>
 
-                    {/* Title + trainer overlay */}
                     <div className="absolute inset-x-0 bottom-0 p-6 lg:p-10">
                         <h1 className="font-['Bebas_Neue'] text-4xl sm:text-5xl lg:text-7xl text-white leading-[0.95] tracking-wide">
                             {cls.title}
@@ -154,10 +163,8 @@ export default function ClassDetailsView({ cls, initialBooked, initialFavorited 
                     </div>
                 </motion.div>
 
-                {/* Content grid — action card first in DOM (mobile-first) but
-                    grid-positioned to the right column on lg+ */}
+                {/* Content grid */}
                 <div className="mt-10 grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    {/* Action card */}
                     <aside className="lg:col-start-3 lg:row-start-1">
                         <div className="lg:sticky lg:top-24">
                             <ActionCard
@@ -171,7 +178,6 @@ export default function ClassDetailsView({ cls, initialBooked, initialFavorited 
                         </div>
                     </aside>
 
-                    {/* Main content */}
                     <div className="lg:col-start-1 lg:col-span-2 lg:row-start-1 space-y-10">
                         <DescriptionSection cls={cls} />
                         <ScheduleSection cls={cls} />
@@ -190,7 +196,6 @@ function ActionCard({
 }) {
     return (
         <div className={`relative bg-[#0a0a0a] border border-[#C9962E]/20 p-6 ${CHAMFER_MD}`}>
-            {/* Ambient gold glow at top-right */}
             <div className="absolute top-0 right-0 h-32 w-32 bg-[radial-gradient(circle_at_top_right,rgba(232,198,103,0.12),transparent_60%)] pointer-events-none" />
 
             <div className="relative">
@@ -199,8 +204,9 @@ function ActionCard({
                 </p>
                 <div className="flex items-baseline gap-2 mt-1">
                     <span className="font-['Bebas_Neue'] text-5xl bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] bg-clip-text text-transparent leading-none">
-                        USD {cls.price}
+                        ${cls.price}
                     </span>
+                    <span className="text-xs text-[#7c7468] font-['Oswald'] tracking-[2px] uppercase">USD</span>
                 </div>
                 <p className="text-[#7c7468] text-xs mt-2 inline-flex items-center gap-1.5">
                     <Clock size={11} className="text-[#E8C667]" />
@@ -209,7 +215,6 @@ function ActionCard({
             </div>
 
             <div className="relative mt-6 space-y-3">
-                {/* Book Now button — text/style changes based on isBooked */}
                 <button
                     type="button"
                     onClick={onBook}
@@ -232,7 +237,6 @@ function ActionCard({
                     )}
                 </button>
 
-                {/* Favorite button — toggles between Add and Saved */}
                 <button
                     type="button"
                     onClick={onToggleFavorite}
@@ -246,16 +250,12 @@ function ActionCard({
                     {isFavoritePending ? (
                         <Loader2 size={14} className="animate-spin" />
                     ) : (
-                        <Heart
-                            size={14}
-                            className={isFavorited ? "fill-[#E8C667]" : ""}
-                        />
+                        <Heart size={14} className={isFavorited ? "fill-[#E8C667]" : ""} />
                     )}
                     {isFavorited ? "Saved to Favorites" : "Add to Favorites"}
                 </button>
             </div>
 
-            {/* Schedule summary at the bottom of the card */}
             <div className="relative mt-6 pt-5 border-t border-[#C9962E]/15">
                 <p className="font-['Oswald'] text-[10px] tracking-[3px] uppercase text-[#7c7468] mb-2">
                     Schedule
@@ -297,7 +297,6 @@ function ScheduleSection({ cls }) {
                     </span>
                 </div>
 
-                {/* All 7 days shown; active ones lit up in gold */}
                 <div className="grid grid-cols-7 gap-2">
                     {ALL_DAYS.map((day) => {
                         const active = cls.scheduleDays.includes(day);
