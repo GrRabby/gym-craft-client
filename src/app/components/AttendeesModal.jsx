@@ -137,7 +137,7 @@ export default function AttendeesModal({ classId, className, isOpen, onClose }) 
                 <div className="p-5 pt-3 border-t border-[#C9962E]/10 flex justify-end">
                     <button
                         onClick={onClose}
-                        className="font-['Oswald'] text-xs tracking-[2px] uppercase text-[#cfc6b8] hover:text-white px-4 py-2 bg-white/5 border border-[#C9962E]/20 hover:border-[#E8C667] cursor-pointer transition-colors [clip-path:polygon(5px_0,100%_0,100%_calc(100%-5px),calc(100%-5px)_100%,0_100%,0_5px)]"
+                        className="font-['Oswald'] text-xs tracking-[2px] bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] text-[#1a1304] uppercase  hover:text-white px-4 py-2 bg-white/5 border border-[#C9962E]/20 hover:border-[#E8C667] cursor-pointer transition-colors [clip-path:polygon(5px_0,100%_0,100%_calc(100%-5px),calc(100%-5px)_100%,0_100%,0_5px)]"
                     >
                         Close
                     </button>

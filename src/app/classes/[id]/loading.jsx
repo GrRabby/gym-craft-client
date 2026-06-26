@@ -11,5 +11,5 @@ export default function Loading() {
         });
     }, []);
 
-    return <ContainedLoader label="Loading Classes" className="py-20"/>;
+    return <ContainedLoader label="Loading details" className="py-20" />;
 }

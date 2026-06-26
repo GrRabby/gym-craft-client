@@ -178,7 +178,7 @@ export default function TrainerClassesTable({ initialClasses = [] }) {
                                             <div className="flex items-center justify-end gap-2">
                                                 <button
                                                     onClick={() => setAttendeesClass(cls)}
-                                                    className="inline-flex items-center gap-1 px-2.5 py-1.5 font-['Oswald'] text-[10px] font-semibold tracking-[1px] uppercase cursor-pointer transition-all [clip-path:polygon(4px_0,100%_0,100%_calc(100%-4px),calc(100%-4px)_100%,0_100%,0_4px)] bg-white/5 border border-[#C9962E]/30 hover:border-[#E8C667] text-[#cfc6b8] hover:text-white"
+                                                    className="inline-flex items-center gap-1 px-2.5 py-1.5 font-['Oswald'] text-[10px] font-semibold tracking-[1px] uppercase cursor-pointer transition-all  bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] [clip-path:polygon(4px_0,100%_0,100%_calc(100%-4px),calc(100%-4px)_100%,0_100%,0_4px)] bg-white/5 border border-[#C9962E]/30 hover:border-[#E8C667] text-[#1a1304] hover:text-white"
                                                     title="View registered students"
                                                 >
                                                     <Users size={11} />

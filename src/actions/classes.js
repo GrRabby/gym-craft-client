@@ -12,9 +12,9 @@ export async function getPublicClasses({
 } = {}) {
     try {
         const params = new URLSearchParams();
-        params.set("page",  String(page));
+        params.set("page", String(page));
         params.set("limit", String(limit));
-        if (search)   params.set("search",   search);
+        if (search) params.set("search", search);
         if (category) params.set("category", category);
 
         const res = await fetch(`${API_URL}/api/classes/public?${params}`, {
