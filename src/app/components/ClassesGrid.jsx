@@ -281,7 +281,7 @@ function ClassCardBody({ cls }) {
                     {meta.label}
                 </div>
                 <div className="absolute top-3 right-3 px-2.5 py-1 bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] text-[#1a1304] text-[11px] font-['Oswald'] font-bold tracking-wide shadow-[inset_0_1px_0_rgba(255,255,255,0.4)]">
-                    BDT {cls.price}
+                    USD {cls.price}
                 </div>
             </div>
 

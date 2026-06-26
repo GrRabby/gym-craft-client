@@ -199,7 +199,7 @@ function ActionCard({
                 </p>
                 <div className="flex items-baseline gap-2 mt-1">
                     <span className="font-['Bebas_Neue'] text-5xl bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] bg-clip-text text-transparent leading-none">
-                        BDT {cls.price}
+                        USD {cls.price}
                     </span>
                 </div>
                 <p className="text-[#7c7468] text-xs mt-2 inline-flex items-center gap-1.5">

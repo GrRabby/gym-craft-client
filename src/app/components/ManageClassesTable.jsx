@@ -153,7 +153,7 @@ function ClassRow({ cls, onViewDetails }) {
                     )}
                     <div className="min-w-0">
                         <p className="text-white font-medium truncate">{cls.title}</p>
-                        <p className="text-[#7c7468] text-xs truncate">{cls.duration} min · BDT {cls.price}</p>
+                        <p className="text-[#7c7468] text-xs truncate">{cls.duration} min · USD {cls.price}</p>
                     </div>
                 </div>
             </td>
@@ -339,7 +339,7 @@ function DetailsModal({ cls, isOpen, onClose }) {
                         <Detail Icon={SIcon}      label="Category"   value={meta.label} highlight />
                         <Detail                   label="Difficulty" value={cls.difficulty.charAt(0).toUpperCase() + cls.difficulty.slice(1)} />
                         <Detail Icon={Clock}      label="Duration"   value={`${cls.duration} min`} />
-                        <Detail Icon={DollarSign} label="Price"      value={`BDT ${cls.price}`} />
+                        <Detail Icon={DollarSign} label="Price"      value={`USD ${cls.price}`} />
                     </dl>
 
                     {/* Schedule */}

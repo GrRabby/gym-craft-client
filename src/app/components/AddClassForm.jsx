@@ -299,14 +299,14 @@ export default function AddClassForm() {
                                     />
                                 </div>
                             </Field>
-                            <Field id="price" label="Price" error={errors.price?.message} hint="BDT">
+                            <Field id="price" label="Price" error={errors.price?.message} hint="USD">
                                 <div className="flex items-center">
                                     <DollarSign size={16} className="ml-3 text-[#7c7468] shrink-0" />
                                     <input
                                         id="price"
                                         type="number"
                                         min={0}
-                                        step={50}
+                                        step={1}
                                         {...register("price", {
                                             required: "Required",
                                             valueAsNumber: true,
