@@ -8,26 +8,26 @@ const SLIDE_DURATION = 7000;
 
 const SLIDES = [
     {
-        image:    "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1920&q=80",
-        eyebrow:  "Strength Training",
-        title1:   "Forge Your",
-        title2:   "Limits.",
+        image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1920&q=80",
+        eyebrow: "Strength Training",
+        title1: "Forge Your",
+        title2: "Limits.",
         description:
             "Train with elite coaches across 240+ weekly sessions. Pick your pace. Push your edge.",
     },
     {
-        image:    "https://images.unsplash.com/photo-1517344884509-a0c97ec11bcc?w=1920&q=80",
-        eyebrow:  "High Intensity",
-        title1:   "Sweat. Then",
-        title2:   "Sweat More.",
+        image: "https://images.unsplash.com/photo-1517344884509-a0c97ec11bcc?w=1920&q=80",
+        eyebrow: "High Intensity",
+        title1: "Sweat. Then",
+        title2: "Sweat More.",
         description:
             "From HIIT to mobility flows, find the class that meets you where you are — then takes you further.",
     },
     {
-        image:    "https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=1920&q=80",
-        eyebrow:  "Recovery & Mobility",
-        title1:   "Recover Like",
-        title2:   "A Pro.",
+        image: "https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=1920&q=80",
+        eyebrow: "Recovery & Mobility",
+        title1: "Recover Like",
+        title2: "A Pro.",
         description:
             "Yoga, mobility, and active recovery. What you do between sets matters as much as the sets.",
     },
@@ -63,9 +63,8 @@ export default function GymCraftBanner() {
                     key={i}
                     aria-hidden={i !== activeIndex}
                     style={{ backgroundImage: `url(${s.image})` }}
-                    className={`absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms] ease-out ${KB_VARIANTS[i % 3]} ${
-                        i === activeIndex ? "opacity-100 z-1" : "opacity-0 z-0"
-                    }`}
+                    className={`absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms] ease-out ${KB_VARIANTS[i % 3]} ${i === activeIndex ? "opacity-100 z-1" : "opacity-0 z-0"
+                        }`}
                 />
             ))}
             <div className="absolute inset-0 z-[2] bg-linear-to-r from-[#050505] via-[#050505]/75 to-[#050505]/15 pointer-events-none" />
@@ -101,28 +100,25 @@ export default function GymCraftBanner() {
                     </p>
 
                     <div className="flex flex-wrap items-center gap-4 opacity-0 animate-gc-fade-up [animation-delay:320ms]">
-                        <Button
-                            as={Link}
-                            href="/classes"
-                            radius="none"
-                            endContent={<ArrowRight size={16} />}
-                            className="!font-['Oswald'] !font-semibold !text-base !tracking-[2px] !uppercase !text-[#1a1304] !bg-linear-to-br !from-[#F7E4A3] !via-[#E8C667] !to-[#C9962E] !h-auto !py-3.5 !px-7 [clip-path:polygon(11px_0,100%_0,100%_calc(100%-11px),calc(100%-11px)_100%,0_100%,0_11px)] !shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_6px_22px_rgba(201,150,46,0.35)] hover:-translate-y-0.5 transition-transform"
-                        >
-                            Explore Classes
-                        </Button>
 
-                        {/* <Link
-                            href="/classes/schedule"
-                            className="inline-flex items-center gap-2 font-['Oswald'] font-medium text-sm tracking-[2px] uppercase text-[#cfc6b8] hover:text-white no-underline py-3 px-2 border-b border-[#C9962E]/30 hover:border-[#E8C667] transition-colors"
+
+                        <Link
+                            href="/classes"
                         >
-                            View This Week's Schedule
-                        </Link> */}
+                            <Button
+                                radius="none"
+                                className="!font-['Oswald'] !font-semibold !text-base !tracking-[2px] !uppercase !text-[#1a1304] !bg-linear-to-br !from-[#F7E4A3] !via-[#E8C667] !to-[#C9962E] !h-auto !py-3.5 !px-7 [clip-path:polygon(11px_0,100%_0,100%_calc(100%-11px),calc(100%-11px)_100%,0_100%,0_11px)] !shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_6px_22px_rgba(201,150,46,0.35)] hover:-translate-y-0.5 transition-transform"
+                            >
+                                Explore Classes <ArrowRight size={16} />
+                            </Button>
+
+                        </Link>
                     </div>
 
                     <div className="hidden sm:flex items-center gap-8 mt-12 pt-6 border-t border-[#C9962E]/15 max-w-md opacity-0 animate-gc-fade-up [animation-delay:400ms]">
                         <Stat value="240+" label="Weekly Classes" />
-                        <Stat value="86"   label="Certified Trainers" />
-                        <Stat value="12K"  label="Members" />
+                        <Stat value="86" label="Certified Trainers" />
+                        <Stat value="12K" label="Members" />
                     </div>
                 </div>
             </div>
@@ -155,9 +151,8 @@ export default function GymCraftBanner() {
                             onClick={() => goTo(i)}
                             aria-label={`Go to slide ${i + 1}`}
                             aria-current={isActive ? "true" : undefined}
-                            className={`relative h-1.5 transition-all duration-500 cursor-pointer ${
-                                isActive ? "w-14 bg-[#C9962E]/30" : "w-6 bg-[#C9962E]/25 hover:bg-[#C9962E]/45"
-                            }`}
+                            className={`relative h-1.5 transition-all duration-500 cursor-pointer ${isActive ? "w-14 bg-[#C9962E]/30" : "w-6 bg-[#C9962E]/25 hover:bg-[#C9962E]/45"
+                                }`}
                         >
                             {isActive && (
                                 <span
