@@ -90,8 +90,8 @@ export default function RegisterPage() {
 
         const { error } = await authClient.signIn.social({
             provider: "google",
-            callbackURL: intended,         
-            newUserCallbackURL: intended,   
+            callbackURL: intended,
+            newUserCallbackURL: intended,
         });
         if (error) {
             setAuthError(error.message || "Could not start Google sign-up.");
@@ -118,11 +118,13 @@ export default function RegisterPage() {
                 <div className="absolute -left-20 top-1/3 w-[140%] h-32 bg-linear-to-r from-transparent via-[#C9962E]/15 to-transparent rotate-[-8deg] blur-2xl pointer-events-none" />
 
                 <div className="relative z-10 flex items-center gap-3">
-                    <BrandMark />
-                    <div className="font-['Oswald'] font-bold text-2xl tracking-[2px] uppercase leading-none">
-                        <span className="bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] bg-clip-text text-transparent">GYM</span>
-                        <span className="text-white ml-1">CRAFT</span>
-                    </div>
+                    <Link href={"/"} className="flex justify-center items-center gap-2 mb-5">
+                        <img src="/Logo small.png" width={40} height={40}></img>
+                        <div className="font-['Oswald'] font-bold text-2xl tracking-[2px] uppercase leading-none">
+                            <span className="bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] bg-clip-text text-transparent">GYM</span>
+                            <span className="text-white ml-1">CRAFT</span>
+                        </div>
+                    </Link>
                 </div>
 
                 <div className="relative z-10 max-w-md">
@@ -130,7 +132,7 @@ export default function RegisterPage() {
                     <p className="font-['Bebas_Neue'] text-5xl xl:text-6xl leading-[0.95] tracking-wide">
                         Day one.<br />
                         <span className="text-[#E8C667]">Rep one.</span><br />
-                        Let's get<br />
+                        Let&apos;s get<br />
                         to <span className="text-[#E8C667]">work</span>.
                     </p>
                     <div className="mt-6 flex items-center gap-3 text-[#8c8478] text-sm">
@@ -165,11 +167,13 @@ export default function RegisterPage() {
 
                 <div className="lg:hidden absolute top-6 left-6 right-6 flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                        <BrandMark small />
-                        <div className="font-['Oswald'] font-bold text-lg tracking-wider uppercase leading-none">
-                            <span className="bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] bg-clip-text text-transparent">GYM</span>
-                            <span className="text-white">CRAFT</span>
-                        </div>
+                        <Link href={"/"} className="flex justify-center items-center gap-2 mb-5">
+                            <img src="/Logo small.png" width={40} height={40}></img>
+                            <div className="font-['Oswald'] font-bold text-2xl tracking-[2px] uppercase leading-none">
+                                <span className="bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] bg-clip-text text-transparent">GYM</span>
+                                <span className="text-white ml-1">CRAFT</span>
+                            </div>
+                        </Link>
                     </div>
                 </div>
 
@@ -351,7 +355,7 @@ export default function RegisterPage() {
                         </button>
 
                         <p className="text-[#5a5247] text-[11px] text-center leading-relaxed pt-1">
-                            By creating an account you agree to GymCraft's{" "}
+                            By creating an account you agree to GymCraft&apos;s{" "}
                             <Link href="/terms" className="text-[#8c8478] hover:text-[#E8C667]">Terms</Link>{" "}
                             and{" "}
                             <Link href="/privacy" className="text-[#8c8478] hover:text-[#E8C667]">Privacy Policy</Link>.
@@ -416,29 +420,6 @@ function Rivet({ className = "" }) {
             className={`absolute h-2 w-2 rounded-full bg-[#7a5a1d] shadow-[inset_0_1px_0_#3a2a0e,0_1px_0_#FBEFBF] ${className}`}
             aria-hidden="true"
         />
-    );
-}
-
-function BrandMark({ small }) {
-    const size = small ? "h-9 w-9" : "h-12 w-12";
-    return (
-        <svg viewBox="0 0 48 48" className={`${size} shrink-0`} aria-hidden="true">
-            <defs>
-                <linearGradient id="gcRegGold" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0" stopColor="#F7E4A3" />
-                    <stop offset="0.45" stopColor="#E8C667" />
-                    <stop offset="1" stopColor="#C9962E" />
-                </linearGradient>
-            </defs>
-            <path d="M40 13.5A18 18 0 1 0 40 34.5" fill="none" stroke="url(#gcRegGold)" strokeWidth="4.4" strokeLinecap="round" />
-            <g fill="#FFFFFF">
-                <rect x="15" y="22.4" width="18" height="3.2" rx="1.6" />
-                <rect x="11.5" y="19" width="3" height="10" rx="1.2" />
-                <rect x="33.5" y="19" width="3" height="10" rx="1.2" />
-                <rect x="8.5" y="21" width="2.4" height="6" rx="1" fill="url(#gcRegGold)" />
-                <rect x="37.1" y="21" width="2.4" height="6" rx="1" fill="url(#gcRegGold)" />
-            </g>
-        </svg>
     );
 }
 

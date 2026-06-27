@@ -120,7 +120,7 @@ export default function ClassesGrid({
                     placeholder="Search classes by name…"
                     value={searchInput}
                     onChange={(e) => setSearchInput(e.target.value)}
-                    className="w-full bg-[#0a0a0a] border border-[#C9962E]/25 text-white placeholder:text-[#5a5247] text-base pl-11 pr-12 py-3.5 outline-none focus:border-[#E8C667]/60 transition-colors [clip-path:polygon(8px_0,100%_0,100%_calc(100%-8px),calc(100%-8px)_100%,0_100%,0_8px)]"
+                    className="w-full bg-[#0a0a0a] border border-[#C9962E]/50 text-white placeholder:text-[#5a5247] text-base pl-11 pr-12 py-3.5 outline-none focus:border-[#E8C667]/80 transition-colors [clip-path:polygon(8px_0,100%_0,100%_calc(100%-8px),calc(100%-8px)_100%,0_100%,0_8px)]"
                 />
                 {isPending && (
                     <DumbbellSpinner className="absolute right-4 top-1/2 -translate-y-1/2 text-[#E8C667]" size={20} />
@@ -253,7 +253,7 @@ function ClassCardBody({ cls }) {
     // Inner div handles hover transforms — outer motion.article handles layout
     // transforms. Separating them keeps hover lift from fighting layout animation.
     return (
-        <div className="group relative h-full bg-[#0a0a0a] border border-[#C9962E]/15 hover:border-[#C9962E]/55 transition-all hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5),0_0_30px_rgba(201,150,46,0.15)] [clip-path:polygon(12px_0,100%_0,100%_calc(100%-12px),calc(100%-12px)_100%,0_100%,0_12px)] overflow-hidden flex flex-col">
+        <div className="group relative h-full bg-[#0a0a0a] border border-[#C9962E]/40 hover:border-[#C9962E]/80 transition-all hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5),0_0_30px_rgba(201,150,46,0.15)] [clip-path:polygon(12px_0,100%_0,100%_calc(100%-12px),calc(100%-12px)_100%,0_100%,0_12px)] overflow-hidden flex flex-col">
             <div className="relative aspect-[16/10] overflow-hidden bg-[#0f0f0f]">
                 {cls.image ? (
                     // eslint-disable-next-line @next/next/no-img-element

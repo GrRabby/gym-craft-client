@@ -96,7 +96,7 @@ export default function ForumGrid({
                         placeholder="Search posts or authors…"
                         value={searchInput}
                         onChange={(e) => setSearchInput(e.target.value)}
-                        className={`w-full bg-[#0a0a0a] border border-[#C9962E]/20 text-white placeholder:text-[#5a5247] text-sm pl-10 pr-10 py-2.5 outline-none focus:border-[#E8C667]/60 transition-colors ${CHAMFER_SM}`}
+                        className={`w-full bg-[#0a0a0a] border border-[#C9962E]/50 text-white placeholder:text-[#5a5247] text-sm pl-10 pr-10 py-2.5 outline-none focus:border-[#E8C667]/80 transition-colors ${CHAMFER_SM}`}
                     />
                     {searchInput && (
                         <button
@@ -113,7 +113,7 @@ export default function ForumGrid({
                     {isSearching ? (
                         <>
                             {total} {total === 1 ? "result" : "results"} for{" "}
-                            <span className="text-[#E8C667]">"{initialSearch}"</span>
+                            <span className="text-[#E8C667]">&quot;{initialSearch}&quot;</span>
                         </>
                     ) : (
                         <>{total} {total === 1 ? "post" : "posts"} from the community</>
@@ -167,7 +167,7 @@ export default function ForumGrid({
 
 function PostCard({ post }) {
     return (
-        <div className={`group h-full flex flex-col bg-[#0a0a0a] border border-[#C9962E]/15 hover:border-[#C9962E]/40 transition-colors overflow-hidden ${CHAMFER_MD}`}>
+        <div className={`group h-full flex flex-col bg-[#0a0a0a] border border-[#C9962E]/40 hover:border-[#C9962E]/80 transition-colors overflow-hidden ${CHAMFER_MD}`}>
             <div className="relative aspect-[16/10] bg-[#0f0f0f] overflow-hidden">
                 {post.image ? (
                     // eslint-disable-next-line @next/next/no-img-element

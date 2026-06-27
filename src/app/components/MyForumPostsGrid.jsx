@@ -114,7 +114,7 @@ function PostCard({ post, isRemoving, onDelete }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.94, transition: { duration: 0.25 } }}
             transition={{ duration: 0.25 }}
-            className={`group relative bg-[#0a0a0a] border ${isHidden ? "border-[#ff5a5a]/25" : "border-[#C9962E]/15 hover:border-[#C9962E]/40"
+            className={`group relative bg-[#0a0a0a] border ${isHidden ? "border-[#ff5a5a]/25" : "border-[#C9962E]/50 hover:border-[#C9962E]/80"
                 } transition-colors overflow-hidden flex flex-col ${CHAMFER_MD}`}
         >
             {/* Cover image with overlaid delete button */}
