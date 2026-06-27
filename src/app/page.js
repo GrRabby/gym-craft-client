@@ -1,10 +1,28 @@
-import Image from "next/image";
-import Banner from "./components/Banner";
+import { getFeaturedClasses } from "@/actions/classes";
+import { getPublicForumPosts } from "@/actions/forum-posts";
 
-export default function Home() {
+import HowItWorksSection from "@/app/components/home/HowItWorksSection";
+import CategoriesSection from "@/app/components/home/CategoriesSection";
+import Banner from "@/app/components/home/Banner";
+import FeaturedClassesSection from "@/app/components/home/FeaturedClassesSection";
+import LatestForumSection from "./components/home/LatestForumSection";
+import BmiCalculatorSection from "./components/home/BmiCalculatorSection";
+export const dynamic = "force-dynamic";
+
+export default async function HomePage() {
+    const [featuredResult, postsResult] = await Promise.all([
+        getFeaturedClasses(6),
+        getPublicForumPosts({ page: 1, limit: 3 }),
+    ]);
+
     return (
-        <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
+        <main className="min-h-screen bg-[#050505]">
             <Banner></Banner>
-        </div>
+            <FeaturedClassesSection classes={featuredResult.classes} />
+            <HowItWorksSection />
+            <LatestForumSection posts={postsResult.posts} />
+            <CategoriesSection /> 
+            <BmiCalculatorSection></BmiCalculatorSection>
+        </main>
     );
 }

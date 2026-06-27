@@ -13,21 +13,21 @@ import {
 
 const CATEGORY_META = {
     strength: { label: "Strength", Icon: Dumbbell },
-    cardio:   { label: "Cardio",   Icon: HeartPulse },
-    hiit:     { label: "HIIT",     Icon: Flame },
-    yoga:     { label: "Yoga",     Icon: Sparkles },
-    pilates:  { label: "Pilates",  Icon: Activity },
+    cardio: { label: "Cardio", Icon: HeartPulse },
+    hiit: { label: "HIIT", Icon: Flame },
+    yoga: { label: "Yoga", Icon: Sparkles },
+    pilates: { label: "Pilates", Icon: Activity },
     mobility: { label: "Mobility", Icon: Move },
 };
 
 const STATUS_STYLES = {
-    pending:  "text-[#E8C667] bg-[#C9962E]/8  border-[#C9962E]/40",
+    pending: "text-[#E8C667] bg-[#C9962E]/8  border-[#C9962E]/40",
     approved: "text-[#4ade80] bg-[#4ade80]/8  border-[#4ade80]/40",
     rejected: "text-[#ff8585] bg-[#ff5a5a]/8  border-[#ff5a5a]/40",
 };
 
 const STATUS_DOT = {
-    pending:  "bg-[#E8C667]",
+    pending: "bg-[#E8C667]",
     approved: "bg-[#4ade80]",
     rejected: "bg-[#ff5a5a]",
 };
@@ -94,7 +94,7 @@ export default function ManageClassesTable({ initialClasses = [] }) {
             {/* Table */}
             <div className="bg-[#0a0a0a] border border-[#C9962E]/15 overflow-hidden">
                 <div className="overflow-x-auto">
-                    <table className="w-full text-sm">
+                    <table className="w-full text-sm min-w-[800px]">
                         <thead>
                             <tr className="border-b border-[#C9962E]/20 bg-black/40">
                                 <Th>Class</Th>
@@ -336,10 +336,10 @@ function DetailsModal({ cls, isOpen, onClose }) {
 
                     {/* Details grid */}
                     <dl className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                        <Detail Icon={SIcon}      label="Category"   value={meta.label} highlight />
-                        <Detail                   label="Difficulty" value={cls.difficulty.charAt(0).toUpperCase() + cls.difficulty.slice(1)} />
-                        <Detail Icon={Clock}      label="Duration"   value={`${cls.duration} min`} />
-                        <Detail Icon={DollarSign} label="Price"      value={`USD ${cls.price}`} />
+                        <Detail Icon={SIcon} label="Category" value={meta.label} highlight />
+                        <Detail label="Difficulty" value={cls.difficulty.charAt(0).toUpperCase() + cls.difficulty.slice(1)} />
+                        <Detail Icon={Clock} label="Duration" value={`${cls.duration} min`} />
+                        <Detail Icon={DollarSign} label="Price" value={`USD ${cls.price}`} />
                     </dl>
 
                     {/* Schedule */}

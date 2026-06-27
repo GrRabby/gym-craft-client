@@ -13,10 +13,10 @@ import {
 
 const SPECIALTY_META = {
     strength: { label: "Strength", Icon: Dumbbell },
-    cardio:   { label: "Cardio",   Icon: HeartPulse },
-    hiit:     { label: "HIIT",     Icon: Flame },
-    yoga:     { label: "Yoga",     Icon: Sparkles },
-    pilates:  { label: "Pilates",  Icon: Activity },
+    cardio: { label: "Cardio", Icon: HeartPulse },
+    hiit: { label: "HIIT", Icon: Flame },
+    yoga: { label: "Yoga", Icon: Sparkles },
+    pilates: { label: "Pilates", Icon: Activity },
     mobility: { label: "Mobility", Icon: Move },
 };
 
@@ -247,9 +247,9 @@ function DetailsModal({ application, isOpen, onClose }) {
                 <div className="p-6 space-y-6">
                     {/* Detail grid */}
                     <dl className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-                        <Detail Icon={SIcon}  label="Specialty"  value={meta.label} highlight />
-                        <Detail Icon={Clock}  label="Experience" value={`${application.experience} ${application.experience === 1 ? "year" : "years"}`} />
-                        <Detail Icon={Award}  label="Applied"    value={applied} />
+                        <Detail Icon={SIcon} label="Specialty" value={meta.label} highlight />
+                        <Detail Icon={Clock} label="Experience" value={`${application.experience} ${application.experience === 1 ? "year" : "years"}`} />
+                        <Detail Icon={Award} label="Applied" value={applied} />
                     </dl>
 
                     {/* Feedback */}

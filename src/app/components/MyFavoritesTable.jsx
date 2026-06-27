@@ -83,7 +83,7 @@ export default function MyFavoritesTable({ initialFavorites = [] }) {
     return (
         <div className={`bg-[#0a0a0a] border border-[#C9962E]/15 overflow-hidden ${CHAMFER_MD}`}>
             <div className="overflow-x-auto">
-                <table className="w-full text-left">
+                <table className="w-full text-left min-w-[800px]">
                     <thead>
                         <tr className="border-b border-[#C9962E]/15">
                             <Th>Class</Th>

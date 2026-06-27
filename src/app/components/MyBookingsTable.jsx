@@ -6,10 +6,10 @@ import {
 
 const CATEGORY_ICONS = {
     strength: Dumbbell,
-    cardio:   HeartPulse,
-    hiit:     Flame,
-    yoga:     Sparkles,
-    pilates:  Activity,
+    cardio: HeartPulse,
+    hiit: Flame,
+    yoga: Sparkles,
+    pilates: Activity,
     mobility: Move,
 };
 
@@ -41,7 +41,7 @@ export default function MyBookingsTable({ bookings = [] }) {
         // without breaking the rest of the page layout
         <div className={`bg-[#0a0a0a] border border-[#C9962E]/15 overflow-hidden ${CHAMFER_MD}`}>
             <div className="overflow-x-auto">
-                <table className="w-full text-left">
+                <table className="w-full text-left min-w-[800px]">
                     <thead>
                         <tr className="border-b border-[#C9962E]/15">
                             <Th>Class</Th>
@@ -71,9 +71,8 @@ function BookingRow({ booking, isLast }) {
 
     return (
         <tr
-            className={`group transition-colors hover:bg-[#C9962E]/[0.04] ${
-                isLast ? "" : "border-b border-[#C9962E]/10"
-            }`}
+            className={`group transition-colors hover:bg-[#C9962E]/[0.04] ${isLast ? "" : "border-b border-[#C9962E]/10"
+                }`}
         >
             {/* Class — thumbnail + title + category */}
             <td className="px-5 py-4">

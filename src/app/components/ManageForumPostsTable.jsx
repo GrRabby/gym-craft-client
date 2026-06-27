@@ -45,7 +45,7 @@ export default function ManageForumPostsTable({ initialPosts = [] }) {
             },
             cancel: {
                 label: "Cancel",
-                onClick: () => {},
+                onClick: () => { },
             },
         });
     }
@@ -93,7 +93,7 @@ export default function ManageForumPostsTable({ initialPosts = [] }) {
             {/* Table */}
             <div className={`bg-[#0a0a0a] border border-[#C9962E]/15 overflow-hidden ${CHAMFER_MD}`}>
                 <div className="overflow-x-auto">
-                    <table className="w-full text-left">
+                    <table className="w-full text-left min-w-[800px]">
                         <thead>
                             <tr className="border-b border-[#C9962E]/15">
                                 <Th>Post</Th>
@@ -143,9 +143,8 @@ function PostRow({ post, isLast, isRemoving, onDelete }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, x: -24, transition: { duration: 0.25 } }}
             transition={{ duration: 0.2 }}
-            className={`group transition-colors hover:bg-[#C9962E]/[0.04] ${
-                isLast ? "" : "border-b border-[#C9962E]/10"
-            }`}
+            className={`group transition-colors hover:bg-[#C9962E]/[0.04] ${isLast ? "" : "border-b border-[#C9962E]/10"
+                }`}
         >
             {/* Post — thumbnail + title + description preview */}
             <td className="px-5 py-4">
@@ -239,9 +238,9 @@ function Th({ children, align = "left" }) {
 
 function RoleLabel({ role }) {
     const meta = {
-        admin:   { Icon: ShieldCheck, label: "Admin",   className: "text-[#E8C667]" },
-        trainer: { Icon: BadgeCheck,  label: "Trainer", className: "text-[#C9962E]" },
-        member:  { Icon: UserIcon,    label: "Member",  className: "text-[#7c7468]" },
+        admin: { Icon: ShieldCheck, label: "Admin", className: "text-[#E8C667]" },
+        trainer: { Icon: BadgeCheck, label: "Trainer", className: "text-[#C9962E]" },
+        member: { Icon: UserIcon, label: "Member", className: "text-[#7c7468]" },
     };
     const m = meta[role] || meta.member;
     const Icon = m.Icon;

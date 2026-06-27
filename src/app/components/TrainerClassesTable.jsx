@@ -112,7 +112,7 @@ export default function TrainerClassesTable({ initialClasses = [] }) {
             {/* Table */}
             <div className="bg-[#0a0a0a] border border-[#C9962E]/15 overflow-hidden">
                 <div className="overflow-x-auto">
-                    <table className="w-full text-sm">
+                    <table className="w-full text-sm min-w-[1200px]">
                         <thead>
                             <tr className="border-b border-[#C9962E]/20 bg-black/40">
                                 <Th>Class Details</Th>

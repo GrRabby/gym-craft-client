@@ -103,9 +103,9 @@ export default function UsersTable({ initialUsers = [] }) {
             </div>
             <div className="bg-[#0a0a0a] border border-[#C9962E]/15 overflow-hidden">
                 <div className="overflow-x-auto">
-                    <table className="w-full text-sm">
+                    <table className="w-full text-sm min-w-[800px]">
                         <thead>
-                            <tr className="border-b border-[#C9962E]/20 bg-black/40">
+                            <tr className="border-b border-[#C9962E]/20 bg-black/40 whitespace-nowrap">
                                 <Th>User</Th>
                                 <Th>Email</Th>
                                 <Th>Role</Th>
@@ -115,7 +115,7 @@ export default function UsersTable({ initialUsers = [] }) {
                         </thead>
                         <tbody>
                             {paged.length === 0 ? (
-                                <tr>
+                                <tr className="whitespace-nowrap">
                                     <td colSpan={5} className="px-5 py-16 text-center text-[#7c7468]">
                                         No users match your filters.
                                     </td>

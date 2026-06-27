@@ -99,7 +99,7 @@ export default function TransactionsTable({ initialTransactions = [] }) {
 
             <div className="bg-[#0a0a0a] border border-[#C9962E]/15 overflow-hidden">
                 <div className="overflow-x-auto">
-                    <table className="w-full text-sm">
+                    <table className="w-full text-sm min-w-[800px]">
                         <thead>
                             <tr className="border-b border-[#C9962E]/20 bg-black/40">
                                 <Th>User Email</Th>

@@ -168,7 +168,7 @@ export function GymCraftNavbar() {
     return (
         <header className="sticky top-0 z-50 bg-linear-to-b from-[#0a0a0a] to-[#040404] backdrop-blur-xl saturate-160 border-b border-[#C9962E]/16 shadow-[0_10px_34px_rgba(0,0,0,0.5)] font-sans before:content-[''] before:absolute before:inset-0 before:z-0 before:pointer-events-none before:bg-[radial-gradient(460px_130px_at_16%_-20%,rgba(201,150,46,0.14),transparent_70%)] after:content-[''] after:absolute after:left-0 after:right-0 after:-bottom-px after:h-px after:z-1 after:bg-linear-to-r after:from-transparent after:via-[#F7E4A3]/55 after:to-transparent">
 
-            <div className="relative z-10 max-w-310 mx-auto px-6 h-18.5 flex items-center gap-7">
+            <div className="relative z-10 max-w-310 mx-auto px-6 h-18.5 flex items-center gap-7 justify-between">
 
                 <Link href="/" className="flex items-center gap-3 no-underline shrink-0" aria-label="GymCraft home">
                     <LogoMark />
@@ -184,7 +184,7 @@ export function GymCraftNavbar() {
                 </Link>
 
 
-                <nav className="hidden md:flex items-center gap-2 ml-auto" aria-label="Primary">
+                <nav className="hidden lg:flex items-center gap-2 ml-auto" aria-label="Primary">
                     {NAV_LINKS.map((link) => (
                         <Link
                             key={link.href}
@@ -211,20 +211,20 @@ export function GymCraftNavbar() {
                 </nav>
 
                 <div className="flex items-center gap-3.5 ml-auto md:ml-0">
-                    {isPending ? 
+                    {isPending ?
                         <DumbbellSpinner size={14} />
-                     : user ? (
-                        <UserMenu user={user} onLogout={handleLogout} loggingOut={loggingOut} />
-                    ) : (
-                        <Link href="/login">
-                            <button className="font-['Oswald'] font-semibold text-[15px] tracking-wider uppercase text-[#1a1304] bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] border-none cursor-pointer py-2.5 px-6 [clip-path:polygon(9px_0,100%_0,100%_calc(100%-9px),calc(100%-9px)_100%,0_100%,0_9px)] shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_4px_18px_rgba(201,150,46,0.3)] transition-all active:translate-y-0 hover:-translate-y-px hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_7px_26px_rgba(201,150,46,0.45)]">
-                                Log In
-                            </button>
-                        </Link>
-                    )}
+                        : user ? (
+                            <UserMenu user={user} onLogout={handleLogout} loggingOut={loggingOut} />
+                        ) : (
+                            <Link href="/login">
+                                <button className="font-['Oswald'] font-semibold text-[15px] tracking-wider uppercase text-[#1a1304] bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] border-none cursor-pointer py-2.5 px-6 [clip-path:polygon(9px_0,100%_0,100%_calc(100%-9px),calc(100%-9px)_100%,0_100%,0_9px)] shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_4px_18px_rgba(201,150,46,0.3)] transition-all active:translate-y-0 hover:-translate-y-px hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_7px_26px_rgba(201,150,46,0.45)]">
+                                    Log In
+                                </button>
+                            </Link>
+                        )}
 
                     <button
-                        className="flex md:hidden bg-transparent border-none text-[#e8c667] cursor-pointer p-1"
+                        className="flex lg:hidden bg-transparent border-none text-[#e8c667] cursor-pointer p-1"
                         onClick={() => setMobileOpen((v) => !v)}
                         aria-label="Toggle menu"
                         aria-expanded={mobileOpen}
@@ -234,7 +234,7 @@ export function GymCraftNavbar() {
                 </div>
             </div>
 
-            <div className={`flex md:hidden flex-col gap-0.5 px-4 overflow-hidden bg-[#070707] transition-all duration-300 border-b ${mobileOpen ? "max-h-85 pt-2.5 pb-4 border-[#C9962E]/22" : "max-h-0 border-transparent"}`}>
+            <div className={`flex lg::hidden flex-col gap-0.5 px-4 overflow-hidden bg-[#070707] transition-all duration-300 border-b ${mobileOpen ? "max-h-85 pt-2.5 pb-4 border-[#C9962E]/22" : "max-h-0 border-transparent"}`}>
                 {NAV_LINKS.map((link) => {
                     const Icon = link.icon;
                     return (

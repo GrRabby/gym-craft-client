@@ -80,3 +80,23 @@ export async function getClassDetails(classId) {
         };
     }
 }
+export async function getFeaturedClasses(limit = 6) {
+    try {
+        const res = await fetch(
+            `${API_URL}/api/classes/public/featured?limit=${limit}`,
+            { cache: "no-store" },
+        );
+
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) {
+            return {
+                classes: [],
+                error: data.error || `Request failed (${res.status})`,
+            };
+        }
+        return { classes: data.classes || [], error: null };
+    } catch (err) {
+        console.error("getFeaturedClasses failed:", err);
+        return { classes: [], error: "Failed to load featured classes" };
+    }
+}

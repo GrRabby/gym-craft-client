@@ -16,7 +16,7 @@ const SLIDES = [
             "Train with elite coaches across 240+ weekly sessions. Pick your pace. Push your edge.",
     },
     {
-        image: "https://images.unsplash.com/photo-1517344884509-a0c97ec11bcc?w=1920&q=80",
+        image: "https://fitenium.com/wp-content/uploads/2019/12/crossfit.png",
         eyebrow: "High Intensity",
         title1: "Sweat. Then",
         title2: "Sweat More.",
@@ -54,8 +54,8 @@ export default function GymCraftBanner() {
     return (
         <section
             className="relative h-[85vh] min-h-[620px] w-full overflow-hidden bg-black isolate font-sans"
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
+            // onMouseEnter={() => setIsPaused(true)}
+            // onMouseLeave={() => setIsPaused(false)}
             aria-label="Featured fitness classes"
         >
             {SLIDES.map((s, i) => (

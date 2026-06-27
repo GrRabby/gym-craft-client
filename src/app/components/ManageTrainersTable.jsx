@@ -39,7 +39,7 @@ export default function ManageTrainersTable({ initialTrainers = [] }) {
                 label: "Demote",
                 onClick: () => runDemote(trainer),
             },
-            cancel: { label: "Cancel", onClick: () => {} },
+            cancel: { label: "Cancel", onClick: () => { } },
         });
     };
 
@@ -75,7 +75,7 @@ export default function ManageTrainersTable({ initialTrainers = [] }) {
 
             <div className="bg-[#0a0a0a] border border-[#C9962E]/15 overflow-hidden">
                 <div className="overflow-x-auto">
-                    <table className="w-full text-sm">
+                    <table className="w-full text-sm min-w-[800px]">
                         <thead>
                             <tr className="border-b border-[#C9962E]/20 bg-black/40">
                                 <Th>Trainer</Th>
@@ -118,8 +118,8 @@ function TrainerRow({ trainer, pending, onDemote }) {
     const blocked = (trainer.status || "active") === "blocked";
     const joined = trainer.createdAt
         ? new Date(trainer.createdAt).toLocaleDateString("en-US", {
-              month: "short", day: "numeric", year: "numeric",
-          })
+            month: "short", day: "numeric", year: "numeric",
+        })
         : "—";
 
     return (
