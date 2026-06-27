@@ -56,7 +56,7 @@ export async function demoteTrainerAction(userId) {
             body: JSON.stringify({ role: "member" }),
         });
         let data = null;
-        try { data = await res.json(); } catch {}
+        try { data = await res.json(); } catch { }
         if (!res.ok || !data?.ok)
             return { ok: false, error: data?.error || `Request failed (${res.status})` };
 
