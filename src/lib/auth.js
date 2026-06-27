@@ -18,21 +18,21 @@ export const auth = betterAuth({
             },
         }),
     ],
-    session : {
-        cookieCache : {
-            enabled : true,
-            strategy : "jwt",
-            maxAge : 7*24*60*60
+    session: {
+        cookieCache: {
+            enabled: true,
+            strategy: "jwt",
+            maxAge: 7 * 24 * 60 * 60
         }
     },
     emailAndPassword: {
         enabled: true,
     },
     socialProviders: {
-        google: { 
-            clientId: process.env.GOOGLE_CLIENT_ID, 
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET, 
-        }, 
+        google: {
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        },
     },
     user: {
         additionalFields: {
@@ -55,5 +55,5 @@ export const auth = betterAuth({
             trustedProviders: ["google"],
         },
     },
-    database: mongodbAdapter(db, {client}),
+    database: mongodbAdapter(db, { client }),
 });
