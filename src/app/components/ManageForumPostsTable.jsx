@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
 import {
     Trash2, Loader2, Search, MessageSquare, EyeOff, ShieldCheck,
-    BadgeCheck, User as UserIcon,
+    BadgeCheck, User as UserIcon, AlertTriangle
 } from "lucide-react";
 
 import { deleteForumPostAction } from "@/actions/forum-posts";
@@ -17,9 +17,9 @@ const CHAMFER_SM = "[clip-path:polygon(6px_0,100%_0,100%_calc(100%-6px),calc(100
 export default function ManageForumPostsTable({ initialPosts = [] }) {
     const router = useRouter();
     const [posts, setPosts] = useState(initialPosts);
-    const [removingIds, setRemovingIds] = useState(new Set());
+    const [deletingPost, setDeletingPost] = useState(null);
     const [search, setSearch] = useState("");
-    const [, startTransition] = useTransition();
+    const [isPending, startTransition] = useTransition();
 
     // Client-side search filter — case-insensitive substring match against
     // title, description, and author name/email. Cheap for any realistic
@@ -36,98 +36,118 @@ export default function ManageForumPostsTable({ initialPosts = [] }) {
     }, [posts, search]);
 
     function confirmDelete(post) {
-        toast(`Delete "${truncate(post.title, 40)}"?`, {
-            description: `Post by ${post.author.name}. This action cannot be undone.`,
-            duration: 8000,
-            action: {
-                label: "Delete",
-                onClick: () => performDelete(post),
-            },
-            cancel: {
-                label: "Cancel",
-                onClick: () => { },
-            },
-        });
+        setDeletingPost(post);
     }
 
     function performDelete(post) {
-        setRemovingIds((prev) => new Set(prev).add(post.id));
-        setPosts((prev) => prev.filter((p) => p.id !== post.id));
-
         startTransition(async () => {
             const result = await deleteForumPostAction(post.id);
 
             if (!result.ok) {
-                router.refresh();
                 toast.error(result.error || "Failed to delete post");
             } else {
                 toast.success(`Removed "${truncate(post.title, 40)}"`);
+                setPosts((prev) => prev.filter((p) => p.id !== post.id));
+                setDeletingPost(null);
+                router.refresh();
             }
-
-            setRemovingIds((prev) => {
-                const next = new Set(prev);
-                next.delete(post.id);
-                return next;
-            });
         });
     }
 
-    if (posts.length === 0) {
-        return <EmptyState />;
-    }
-
     return (
-        <div className="space-y-4">
-            {/* Search */}
-            <div className="relative max-w-md">
-                <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#7c7468] pointer-events-none" />
-                <input
-                    type="search"
-                    placeholder="Search title, description, or author…"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                    className={`w-full bg-[#0a0a0a] border border-[#C9962E]/20 text-white placeholder:text-[#5a5247] text-sm pl-10 pr-4 py-2.5 outline-none focus:border-[#E8C667]/60 transition-colors ${CHAMFER_SM}`}
-                />
-            </div>
+        <>
+            {posts.length === 0 ? (
+                <EmptyState />
+            ) : (
+                <div className="space-y-4">
+                    {/* Search */}
+                    <div className="relative max-w-md">
+                        <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#7c7468] pointer-events-none" />
+                        <input
+                            type="search"
+                            placeholder="Search title, description, or author…"
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            className={`w-full bg-[#0a0a0a] border border-[#C9962E]/20 text-white placeholder:text-[#5a5247] text-sm pl-10 pr-4 py-2.5 outline-none focus:border-[#E8C667]/60 transition-colors ${CHAMFER_SM}`}
+                        />
+                    </div>
 
-            {/* Table */}
-            <div className={`bg-[#0a0a0a] border border-[#C9962E]/15 overflow-hidden ${CHAMFER_MD}`}>
-                <div className="overflow-x-auto">
-                    <table className="w-full text-left min-w-[800px]">
-                        <thead>
-                            <tr className="border-b border-[#C9962E]/15">
-                                <Th>Post</Th>
-                                <Th>Author</Th>
-                                <Th>Status</Th>
-                                <Th>Posted</Th>
-                                <Th align="right">Action</Th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <AnimatePresence initial={false}>
-                                {filteredPosts.length === 0 ? (
-                                    <tr>
-                                        <td colSpan={5} className="px-5 py-12 text-center text-[#7c7468] text-sm">
-                                            No posts match your search.
-                                        </td>
+                    {/* Table */}
+                    <div className={`bg-[#0a0a0a] border border-[#C9962E]/15 overflow-hidden ${CHAMFER_MD}`}>
+                        <div className="overflow-x-auto">
+                            <table className="w-full text-left min-w-[800px]">
+                                <thead>
+                                    <tr className="border-b border-[#C9962E]/15">
+                                        <Th>Post</Th>
+                                        <Th>Author</Th>
+                                        <Th>Status</Th>
+                                        <Th>Posted</Th>
+                                        <Th align="right">Action</Th>
                                     </tr>
-                                ) : (
-                                    filteredPosts.map((post, i) => (
-                                        <PostRow
-                                            key={post.id}
-                                            post={post}
-                                            isLast={i === filteredPosts.length - 1}
-                                            isRemoving={removingIds.has(post.id)}
-                                            onDelete={() => confirmDelete(post)}
-                                        />
-                                    ))
-                                )}
-                            </AnimatePresence>
-                        </tbody>
-                    </table>
+                                </thead>
+                                <tbody>
+                                    <AnimatePresence initial={false}>
+                                        {filteredPosts.length === 0 ? (
+                                            <tr>
+                                                <td colSpan={5} className="px-5 py-12 text-center text-[#7c7468] text-sm">
+                                                    No posts match your search.
+                                                </td>
+                                            </tr>
+                                        ) : (
+                                            filteredPosts.map((post, i) => (
+                                                <PostRow
+                                                    key={post.id}
+                                                    post={post}
+                                                    isLast={i === filteredPosts.length - 1}
+                                                    isRemoving={deletingPost?.id === post.id && isPending}
+                                                    onDelete={() => confirmDelete(post)}
+                                                />
+                                            ))
+                                        )}
+                                    </AnimatePresence>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+            )}
+
+            {/* Delete Confirmation Modal */}
+            {deletingPost && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                    <div onClick={() => !isPending && setDeletingPost(null)} className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
+                    <div className="relative w-full max-w-md bg-[#0a0a0a] border border-[#ff5a5a]/45 shadow-[0_20px_50px_rgba(0,0,0,0.6)] p-6 [clip-path:polygon(10px_0,100%_0,100%_calc(100%-10px),calc(100%-10px)_100%,0_100%,0_10px)]">
+                        <div className="flex items-center gap-3 text-[#ff8585] mb-4">
+                            <AlertTriangle size={24} className="shrink-0 animate-bounce" />
+                            <h3 className="font-['Bebas_Neue'] text-2xl tracking-wide leading-none">Delete Post?</h3>
+                        </div>
+                        <p className="text-[#cfc6b8] text-sm leading-relaxed mb-6">
+                            Are you sure you want to delete <span className="text-white font-semibold">"{deletingPost.title}"</span>? This action is permanent and cannot be undone.
+                        </p>
+                        <div className="flex justify-end gap-3">
+                            <button
+                                onClick={() => setDeletingPost(null)}
+                                disabled={isPending}
+                                className="font-['Oswald'] text-xs tracking-[2px] uppercase text-[#cfc6b8] hover:text-white px-4 py-2 cursor-pointer disabled:opacity-40"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={() => performDelete(deletingPost)}
+                                disabled={isPending}
+                                className="inline-flex items-center justify-center gap-1.5 px-4 py-2 font-['Oswald'] text-xs font-semibold tracking-[2px] uppercase cursor-pointer bg-[#ff5a5a]/15 border border-[#ff5a5a]/50 hover:border-[#ff5a5a] hover:bg-[#ff5a5a]/25 text-[#ff8585] hover:text-[#ffadad] [clip-path:polygon(5px_0,100%_0,100%_calc(100%-5px),calc(100%-5px)_100%,0_100%,0_5px)]"
+                            >
+                                {isPending ? (
+                                    <><Loader2 size={12} className="animate-spin" /> Deleting…</>
+                                ) : (
+                                    "Yes, Delete"
+                                )}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </>
     );
 }
 

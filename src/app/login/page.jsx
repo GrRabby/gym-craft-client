@@ -68,11 +68,14 @@ export default function LoginPage() {
 
 
                 <div className="relative z-10 flex items-center gap-3">
-                    <BrandMark />
-                    <div className="font-['Oswald'] font-bold text-2xl tracking-[2px] uppercase leading-none">
-                        <span className="bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] bg-clip-text text-transparent">GYM</span>
-                        <span className="text-white ml-1">CRAFT</span>
-                    </div>
+                    <Link href={"/"} className="flex justify-center items-center gap-2">
+                        <img src="/Logo small.png" width={40} height={40}></img>
+                        <div className="font-['Oswald'] font-bold text-2xl tracking-[2px] uppercase leading-none">
+                            <span className="bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] bg-clip-text text-transparent">GYM</span>
+                            <span className="text-white ml-1">CRAFT</span>
+                        </div>
+                    </Link>
+
                 </div>
 
                 <div className="relative z-10 max-w-md">
@@ -120,15 +123,21 @@ export default function LoginPage() {
 
                 <div className="lg:hidden absolute top-6 left-6 right-6 flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                        <BrandMark small />
-                        <div className="font-['Oswald'] font-bold text-lg tracking-wider uppercase leading-none">
+                        <Link href={"/"} className="flex justify-center items-center gap-2 mb-5">
+                            <img src="/Logo small.png" width={40} height={40}></img>
+                            <div className="font-['Oswald'] font-bold text-2xl tracking-[2px] uppercase leading-none">
+                                <span className="bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] bg-clip-text text-transparent">GYM</span>
+                                <span className="text-white ml-1">CRAFT</span>
+                            </div>
+                        </Link>
+                        {/* <div className="font-['Oswald'] font-bold text-lg tracking-wider uppercase leading-none">
                             <span className="bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] bg-clip-text text-transparent">GYM</span>
                             <span className="text-white">CRAFT</span>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 
-                <div className="relative z-10 w-full max-w-md">
+                <div className="relative z-10 w-full max-w-md mt-10">
                     <div className="flex items-center gap-3 mb-6">
                         <div className="h-px w-8 bg-[#E8C667]" />
                         <span className="font-['Oswald'] text-[#E8C667] text-xs font-semibold tracking-[5px] uppercase">

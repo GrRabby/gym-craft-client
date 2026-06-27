@@ -21,10 +21,10 @@ const RESOURCES = [
 ];
 
 const SOCIAL = [
-    { label: "Facebook",  href: "https://facebook.com/gymcraft",  Icon: FaFacebookF },
-    { label: "X",         href: "https://x.com/gymcraft",          Icon: XLogo },
-    { label: "Instagram", href: "https://instagram.com/gymcraft", Icon: FaInstagram },
-    { label: "YouTube",   href: "https://youtube.com/@gymcraft",  Icon: FaYoutube },
+    { label: "Facebook",  href: "/",  Icon: FaFacebookF },
+    { label: "X",         href: "/",          Icon: XLogo },
+    { label: "Instagram", href: "/", Icon: FaInstagram },
+    { label: "YouTube",   href: "/",  Icon: FaYoutube },
 ];
 
 export default function Footer() {
@@ -154,28 +154,6 @@ function ContactRow({ icon: Icon, children }) {
             <Icon size={15} className="text-[#E8C667] shrink-0 mt-0.5" />
             <span className="leading-relaxed">{children}</span>
         </li>
-    );
-}
-
-function LogoMark() {
-    return (
-        <svg viewBox="0 0 48 48" className="h-11 w-11 shrink-0" aria-hidden="true">
-            <defs>
-                <linearGradient id="gcFooterGold" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0" stopColor="#F7E4A3" />
-                    <stop offset="0.45" stopColor="#E8C667" />
-                    <stop offset="1" stopColor="#C9962E" />
-                </linearGradient>
-            </defs>
-            <path d="M40 13.5A18 18 0 1 0 40 34.5" fill="none" stroke="url(#gcFooterGold)" strokeWidth="4.4" strokeLinecap="round" />
-            <g fill="#FFFFFF">
-                <rect x="15" y="22.4" width="18" height="3.2" rx="1.6" />
-                <rect x="11.5" y="19" width="3" height="10" rx="1.2" />
-                <rect x="33.5" y="19" width="3" height="10" rx="1.2" />
-                <rect x="8.5" y="21" width="2.4" height="6" rx="1" fill="url(#gcFooterGold)" />
-                <rect x="37.1" y="21" width="2.4" height="6" rx="1" fill="url(#gcFooterGold)" />
-            </g>
-        </svg>
     );
 }
 

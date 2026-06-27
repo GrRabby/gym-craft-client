@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
 import {
     Trash2, Loader2, MessageSquarePlus, MessageSquare,
-    AlertCircle, Clock, EyeOff,
+    Clock, EyeOff, AlertTriangle
 } from "lucide-react";
 
 import { deleteForumPostAction } from "@/actions/forum-posts";
@@ -18,38 +18,18 @@ const CHAMFER_SM = "[clip-path:polygon(6px_0,100%_0,100%_calc(100%-6px),calc(100
 export default function MyForumPostsGrid({ initialPosts = [] }) {
     const router = useRouter();
     const [posts, setPosts] = useState(initialPosts);
-    const [removingIds, setRemovingIds] = useState(new Set());
-    const [, startTransition] = useTransition();
+    const [deletingPost, setDeletingPost] = useState(null);
+    const [isPending, startTransition] = useTransition();
 
     function confirmDelete(post) {
-        // Sonner action toast — two-button confirmation pattern matches the
-        // admin Demote/Make Admin actions
-        toast(`Delete "${truncate(post.title, 40)}"?`, {
-            description: "This action cannot be undone.",
-            duration: 8000,
-            action: {
-                label: "Delete",
-                onClick: () => performDelete(post),
-            },
-            cancel: {
-                label: "Cancel",
-                onClick: () => {},
-            },
-        });
+        setDeletingPost(post);
     }
 
     function performDelete(post) {
-        // Optimistic: mark as removing (for the button spinner) AND filter
-        // out of the list (for the AnimatePresence exit animation)
-        setRemovingIds((prev) => new Set(prev).add(post.id));
-        setPosts((prev) => prev.filter((p) => p.id !== post.id));
-
         startTransition(async () => {
             const result = await deleteForumPostAction(post.id);
 
             if (!result.ok) {
-                // Roll back by refetching from the server
-                router.refresh();
                 if (result.blocked) {
                     toast.error("Action restricted by Admin");
                 } else {
@@ -57,33 +37,68 @@ export default function MyForumPostsGrid({ initialPosts = [] }) {
                 }
             } else {
                 toast.success("Post deleted");
+                setPosts((prev) => prev.filter((p) => p.id !== post.id));
+                setDeletingPost(null);
+                router.refresh();
             }
-
-            setRemovingIds((prev) => {
-                const next = new Set(prev);
-                next.delete(post.id);
-                return next;
-            });
         });
     }
 
-    if (posts.length === 0) {
-        return <EmptyState />;
-    }
-
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            <AnimatePresence initial={false} mode="popLayout">
-                {posts.map((post) => (
-                    <PostCard
-                        key={post.id}
-                        post={post}
-                        isRemoving={removingIds.has(post.id)}
-                        onDelete={() => confirmDelete(post)}
-                    />
-                ))}
-            </AnimatePresence>
-        </div>
+        <>
+            {posts.length === 0 ? (
+                <EmptyState />
+            ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <AnimatePresence initial={false} mode="popLayout">
+                        {posts.map((post) => (
+                            <PostCard
+                                key={post.id}
+                                post={post}
+                                isRemoving={deletingPost?.id === post.id && isPending}
+                                onDelete={() => confirmDelete(post)}
+                            />
+                        ))}
+                    </AnimatePresence>
+                </div>
+            )}
+
+            {/* Delete Confirmation Modal */}
+            {deletingPost && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                    <div onClick={() => !isPending && setDeletingPost(null)} className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
+                    <div className="relative w-full max-w-md bg-[#0a0a0a] border border-[#ff5a5a]/45 shadow-[0_20px_50px_rgba(0,0,0,0.6)] p-6 [clip-path:polygon(10px_0,100%_0,100%_calc(100%-10px),calc(100%-10px)_100%,0_100%,0_10px)]">
+                        <div className="flex items-center gap-3 text-[#ff8585] mb-4">
+                            <AlertTriangle size={24} className="shrink-0 animate-bounce" />
+                            <h3 className="font-['Bebas_Neue'] text-2xl tracking-wide leading-none">Delete Post?</h3>
+                        </div>
+                        <p className="text-[#cfc6b8] text-sm leading-relaxed mb-6">
+                            Are you sure you want to delete <span className="text-white font-semibold">"{deletingPost.title}"</span>? This action is permanent and cannot be undone.
+                        </p>
+                        <div className="flex justify-end gap-3">
+                            <button
+                                onClick={() => setDeletingPost(null)}
+                                disabled={isPending}
+                                className="font-['Oswald'] text-xs tracking-[2px] uppercase text-[#cfc6b8] hover:text-white px-4 py-2 cursor-pointer disabled:opacity-40"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={() => performDelete(deletingPost)}
+                                disabled={isPending}
+                                className="inline-flex items-center justify-center gap-1.5 px-4 py-2 font-['Oswald'] text-xs font-semibold tracking-[2px] uppercase cursor-pointer bg-[#ff5a5a]/15 border border-[#ff5a5a]/50 hover:border-[#ff5a5a] hover:bg-[#ff5a5a]/25 text-[#ff8585] hover:text-[#ffadad] [clip-path:polygon(5px_0,100%_0,100%_calc(100%-5px),calc(100%-5px)_100%,0_100%,0_5px)]"
+                            >
+                                {isPending ? (
+                                    <><Loader2 size={12} className="animate-spin" /> Deleting…</>
+                                ) : (
+                                    "Yes, Delete"
+                                )}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </>
     );
 }
 
@@ -99,9 +114,8 @@ function PostCard({ post, isRemoving, onDelete }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.94, transition: { duration: 0.25 } }}
             transition={{ duration: 0.25 }}
-            className={`group relative bg-[#0a0a0a] border ${
-                isHidden ? "border-[#ff5a5a]/25" : "border-[#C9962E]/15 hover:border-[#C9962E]/40"
-            } transition-colors overflow-hidden flex flex-col ${CHAMFER_MD}`}
+            className={`group relative bg-[#0a0a0a] border ${isHidden ? "border-[#ff5a5a]/25" : "border-[#C9962E]/15 hover:border-[#C9962E]/40"
+                } transition-colors overflow-hidden flex flex-col ${CHAMFER_MD}`}
         >
             {/* Cover image with overlaid delete button */}
             <div className="relative aspect-[16/10] bg-[#0f0f0f] overflow-hidden">

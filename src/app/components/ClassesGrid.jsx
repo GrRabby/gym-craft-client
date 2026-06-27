@@ -183,18 +183,6 @@ export default function ClassesGrid({
                     </>
                 )}
             </p>
-            {/* Stats */}
-            {/* <div className="scroll-mt-10">
-                <p className="text-start text-[#7c7468] text-[13px] font-['Oswald'] tracking-[2px] uppercase">
-                    {total === 0 ? (
-                        "No classes found"
-                    ) : (
-                        <>
-                            Showing <span className="text-[#E8C667]">{fromItem}–{toItem}</span> of <span className="text-[#E8C667]">{total}</span> {total === 1 ? "class" : "classes"} {hasActiveFilters ? "matched" : "available"}
-                        </>
-                    )}
-                </p>
-            </div> */}
 
             {/* Grid */}
             {initialClasses.length === 0 ? (

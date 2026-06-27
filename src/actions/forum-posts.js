@@ -180,35 +180,41 @@ export async function deleteForumPostAction(postId) {
         return { ok: false, error: "Failed to delete post" };
     }
 }
-export async function getPublicForumPosts({ page = 1, limit = 12 } = {}) {
+export async function getPublicForumPosts({ page = 1, limit = 12, search = "" } = {}) {
     try {
         const params = new URLSearchParams({
-            page: String(page),
+            page:  String(page),
             limit: String(limit),
         });
+        const trimmed = String(search).trim();
+        if (trimmed) {
+            params.set("search", trimmed);
+        }
+ 
         const res = await fetch(`${API_URL}/api/forum-posts/public?${params}`, {
             cache: "no-store",
         });
-
+ 
         const data = await res.json().catch(() => ({}));
         if (!res.ok) {
             return {
-                posts: [], page: 1, limit, total: 0, totalPages: 1,
+                posts: [], page: 1, limit, total: 0, totalPages: 1, search: trimmed,
                 error: data.error || `Request failed (${res.status})`,
             };
         }
         return {
-            posts: data.posts || [],
-            page: data.page || 1,
-            limit: data.limit || limit,
-            total: data.total || 0,
+            posts:      data.posts || [],
+            page:       data.page || 1,
+            limit:      data.limit || limit,
+            total:      data.total || 0,
             totalPages: data.totalPages || 1,
-            error: null,
+            search:     data.search ?? trimmed,
+            error:      null,
         };
     } catch (err) {
         console.error("getPublicForumPosts failed:", err);
         return {
-            posts: [], page: 1, limit, total: 0, totalPages: 1,
+            posts: [], page: 1, limit, total: 0, totalPages: 1, search,
             error: "Failed to load posts",
         };
     }

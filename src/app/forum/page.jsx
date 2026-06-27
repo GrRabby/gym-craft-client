@@ -5,10 +5,14 @@ export const dynamic = "force-dynamic";
 
 export default async function ForumPage({ searchParams }) {
     const sp = await searchParams;
-    const page = Math.max(1, Number(sp?.page) || 1);
-    const limit = 12;
+    const page   = Math.max(1, Number(sp?.page) || 1);
+    const search = String(sp?.search || "").trim();
+    const limit  = 12;
 
-    const { posts, totalPages, total, error } = await getPublicForumPosts({ page, limit });
+    const {
+        posts, totalPages, total, error,
+    } = await getPublicForumPosts({ page, limit, search });
+
     return (
         <main className="min-h-screen bg-[#050505] pb-20">
             {/* Hero */}
@@ -32,15 +36,10 @@ export default async function ForumPage({ searchParams }) {
                     <p className="text-[#cfc6b8] text-base lg:text-lg mt-4 max-w-2xl">
                         Training insights, stories, and announcements from GymCraft trainers and admins.
                     </p>
-                    {total > 0 && (
-                        <p className="font-['Oswald'] text-xs tracking-[3px] uppercase text-[#7c7468] mt-6">
-                            {total} {total === 1 ? "post" : "posts"} from the community
-                        </p>
-                    )}
                 </div>
             </section>
 
-            {/* Grid */}
+            {/* Grid + search */}
             <section className="max-w-7xl mx-auto px-6 lg:px-8">
                 {error ? (
                     <ErrorBanner message={error} />
@@ -49,6 +48,8 @@ export default async function ForumPage({ searchParams }) {
                         initialPosts={posts}
                         currentPage={page}
                         totalPages={totalPages}
+                        total={total}
+                        initialSearch={search}
                     />
                 )}
             </section>

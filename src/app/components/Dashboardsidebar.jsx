@@ -128,7 +128,7 @@ export default function DashboardSidebar() {
 
                 <div className="relative px-6 pt-6 pb-5 flex items-center justify-between">
                     <Link href="/" className="flex items-center gap-2.5 no-underline" aria-label="GymCraft home">
-                        <LogoMark size={36} />
+                        <img src="/Logo small.png" width={45} height={45}></img>
                         <div className="flex flex-col leading-none">
                             <span className="font-['Oswald'] font-bold text-lg tracking-wider uppercase">
                                 <span className="bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] bg-clip-text text-transparent mr-0.5">GYM</span>
@@ -281,27 +281,5 @@ function Avatar({ user, size = 38 }) {
         >
             {initials}
         </span>
-    );
-}
-
-function LogoMark({ size = 44 }) {
-    return (
-        <svg viewBox="0 0 48 48" style={{ width: size, height: size }} className="shrink-0" aria-hidden="true">
-            <defs>
-                <linearGradient id="gcSidebarGold" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0" stopColor="#F7E4A3" />
-                    <stop offset="0.45" stopColor="#E8C667" />
-                    <stop offset="1" stopColor="#C9962E" />
-                </linearGradient>
-            </defs>
-            <path d="M40 13.5A18 18 0 1 0 40 34.5" fill="none" stroke="url(#gcSidebarGold)" strokeWidth="4.4" strokeLinecap="round" />
-            <g fill="#FFFFFF">
-                <rect x="15" y="22.4" width="18" height="3.2" rx="1.6" />
-                <rect x="11.5" y="19" width="3" height="10" rx="1.2" />
-                <rect x="33.5" y="19" width="3" height="10" rx="1.2" />
-                <rect x="8.5" y="21" width="2.4" height="6" rx="1" fill="url(#gcSidebarGold)" />
-                <rect x="37.1" y="21" width="2.4" height="6" rx="1" fill="url(#gcSidebarGold)" />
-            </g>
-        </svg>
     );
 }
