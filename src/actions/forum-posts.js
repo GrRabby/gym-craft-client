@@ -30,7 +30,7 @@ async function authedFetch(path, options = {}) {
     });
 }
 
-/* ---------- Imgbb upload (server-side, key stays out of the browser) ---------- */
+/* ---------- Imgbb upload ---------- */
 
 async function uploadToImgbb(file) {
     if (!IMGBB_API_KEY) {
@@ -45,16 +45,12 @@ async function uploadToImgbb(file) {
     form.append("image", base64);
 
     const res = await fetch(IMGBB_ENDPOINT, { method: "POST", body: form });
-
-    if (!res.ok) {
-        throw new Error(`Imgbb upload failed (${res.status})`);
-    }
+    if (!res.ok) throw new Error(`Imgbb upload failed (${res.status})`);
 
     const data = await res.json();
     if (!data?.success || !data?.data?.url) {
         throw new Error(data?.error?.message || "Imgbb upload returned no URL");
     }
-
     return data.data.url;
 }
 
@@ -100,26 +96,25 @@ export async function createForumPostAction(formData) {
             };
         }
 
+        // Refresh both list views — admin moderation table and trainer's own
+        // list. force-dynamic on those pages already prevents stale caching,
+        // but this is belt-and-suspenders.
         revalidatePath("/dashboard/trainer/forum");
+        revalidatePath("/dashboard/admin/forum");
+
         return { ok: true, post: data.post };
     } catch (err) {
-        if (err.code === "NO_AUTH") {
-            return { ok: false, error: "Not authenticated" };
-        }
+        if (err.code === "NO_AUTH") return { ok: false, error: "Not authenticated" };
         console.error("createForumPostAction failed:", err);
         return { ok: false, error: "Failed to publish post" };
     }
 }
 
-/* ---------- list mine ---------- */
+/* ---------- list (trainer's own) ---------- */
 
-/**
- * Returns the current trainer's posts (all statuses, newest first).
- */
 export async function getMyForumPosts() {
     try {
         const res = await authedFetch("/api/forum-posts/me", { cache: "no-store" });
-
         const data = await res.json().catch(() => ({}));
         if (!res.ok) {
             return {
@@ -129,20 +124,38 @@ export async function getMyForumPosts() {
         }
         return { posts: data.posts || [], error: null };
     } catch (err) {
-        if (err.code === "NO_AUTH") {
-            return { posts: [], error: "Not authenticated" };
-        }
+        if (err.code === "NO_AUTH") return { posts: [], error: "Not authenticated" };
         console.error("getMyForumPosts failed:", err);
+        return { posts: [], error: "Failed to load posts" };
+    }
+}
+
+/* ---------- list (all — admin moderation) ---------- */
+
+/**
+ * Returns ALL forum posts across all users, with author info attached.
+ * Admin-only on the backend. Used by the Forum Post Manage page.
+ */
+export async function getAllForumPosts() {
+    try {
+        const res = await authedFetch("/api/forum-posts", { cache: "no-store" });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) {
+            return {
+                posts: [],
+                error: data.error || `Request failed (${res.status})`,
+            };
+        }
+        return { posts: data.posts || [], error: null };
+    } catch (err) {
+        if (err.code === "NO_AUTH") return { posts: [], error: "Not authenticated" };
+        console.error("getAllForumPosts failed:", err);
         return { posts: [], error: "Failed to load posts" };
     }
 }
 
 /* ---------- delete ---------- */
 
-/**
- * Deletes a post by ID. Backend enforces ownership (or admin override),
- * so a trainer can only delete their own posts.
- */
 export async function deleteForumPostAction(postId) {
     try {
         const res = await authedFetch(`/api/forum-posts/${postId}`, {
@@ -159,11 +172,10 @@ export async function deleteForumPostAction(postId) {
         }
 
         revalidatePath("/dashboard/trainer/forum");
+        revalidatePath("/dashboard/admin/forum");
         return { ok: true };
     } catch (err) {
-        if (err.code === "NO_AUTH") {
-            return { ok: false, error: "Not authenticated" };
-        }
+        if (err.code === "NO_AUTH") return { ok: false, error: "Not authenticated" };
         console.error("deleteForumPostAction failed:", err);
         return { ok: false, error: "Failed to delete post" };
     }

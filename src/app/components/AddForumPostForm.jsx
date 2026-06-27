@@ -18,7 +18,7 @@ const DESC_MAX = 5000;
 const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
 const ALLOWED_TYPES = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
 
-export default function AddForumPostForm() {
+export default function AddForumPostForm({redirectOnSuccess = "/dashboard/trainer/forum",}) {
     const router = useRouter();
     const fileInputRef = useRef(null);
 
@@ -98,7 +98,7 @@ export default function AddForumPostForm() {
         }
 
         toast.success("Post published to the community forum");
-        router.push("/dashboard/trainer/forum");
+        router.push(redirectOnSuccess);
     }
 
     return (
