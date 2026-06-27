@@ -161,11 +161,6 @@ export function GymCraftNavbar() {
         setLoggingOut(true);
         await authClient.signOut({
             fetchOptions: {
-                onSuccess: () => {
-                    // Push home + refresh so server components reading the session re-render
-                    router.push("/login");
-                    router.refresh();
-                },
                 onError: () => setLoggingOut(false),
             },
         });

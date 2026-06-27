@@ -14,10 +14,10 @@ import { removeFavoriteAction } from "@/actions/favorites";
 
 const CATEGORY_ICONS = {
     strength: Dumbbell,
-    cardio:   HeartPulse,
-    hiit:     Flame,
-    yoga:     Sparkles,
-    pilates:  Activity,
+    cardio: HeartPulse,
+    hiit: Flame,
+    yoga: Sparkles,
+    pilates: Activity,
     mobility: Move,
 };
 
@@ -47,13 +47,8 @@ export default function MyFavoritesTable({ initialFavorites = [] }) {
     function handleRemove(favorite) {
         const { id: favoriteId, class: cls } = favorite;
 
-        // Mark this row as removing so its button shows a spinner. We DON'T
-        // remove from the array yet — that's done by AnimatePresence below
-        // when we filter it out.
-        setRemovingIds((prev) => new Set(prev).add(favoriteId));
-
-        // Optimistic remove — animation runs immediately
-        setFavorites((prev) => prev.filter((f) => f.id !== favoriteId));
+        // setRemovingIds((prev) => new Set(prev).add(favoriteId));
+        // setFavorites((prev) => prev.filter((f) => f.id !== favoriteId));
 
         startTransition(async () => {
             const result = await removeFavoriteAction(cls.id);
@@ -68,6 +63,9 @@ export default function MyFavoritesTable({ initialFavorites = [] }) {
                 );
             } else {
                 toast.success(`Removed "${cls.title}" from favorites`);
+                setRemovingIds((prev) => new Set(prev).add(favoriteId));
+                setFavorites((prev) => prev.filter((f) => f.id !== favoriteId));
+
             }
 
             setRemovingIds((prev) => {
@@ -125,9 +123,8 @@ function FavoriteRow({ favorite, isLast, isRemoving, onRemove }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, x: -24, transition: { duration: 0.25 } }}
             transition={{ duration: 0.2 }}
-            className={`group transition-colors hover:bg-[#C9962E]/[0.04] ${
-                isLast ? "" : "border-b border-[#C9962E]/10"
-            }`}
+            className={`group transition-colors hover:bg-[#C9962E]/[0.04] ${isLast ? "" : "border-b border-[#C9962E]/10"
+                }`}
         >
             {/* Class */}
             <td className="px-5 py-4">

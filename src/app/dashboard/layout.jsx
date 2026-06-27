@@ -1,6 +1,5 @@
 import DashboardNavbar from "@/app/components/Dashboardnavbar";
 import DashboardSidebar from "@/app/components/Dashboardsidebar";
-import { Toaster } from "sonner";
 
 export default function DashboardLayout({ children }) {
     return (

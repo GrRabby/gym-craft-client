@@ -58,9 +58,9 @@ async function uploadToImgbb(file) {
 
 export async function createForumPostAction(formData) {
     try {
-        const title       = String(formData.get("title") || "").trim();
+        const title = String(formData.get("title") || "").trim();
         const description = String(formData.get("description") || "").trim();
-        const imageFile   = formData.get("imageFile");
+        const imageFile = formData.get("imageFile");
 
         if (!title) return { ok: false, error: "Title is required" };
         if (!description) return { ok: false, error: "Description is required" };
@@ -178,5 +178,70 @@ export async function deleteForumPostAction(postId) {
         if (err.code === "NO_AUTH") return { ok: false, error: "Not authenticated" };
         console.error("deleteForumPostAction failed:", err);
         return { ok: false, error: "Failed to delete post" };
+    }
+}
+export async function getPublicForumPosts({ page = 1, limit = 12 } = {}) {
+    try {
+        const params = new URLSearchParams({
+            page: String(page),
+            limit: String(limit),
+        });
+        const res = await fetch(`${API_URL}/api/forum-posts/public?${params}`, {
+            cache: "no-store",
+        });
+
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) {
+            return {
+                posts: [], page: 1, limit, total: 0, totalPages: 1,
+                error: data.error || `Request failed (${res.status})`,
+            };
+        }
+        return {
+            posts: data.posts || [],
+            page: data.page || 1,
+            limit: data.limit || limit,
+            total: data.total || 0,
+            totalPages: data.totalPages || 1,
+            error: null,
+        };
+    } catch (err) {
+        console.error("getPublicForumPosts failed:", err);
+        return {
+            posts: [], page: 1, limit, total: 0, totalPages: 1,
+            error: "Failed to load posts",
+        };
+    }
+}
+
+/* ---------- single post details (auth required) ---------- */
+
+/**
+ * Fetches a published post with vote counts, the current user's vote,
+ * and the total comment count. All bundled into one call.
+ */
+export async function getForumPostDetails(postId) {
+    try {
+        const res = await authedFetch(`/api/forum-posts/${postId}`, { cache: "no-store" });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) {
+            return {
+                post: null,
+                error: data.error || `Request failed (${res.status})`,
+                status: res.status,
+            };
+        }
+        return {
+            post: data.post,
+            likes: data.likes || 0,
+            dislikes: data.dislikes || 0,
+            userVote: data.userVote || null,
+            commentCount: data.commentCount || 0,
+            error: null,
+        };
+    } catch (err) {
+        if (err.code === "NO_AUTH") return { post: null, error: "Not authenticated" };
+        console.error("getForumPostDetails failed:", err);
+        return { post: null, error: "Failed to load post" };
     }
 }
