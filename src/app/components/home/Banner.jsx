@@ -54,8 +54,8 @@ export default function GymCraftBanner() {
     return (
         <section
             className="relative h-[85vh] min-h-[620px] w-full overflow-hidden bg-black isolate font-sans"
-            // onMouseEnter={() => setIsPaused(true)}
-            // onMouseLeave={() => setIsPaused(false)}
+            
+            
             aria-label="Featured fitness classes"
         >
             {SLIDES.map((s, i) => (
@@ -77,7 +77,7 @@ export default function GymCraftBanner() {
             <div className="absolute top-0 inset-x-0 z-[4] h-px bg-linear-to-r from-transparent via-[#C9962E]/55 to-transparent" />
 
             <div className="relative z-[5] max-w-310 mx-auto px-6 h-full flex flex-col justify-center">
-                {/* Force remount on slide change so the entrance animation re-fires */}
+                { }
                 <div key={activeIndex} className="max-w-2xl">
                     <div className="flex items-center gap-3 mb-5 opacity-0 animate-gc-fade-up">
                         <div className="h-px w-10 bg-[#E8C667]" />

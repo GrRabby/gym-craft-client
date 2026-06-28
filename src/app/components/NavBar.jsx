@@ -38,7 +38,7 @@ function Avatar({ user, size = 38 }) {
 
     if (user?.image) {
         return (
-            // eslint-disable-next-line @next/next/no-img-element
+            
             <img
                 src={user.image}
                 alt={user.name}

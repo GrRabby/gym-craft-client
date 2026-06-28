@@ -19,7 +19,7 @@ export default function FeaturedClassesSection({ classes = [] }) {
     return (
         <section className="relative py-20 lg:py-28">
             <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                {/* Section header */}
+                { }
                 <SectionHeader
                     eyebrow="Top Classes"
                     title="Featured Classes"
@@ -27,7 +27,7 @@ export default function FeaturedClassesSection({ classes = [] }) {
                     subtitle="The most-booked sessions across the platform — ranked by what members are actually training in."
                 />
 
-                {/* Grid */}
+                { }
                 {classes.length === 0 ? (
                     <EmptyState />
                 ) : (
@@ -38,7 +38,7 @@ export default function FeaturedClassesSection({ classes = [] }) {
                     </div>
                 )}
 
-                {/* View-all link */}
+                { }
                 {classes.length > 0 && (
                     <div className="text-center mt-12">
                         <Link
@@ -55,15 +55,15 @@ export default function FeaturedClassesSection({ classes = [] }) {
     );
 }
 
-/* ---------- card ---------- */
+ 
 
 function FeaturedCard({ cls }) {
     return (
         <article className={`group h-full flex flex-col bg-[#0a0a0a] border border-[#C9962E]/30 hover:border-[#C9962E]/70 transition-colors overflow-hidden ${CHAMFER_MD}`}>
-            {/* Image with booking-count badge */}
+            { }
             <div className="relative aspect-[16/10] bg-[#0f0f0f] overflow-hidden">
                 {cls.image ? (
-                    // eslint-disable-next-line @next/next/no-img-element
+                    
                     <img
                         src={cls.image}
                         alt=""
@@ -76,7 +76,7 @@ function FeaturedCard({ cls }) {
                 )}
                 <div className="absolute inset-x-0 top-0 h-16 bg-linear-to-b from-black/55 to-transparent pointer-events-none" />
 
-                {/* Booking count badge */}
+                { }
                 {cls.bookingCount > 0 && (
                     <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 bg-black/70 backdrop-blur-sm border border-[#E8C667]/50 text-[#E8C667] font-['Oswald'] text-[10px] font-bold tracking-[2px] uppercase [clip-path:polygon(4px_0,100%_0,100%_calc(100%-4px),calc(100%-4px)_100%,0_100%,0_4px)]">
                         <Flame size={10} />
@@ -84,25 +84,25 @@ function FeaturedCard({ cls }) {
                     </span>
                 )}
 
-                {/* Category badge */}
+                { }
                 <span className="absolute top-3 right-3 inline-flex items-center px-2.5 py-1 bg-black/70 backdrop-blur-sm border border-[#C9962E]/30 text-[#cfc6b8] font-['Oswald'] text-[10px] font-semibold tracking-[2px] uppercase [clip-path:polygon(4px_0,100%_0,100%_calc(100%-4px),calc(100%-4px)_100%,0_100%,0_4px)]">
                     {CATEGORY_LABELS[cls.category] || cls.category}
                 </span>
             </div>
 
-            {/* Body */}
+            { }
             <div className="p-5 flex flex-col flex-1">
                 <h3 className="font-['Bebas_Neue'] text-2xl text-white tracking-wide leading-tight line-clamp-2 group-hover:text-[#E8C667] transition-colors">
                     {cls.title}
                 </h3>
 
-                {/* Trainer */}
+                { }
                 <div className="flex items-center gap-2 mt-2">
                     <Avatar user={cls.trainer} size={20} />
                     <span className="text-[#cfc6b8] text-xs truncate">Coach {cls.trainer.name}</span>
                 </div>
 
-                {/* Stats row */}
+                { }
                 <div className="flex items-center gap-4 mt-4 text-xs font-['Oswald'] tracking-[1px]">
                     <span className="inline-flex items-center gap-1.5 text-[#cfc6b8]">
                         <Clock size={12} className="text-[#E8C667]" />
@@ -115,7 +115,7 @@ function FeaturedCard({ cls }) {
                     </span>
                 </div>
 
-                {/* CTA */}
+                { }
                 <div className="mt-auto pt-5">
                     <Link
                         href={`/classes/${cls.id}`}
@@ -130,10 +130,10 @@ function FeaturedCard({ cls }) {
     );
 }
 
-/* ---------- shared bits ---------- */
+ 
 
 export function SectionHeader({ eyebrow, title, accent, subtitle }) {
-    // Splits `title` on `accent` so the accent word gets the gold gradient
+    
     const titleParts = accent ? title.split(accent) : [title];
     return (
         <div className="text-center max-w-2xl mx-auto">
@@ -162,7 +162,7 @@ export function SectionHeader({ eyebrow, title, accent, subtitle }) {
 
 function Avatar({ user, size = 24 }) {
     if (user?.image) {
-        // eslint-disable-next-line @next/next/no-img-element
+        
         return (
             <img
                 src={user.image}

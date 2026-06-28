@@ -17,7 +17,7 @@ export default async function BookedClassesPage() {
 
     return (
         <div className="flex-1 flex flex-col">
-            {/* Header */}
+            { }
             <div className="mb-8">
                 <div className="flex items-center gap-3 mb-3">
                     <div className="h-px w-10 bg-[#E8C667]" />
@@ -46,7 +46,7 @@ export default async function BookedClassesPage() {
                 </div>
             </div>
 
-            {/* Error / Table / Empty state */}
+            { }
             {error ? (
                 <div className="max-w-xl p-6 border border-[#ff5a5a]/30 bg-[#ff5a5a]/5 text-[#ff8585] [clip-path:polygon(8px_0,100%_0,100%_calc(100%-8px),calc(100%-8px)_100%,0_100%,0_8px)]">
                     <p className="font-['Oswald'] text-xs tracking-[3px] uppercase mb-2">

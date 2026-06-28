@@ -10,8 +10,8 @@ export default async function AddForumPostPage() {
     if (!user) {
         redirect("/login");
     }
-    // Trainers only — admins can build their own post creation via Admin
-    // Dashboard if needed; members aren't allowed to post to the forum
+    
+    
     if (user.role !== "trainer") {
         redirect("/dashboard");
     }

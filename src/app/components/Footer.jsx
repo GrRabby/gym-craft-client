@@ -157,7 +157,7 @@ function ContactRow({ icon: Icon, children }) {
     );
 }
 
-/** Official X (formerly Twitter) brand mark — not the old bird. */
+ 
 function XLogo({ size = 16 }) {
     return (
         <svg

@@ -25,7 +25,7 @@ export default async function TrainerOverviewPage() {
 
     return (
         <div className="flex-1 flex flex-col gap-8">
-            {/* Header */}
+            { }
             <header>
                 <div className="flex items-center gap-3 mb-3">
                     <div className="h-px w-10 bg-[#E8C667]" />
@@ -44,7 +44,7 @@ export default async function TrainerOverviewPage() {
                 </p>
             </header>
 
-            {/* Stats — Classes Created is linkable, Students Enrolled is passive */}
+            { }
             <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <StatCard
                     href="/dashboard/trainer/classes"
@@ -65,7 +65,7 @@ export default async function TrainerOverviewPage() {
                 />
             </section>
 
-            {/* Profile */}
+            { }
             <section>
                 <SectionHeader>Profile</SectionHeader>
                 <ProfileCard user={user} />
@@ -74,7 +74,7 @@ export default async function TrainerOverviewPage() {
     );
 }
 
-/* ---------- shared section header ---------- */
+ 
 
 function SectionHeader({ children }) {
     return (
@@ -87,10 +87,10 @@ function SectionHeader({ children }) {
     );
 }
 
-/* ---------- stat card (linkable OR passive) ---------- */
+ 
 
 function StatCard({ href, Icon, label, value, sublabel }) {
-    // Card body is identical for both modes — only the wrapper differs
+    
     const body = (
         <>
             <div className="absolute top-0 right-0 h-32 w-32 bg-[radial-gradient(circle_at_top_right,rgba(232,198,103,0.08),transparent_60%)] pointer-events-none" />
@@ -142,7 +142,7 @@ function StatCard({ href, Icon, label, value, sublabel }) {
     );
 }
 
-/* ---------- profile card ---------- */
+ 
 
 function ProfileCard({ user }) {
     return (
@@ -179,11 +179,11 @@ function TrainerBadge() {
     );
 }
 
-/* ---------- avatar ---------- */
+ 
 
 function Avatar({ user, size = 96 }) {
     if (user?.image) {
-        // eslint-disable-next-line @next/next/no-img-element
+        
         return (
             <img
                 src={user.image}

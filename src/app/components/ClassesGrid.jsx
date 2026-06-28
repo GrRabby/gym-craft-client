@@ -46,9 +46,9 @@ export default function ClassesGrid({
     const [isPending, startTransition] = useTransition();
     const topAnchorRef = useRef(null);
     const prevPageRef = useRef(currentPage);
-    /* ---------- Search input ↔ URL (debounced) ---------- */
+     
     const [searchInput, setSearchInput] = useState(currentSearch);
-    // Scroll cleanly up to the top of the grid whenever the page changes
+    
     useEffect(() => {
         if (prevPageRef.current !== currentPage) {
             topAnchorRef.current?.scrollIntoView({
@@ -65,23 +65,23 @@ export default function ClassesGrid({
         prevPageRef.current = currentPage;
         
     }, [currentPage]);
-    // Sync local input when URL changes externally (back button, link share)
+    
     useEffect(() => {
         setSearchInput(currentSearch);
     }, [currentSearch]);
 
-    // Debounce typing → URL push (400ms idle)
+    
     useEffect(() => {
         if (searchInput === currentSearch) return;
         const t = setTimeout(() => setParam("search", searchInput.trim()), 400);
         return () => clearTimeout(t);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        
     }, [searchInput]);
 
-    /* ---------- URL helpers ---------- */
+     
     function setParam(key, value) {
         const params = new URLSearchParams(searchParams);
-        if (key !== "page") params.delete("page");          // any filter change → page 1
+        if (key !== "page") params.delete("page");          
         if (value === "" || value == null) params.delete(key);
         else params.set(key, String(value));
 
@@ -101,16 +101,16 @@ export default function ClassesGrid({
     function clearAll() {
         startTransition(() => router.push(pathname, { scroll: false }));
     }
-    // Safely infers page size by measuring current list array length, or defaults to 9
-    const PAGE_SIZE = 9; // Hardcoded to match your backend limit
+    
+    const PAGE_SIZE = 9; 
     const fromItem = total === 0 ? 0 : (currentPage - 1) * PAGE_SIZE + 1;
     const toItem = Math.min(currentPage * PAGE_SIZE, total);
     const hasActiveFilters = currentCategories.length > 0 || !!currentSearch;
 
-    /* ---------- Render ---------- */
+     
     return (
         <div className="space-y-10">
-            {/* Search */}
+            { }
             <div ref={topAnchorRef} className="scroll-mt-30">
             </div>
             <div className="relative max-w-xl mx-auto">
@@ -126,9 +126,9 @@ export default function ClassesGrid({
                     <DumbbellSpinner className="absolute right-4 top-1/2 -translate-y-1/2 text-[#E8C667]" size={20} />
                 )}
             </div>
-            {/* Stats / Scroll Anchor point */}
+            { }
 
-            {/* Category pills — multi-select */}
+            { }
             <div className="flex flex-wrap items-center justify-center gap-2">
                 <button
                     type="button"
@@ -184,7 +184,7 @@ export default function ClassesGrid({
                 )}
             </p>
 
-            {/* Grid */}
+            { }
             {initialClasses.length === 0 ? (
                 <EmptyState hasFilters={hasActiveFilters} />
             ) : (
@@ -214,7 +214,7 @@ export default function ClassesGrid({
                 </motion.div>
             )}
 
-            {/* Pagination */}
+            { }
             {totalPages > 1 && (
                 <div className="flex items-center justify-center gap-4 pt-6">
                     <PagerButton
@@ -242,7 +242,7 @@ export default function ClassesGrid({
     );
 }
 
-/* ---------- card body ---------- */
+ 
 
 function ClassCardBody({ cls }) {
     const meta = CATEGORY_META[cls.category] || { label: cls.category, Icon: Dumbbell };
@@ -250,13 +250,13 @@ function ClassCardBody({ cls }) {
     const days = cls.scheduleDays.map((d) => DAY_LABEL[d]).join(" · ");
     const diffLabel = cls.difficulty.charAt(0).toUpperCase() + cls.difficulty.slice(1);
 
-    // Inner div handles hover transforms — outer motion.article handles layout
-    // transforms. Separating them keeps hover lift from fighting layout animation.
+    
+    
     return (
         <div className="group relative h-full bg-[#0a0a0a] border border-[#C9962E]/40 hover:border-[#C9962E]/80 transition-all hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5),0_0_30px_rgba(201,150,46,0.15)] [clip-path:polygon(12px_0,100%_0,100%_calc(100%-12px),calc(100%-12px)_100%,0_100%,0_12px)] overflow-hidden flex flex-col">
             <div className="relative aspect-[16/10] overflow-hidden bg-[#0f0f0f]">
                 {cls.image ? (
-                    // eslint-disable-next-line @next/next/no-img-element
+                    
                     <img src={cls.image} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 ) : (
                     <div className="w-full h-full flex items-center justify-center">
@@ -313,7 +313,7 @@ function ClassCardBody({ cls }) {
     );
 }
 
-/* ---------- helpers ---------- */
+ 
 
 function PagerButton({ children, ...props }) {
     return (
@@ -342,7 +342,7 @@ function EmptyState({ hasFilters }) {
 
 function Avatar({ user, size = 24 }) {
     if (user?.image) {
-        // eslint-disable-next-line @next/next/no-img-element
+        
         return <img src={user.image} alt="" className="rounded-full object-cover border border-[#C9962E]/40 shrink-0" style={{ width: size, height: size }} />;
     }
     const initials = (user?.name || "U").split(" ").map((p) => p[0]).slice(0, 2).join("").toUpperCase();

@@ -20,7 +20,7 @@ const CHAMFER_SM = "[clip-path:polygon(6px_0,100%_0,100%_calc(100%-6px),calc(100
 
 const POLL_INTERVAL_MS = 30_000;
 
-// Type → presentation. Add new types here without touching the DB.
+
 const META = {
     trainer_approved: { Icon: BadgeCheck,   color: "#4ade80" },
     trainer_rejected: { Icon: AlertCircle,  color: "#ff5a5a" },
@@ -32,11 +32,7 @@ function getMeta(type) {
     return META[type] || META.info;
 }
 
-/**
- * Renders a bell + unread badge that opens a dropdown of recent
- * notifications. Caller must pass a `user` prop — the component
- * renders nothing when there's no signed-in user.
- */
+ 
 export default function NotificationBell({ user }) {
     const router = useRouter();
     const containerRef = useRef(null);
@@ -46,7 +42,7 @@ export default function NotificationBell({ user }) {
     const [loading, setLoading]                 = useState(true);
     const [, startTransition] = useTransition();
 
-    // Fetch loop — initial + interval + tab-focus refresh
+    
     useEffect(() => {
         if (!user) return;
 
@@ -75,7 +71,7 @@ export default function NotificationBell({ user }) {
         };
     }, [user]);
 
-    // Click outside to close
+    
     useEffect(() => {
         if (!open) return;
         function handleClickOutside(e) {
@@ -87,7 +83,7 @@ export default function NotificationBell({ user }) {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, [open]);
 
-    // Optimistic mark-as-read + navigate
+    
     function handleClickNotification(n) {
         if (!n.isRead) {
             setNotifications((prev) =>
@@ -108,7 +104,7 @@ export default function NotificationBell({ user }) {
     }
 
     function handleDelete(n, e) {
-        e.stopPropagation();  // don't trigger click-to-navigate on the row
+        e.stopPropagation();  
         setNotifications((prev) => prev.filter((x) => x.id !== n.id));
         if (!n.isRead) setUnreadCount((c) => Math.max(0, c - 1));
         startTransition(() => { deleteNotificationAction(n.id); });
@@ -142,7 +138,7 @@ export default function NotificationBell({ user }) {
                         transition={{ duration: 0.18 }}
                         className={`absolute right-0 top-full mt-2 w-80 sm:w-96 bg-[#0a0a0a] border border-[#C9962E]/25 shadow-[0_12px_40px_rgba(0,0,0,0.6)] z-50 ${CHAMFER_MD}`}
                     >
-                        {/* Header */}
+                        { }
                         <div className="flex items-center justify-between px-4 py-3 border-b border-[#C9962E]/15">
                             <div className="flex items-center gap-2">
                                 <span className="font-['Bebas_Neue'] text-xl text-white tracking-wide leading-none">
@@ -166,7 +162,7 @@ export default function NotificationBell({ user }) {
                             )}
                         </div>
 
-                        {/* Body */}
+                        { }
                         <div className="max-h-[420px] overflow-y-auto">
                             {loading ? (
                                 <div className="flex items-center justify-center py-12">
@@ -194,7 +190,7 @@ export default function NotificationBell({ user }) {
     );
 }
 
-/* ---------- pieces ---------- */
+ 
 
 function NotificationItem({ n, onClick, onDelete }) {
     const { Icon, color } = getMeta(n.type);
@@ -209,7 +205,7 @@ function NotificationItem({ n, onClick, onDelete }) {
             }`}
         >
             <div className="flex items-start gap-3">
-                {/* Icon */}
+                { }
                 <div
                     className={`shrink-0 inline-flex items-center justify-center h-9 w-9 border ${CHAMFER_SM}`}
                     style={{
@@ -221,7 +217,7 @@ function NotificationItem({ n, onClick, onDelete }) {
                     <Icon size={15} />
                 </div>
 
-                {/* Body */}
+                { }
                 <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between gap-2">
                         <p className="text-white text-sm font-semibold leading-tight">
@@ -243,7 +239,7 @@ function NotificationItem({ n, onClick, onDelete }) {
                     </p>
                 </div>
 
-                {/* Delete (hover-only) */}
+                { }
                 <button
                     type="button"
                     onClick={onDelete}

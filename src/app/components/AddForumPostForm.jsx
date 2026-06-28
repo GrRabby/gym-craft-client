@@ -40,7 +40,7 @@ export default function AddForumPostForm({redirectOnSuccess = "/dashboard/traine
             return;
         }
 
-        // Revoke the previous preview URL to avoid memory leak
+        
         if (imagePreview) URL.revokeObjectURL(imagePreview);
 
         setImageFile(file);
@@ -103,15 +103,15 @@ export default function AddForumPostForm({redirectOnSuccess = "/dashboard/traine
 
     return (
         <form onSubmit={handleSubmit}>
-            {/* Form sits in a panel mirroring AddClassForm's chrome */}
+            { }
             <div
                 className={`relative bg-[#0a0a0a] border border-[#C9962E]/15 p-6 lg:p-8 ${CHAMFER_MD} overflow-hidden max-w-3xl`}
             >
-                {/* Ambient gold corner glow */}
+                { }
                 <div className="absolute top-0 right-0 h-40 w-40 bg-[radial-gradient(circle_at_top_right,rgba(232,198,103,0.10),transparent_60%)] pointer-events-none" />
 
                 <div className="relative space-y-8">
-                    {/* Image */}
+                    { }
                     <Section
                         Icon={ImageIcon}
                         title="Cover Image"
@@ -121,7 +121,7 @@ export default function AddForumPostForm({redirectOnSuccess = "/dashboard/traine
                             <div
                                 className={`relative aspect-[16/9] overflow-hidden bg-[#0f0f0f] border border-[#C9962E]/20 ${CHAMFER_SM}`}
                             >
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                { }
                                 <img
                                     src={imagePreview}
                                     alt="Selected"
@@ -177,7 +177,7 @@ export default function AddForumPostForm({redirectOnSuccess = "/dashboard/traine
                         )}
                     </Section>
 
-                    {/* Title */}
+                    { }
                     <Section
                         Icon={Type}
                         title="Title"
@@ -193,7 +193,7 @@ export default function AddForumPostForm({redirectOnSuccess = "/dashboard/traine
                         />
                     </Section>
 
-                    {/* Description */}
+                    { }
                     <Section
                         Icon={FileText}
                         title="Description"
@@ -209,7 +209,7 @@ export default function AddForumPostForm({redirectOnSuccess = "/dashboard/traine
                         />
                     </Section>
 
-                    {/* Submit row */}
+                    { }
                     <div className="pt-2 flex items-center justify-between gap-4 flex-wrap">
                         <p className="text-[#7c7468] text-xs">
                             Posts publish immediately to the community forum.
@@ -238,7 +238,7 @@ export default function AddForumPostForm({redirectOnSuccess = "/dashboard/traine
     );
 }
 
-/* ---------- section header helper ---------- */
+ 
 
 function Section({ Icon, title, hint, children }) {
     return (

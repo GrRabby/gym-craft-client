@@ -15,7 +15,7 @@ export default async function ForumPage({ searchParams }) {
 
     return (
         <main className="min-h-screen bg-[#050505] pb-20">
-            {/* Hero */}
+            { }
             <section className="relative pt-28 pb-12 lg:pt-32 lg:pb-16 overflow-hidden">
                 <div className="absolute top-0 left-0 h-96 w-96 rounded-full bg-[#E8C667]/8 blur-[120px] pointer-events-none" />
                 <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-[#C9962E]/6 blur-[120px] pointer-events-none" />
@@ -39,7 +39,7 @@ export default async function ForumPage({ searchParams }) {
                 </div>
             </section>
 
-            {/* Grid + search */}
+            { }
             <section className="max-w-7xl mx-auto px-6 lg:px-8">
                 {error ? (
                     <ErrorBanner message={error} />

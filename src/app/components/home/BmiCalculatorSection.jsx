@@ -12,9 +12,7 @@ import { SectionHeader } from "@/app/components/home/FeaturedClassesSection";
 const CHAMFER_MD = "[clip-path:polygon(12px_0,100%_0,100%_calc(100%-12px),calc(100%-12px)_100%,0_100%,0_12px)]";
 const CHAMFER_SM = "[clip-path:polygon(6px_0,100%_0,100%_calc(100%-6px),calc(100%-6px)_100%,0_100%,0_6px)]";
 
-// WHO standard BMI categories, with GymCraft-tied recommendations.
-// The `width` percentages are proportional to the 15–40 BMI display range
-// used by the visual scale.
+
 const CATEGORIES = [
     {
         label:   "Underweight",
@@ -42,7 +40,7 @@ const CATEGORIES = [
     },
 ];
 
-// Visual scale shows 15–40 BMI range (covers realistic distribution)
+
 const SCALE_MIN = 15;
 const SCALE_MAX = 40;
 
@@ -103,15 +101,15 @@ export default function BmiCalculatorSection() {
                 />
 
                 <div className={`mt-14 bg-[#0a0a0a] border border-[#C9962E]/30 overflow-hidden ${CHAMFER_MD}`}>
-                    {/* Ambient glow */}
+                    { }
                     <div className="relative">
                         <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-[#E8C667]/8 blur-3xl pointer-events-none" />
                         <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-[#C9962E]/6 blur-3xl pointer-events-none" />
 
                         <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-0">
-                            {/* LEFT — Inputs */}
+                            { }
                             <div className="p-7 lg:p-10 border-b lg:border-b-0 lg:border-r border-[#C9962E]/15">
-                                {/* Unit toggle */}
+                                { }
                                 <div className="flex items-center gap-2 mb-7">
                                     <UnitButton
                                         active={unit === "metric"}
@@ -127,7 +125,7 @@ export default function BmiCalculatorSection() {
                                     </UnitButton>
                                 </div>
 
-                                {/* Height */}
+                                { }
                                 <div className="mb-5">
                                     <label className="block font-['Oswald'] text-[10px] font-semibold tracking-[3px] uppercase text-[#7c7468] mb-2.5">
                                         <Ruler size={11} className="inline mr-1.5 -mt-0.5" />
@@ -168,7 +166,7 @@ export default function BmiCalculatorSection() {
                                     )}
                                 </div>
 
-                                {/* Weight */}
+                                { }
                                 <div>
                                     <label className="block font-['Oswald'] text-[10px] font-semibold tracking-[3px] uppercase text-[#7c7468] mb-2.5">
                                         <Weight size={11} className="inline mr-1.5 -mt-0.5" />
@@ -185,7 +183,7 @@ export default function BmiCalculatorSection() {
                                     />
                                 </div>
 
-                                {/* Reset */}
+                                { }
                                 {(heightCm || heightFt || heightIn || weight) && (
                                     <button
                                         type="button"
@@ -197,7 +195,7 @@ export default function BmiCalculatorSection() {
                                 )}
                             </div>
 
-                            {/* RIGHT — Result */}
+                            { }
                             <div className="p-7 lg:p-10 flex flex-col">
                                 {bmi == null ? (
                                     <EmptyResult />
@@ -213,7 +211,7 @@ export default function BmiCalculatorSection() {
                     </div>
                 </div>
 
-                {/* Disclaimer */}
+                { }
                 <p className="text-[#5a5247] text-xs text-center mt-6 max-w-2xl mx-auto leading-relaxed inline-flex items-start gap-2 justify-center">
                     <Info size={11} className="mt-0.5 shrink-0" />
                     <span>
@@ -227,7 +225,7 @@ export default function BmiCalculatorSection() {
     );
 }
 
-/* ---------- inputs ---------- */
+ 
 
 function UnitButton({ children, active, onClick }) {
     return (
@@ -262,7 +260,7 @@ function Field({ value, onChange, placeholder, suffix, ...rest }) {
     );
 }
 
-/* ---------- result states ---------- */
+ 
 
 function EmptyResult() {
     return (
@@ -283,7 +281,7 @@ function EmptyResult() {
 function FilledResult({ bmi, category, markerLeft }) {
     return (
         <div className="flex-1 flex flex-col">
-            {/* BMI value */}
+            { }
             <div className="flex items-baseline gap-3">
                 <span
                     className="font-['Bebas_Neue'] text-7xl leading-none"
@@ -296,7 +294,7 @@ function FilledResult({ bmi, category, markerLeft }) {
                 </span>
             </div>
 
-            {/* Category */}
+            { }
             <div className="mt-3">
                 <span
                     className={`inline-flex items-center gap-1.5 px-3 py-1.5 font-['Oswald'] text-xs font-bold tracking-[2px] uppercase ${CHAMFER_SM}`}
@@ -311,10 +309,10 @@ function FilledResult({ bmi, category, markerLeft }) {
                 </span>
             </div>
 
-            {/* Scale bar with animated marker */}
+            { }
             <div className="mt-7">
                 <div className={`relative h-2.5 bg-[#0f0f0f] overflow-hidden ${CHAMFER_SM}`}>
-                    {/* Zone bands — width derived from each category's BMI span */}
+                    { }
                     {CATEGORIES.map((cat, i) => {
                         const prevMax = i === 0 ? SCALE_MIN : CATEGORIES[i - 1].max;
                         const start   = Math.max(SCALE_MIN, prevMax);
@@ -335,7 +333,7 @@ function FilledResult({ bmi, category, markerLeft }) {
                         );
                     })}
 
-                    {/* Marker */}
+                    { }
                     <motion.div
                         className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 h-4 w-1 bg-white rounded-full shadow-[0_0_0_2px_#0a0a0a]"
                         animate={{ left: `${markerLeft}%` }}
@@ -343,7 +341,7 @@ function FilledResult({ bmi, category, markerLeft }) {
                     />
                 </div>
 
-                {/* Range labels */}
+                { }
                 <div className="flex justify-between mt-2 text-[9px] font-['Oswald'] tracking-[1px] uppercase text-[#5a5247]">
                     <span>{SCALE_MIN}</span>
                     <span>18.5</span>
@@ -353,12 +351,12 @@ function FilledResult({ bmi, category, markerLeft }) {
                 </div>
             </div>
 
-            {/* Recommendation */}
+            { }
             <p className="text-[#cfc6b8] text-sm leading-relaxed mt-6">
                 {category.message}
             </p>
 
-            {/* CTA */}
+            { }
             <div className="mt-auto pt-6">
                 <Link
                     href="/classes"

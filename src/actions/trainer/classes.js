@@ -13,7 +13,7 @@ cloudinary.config({
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 const ALLOWED_MIME = ["image/png", "image/jpeg", "image/webp"];
-const MAX_BYTES = 5 * 1024 * 1024; // 5 MB
+const MAX_BYTES = 5 * 1024 * 1024; 
 
 async function uploadClassImage(file) {
     if (!file || file.size === 0) return null;
@@ -40,18 +40,15 @@ async function uploadClassImage(file) {
     });
 }
 
-/**
- * Receives FormData from the form, uploads the image to Cloudinary, then
- * forwards the class payload to Express. Returns { ok, error, class? }.
- */
+ 
 export async function createClassAction(formData) {
-    // Auth — trainer only, must be active (soft-block aware)
+    
     const { user, error, blocked } = await requireActiveUser();
     if (error) return { ok: false, error, blocked };
     if (user.role !== "trainer")
         return { ok: false, error: "Only trainers can create classes." };
 
-    // Pull fields off FormData
+    
     const imageFile    = formData.get("image");
     const title        = String(formData.get("title") || "").trim();
     const description  = String(formData.get("description") || "").trim();
@@ -62,7 +59,7 @@ export async function createClassAction(formData) {
     const scheduleTime = String(formData.get("scheduleTime") || "");
     const scheduleDays = formData.getAll("scheduleDays").map(String);
 
-    // Upload image to Cloudinary first
+    
     let imageUrl;
     try {
         imageUrl = await uploadClassImage(imageFile);
@@ -70,7 +67,7 @@ export async function createClassAction(formData) {
         return { ok: false, error: err.message };
     }
 
-    // POST to Express
+    
     try {
         const token = await getAuthJwt();
         const res = await fetch(`${API_URL}/api/classes`, {
@@ -106,9 +103,7 @@ export async function createClassAction(formData) {
     }
 }
 
-/**
- * Fetches all classes created by the currently logged-in trainer.
- */
+ 
 export async function getTrainerClasses() {
     try {
         const token = await getAuthJwt();
@@ -132,9 +127,7 @@ export async function getTrainerClasses() {
     }
 }
 
-/**
- * Updates a class's details. Uploads new image if provided.
- */
+ 
 export async function updateClassAction(classId, formData) {
     const { user, error, blocked } = await requireActiveUser();
     if (error) return { ok: false, error, blocked };
@@ -201,9 +194,7 @@ export async function updateClassAction(classId, formData) {
     }
 }
 
-/**
- * Permanently deletes a class.
- */
+ 
 export async function deleteClassAction(classId) {
     const { user, error, blocked } = await requireActiveUser();
     if (error) return { ok: false, error, blocked };
@@ -239,9 +230,7 @@ export async function deleteClassAction(classId) {
     }
 }
 
-/**
- * Fetches the attendee list for a class.
- */
+ 
 export async function getClassAttendeesAction(classId) {
     const { user, error } = await requireActiveUser();
     if (error) return { ok: false, error };

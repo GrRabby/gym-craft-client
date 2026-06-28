@@ -77,11 +77,7 @@ export async function editCommentAction(commentId, content) {
     }
 }
 
-/**
- * Hard-deletes a comment. If it was top-level, the backend also deletes
- * all its replies and returns the full set of deleted IDs so the client
- * can remove them from local state without a refetch.
- */
+ 
 export async function deleteCommentAction(commentId) {
     try {
         const res = await authedFetch(`/api/comments/${commentId}`, { method: "DELETE" });

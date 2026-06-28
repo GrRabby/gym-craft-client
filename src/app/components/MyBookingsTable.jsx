@@ -20,7 +20,7 @@ const DAY_LABEL = {
 const CHAMFER_MD = "[clip-path:polygon(12px_0,100%_0,100%_calc(100%-12px),calc(100%-12px)_100%,0_100%,0_12px)]";
 const CHAMFER_SM = "[clip-path:polygon(6px_0,100%_0,100%_calc(100%-6px),calc(100%-6px)_100%,0_100%,0_6px)]";
 
-// Format "18:30" → "6:30 PM" — friendlier for the table
+
 function formatTime12h(time24) {
     if (!time24 || !time24.includes(":")) return time24 || "";
     const [h, m] = time24.split(":");
@@ -37,8 +37,8 @@ export default function MyBookingsTable({ bookings = [] }) {
     }
 
     return (
-        // overflow-x-auto so the table can scroll horizontally on mobile
-        // without breaking the rest of the page layout
+        
+        
         <div className={`bg-[#0a0a0a] border border-[#C9962E]/15 overflow-hidden ${CHAMFER_MD}`}>
             <div className="overflow-x-auto">
                 <table className="w-full text-left min-w-[800px]">
@@ -74,12 +74,12 @@ function BookingRow({ booking, isLast }) {
             className={`group transition-colors hover:bg-[#C9962E]/[0.04] ${isLast ? "" : "border-b border-[#C9962E]/10"
                 }`}
         >
-            {/* Class — thumbnail + title + category */}
+            { }
             <td className="px-5 py-4">
                 <div className="flex items-center gap-3 min-w-[200px]">
                     {cls.image ? (
                         <div className={`relative w-14 h-14 shrink-0 overflow-hidden bg-[#0f0f0f] border border-[#C9962E]/20 ${CHAMFER_SM}`}>
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            { }
                             <img
                                 src={cls.image}
                                 alt=""
@@ -103,7 +103,7 @@ function BookingRow({ booking, isLast }) {
                 </div>
             </td>
 
-            {/* Trainer — avatar + name */}
+            { }
             <td className="px-5 py-4">
                 <div className="flex items-center gap-2.5">
                     <Avatar user={trainer} size={28} />
@@ -113,7 +113,7 @@ function BookingRow({ booking, isLast }) {
                 </div>
             </td>
 
-            {/* Schedule — days + time on two lines */}
+            { }
             <td className="px-5 py-4">
                 <div className="text-sm whitespace-nowrap">
                     <div className="inline-flex items-center gap-1.5 text-[#cfc6b8]">
@@ -127,7 +127,7 @@ function BookingRow({ booking, isLast }) {
                 </div>
             </td>
 
-            {/* Action — View Details link */}
+            { }
             <td className="px-5 py-4 text-right">
                 <Link
                     href={`/classes/${cls.id}?from=bookings`}
@@ -141,7 +141,7 @@ function BookingRow({ booking, isLast }) {
     );
 }
 
-/* ---------- helpers ---------- */
+ 
 
 function Th({ children, align = "left" }) {
     return (
@@ -155,7 +155,7 @@ function Th({ children, align = "left" }) {
 
 function Avatar({ user, size = 28 }) {
     if (user?.image) {
-        // eslint-disable-next-line @next/next/no-img-element
+        
         return (
             <img
                 src={user.image}

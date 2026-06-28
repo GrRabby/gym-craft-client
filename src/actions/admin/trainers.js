@@ -19,9 +19,7 @@ async function authedFetch(path, opts = {}) {
     });
 }
 
-/**
- * Returns all users with role: "trainer". Backend filters via ?role=trainer.
- */
+ 
 export async function getAllTrainers() {
     const { error } = await requireAdmin();
     if (error) return { trainers: [], error };
@@ -40,10 +38,7 @@ export async function getAllTrainers() {
     }
 }
 
-/**
- * Demotes a trainer back to member by flipping the role.
- * Reuses the existing PATCH /api/users/:id/role endpoint.
- */
+ 
 export async function demoteTrainerAction(userId) {
     const { user: admin, error } = await requireAdmin();
     if (error) return { ok: false, error };

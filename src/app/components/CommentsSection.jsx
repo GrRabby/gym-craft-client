@@ -24,7 +24,7 @@ export default function CommentsSection({ postId, initialComments = [], currentU
     const [newText, setNewText] = useState("");
     const [submittingTop, startTopTransition] = useTransition();
 
-    // Group comments — top-level array + replies map keyed by top-level id
+    
     const { topLevel, repliesByParent } = useMemo(() => {
         const top = [];
         const byParent = {};
@@ -39,7 +39,7 @@ export default function CommentsSection({ postId, initialComments = [], currentU
         return { topLevel: top, repliesByParent: byParent };
     }, [comments]);
 
-    /* ----- shared handlers ----- */
+     
 
     function handleAddTop() {
         const text = newText.trim();
@@ -90,11 +90,7 @@ export default function CommentsSection({ postId, initialComments = [], currentU
         });
     }
 
-    /**
-     * Hard delete. Accepts the full comment object so we can:
-     *   - Tell the user if replies will go too (cascade warning)
-     *   - Remove all cascaded IDs from local state in one shot
-     */
+     
     function handleDelete(comment) {
         const replyCount = !comment.parentId
             ? (repliesByParent[comment.id] || []).length
@@ -126,7 +122,7 @@ export default function CommentsSection({ postId, initialComments = [], currentU
 
     return (
         <section>
-            {/* Heading */}
+            { }
             <div className="flex items-center gap-3 mb-6">
                 <MessageCircle size={20} className="text-[#E8C667]" />
                 <h2 className="font-['Bebas_Neue'] text-3xl text-white tracking-wide leading-none">
@@ -137,7 +133,7 @@ export default function CommentsSection({ postId, initialComments = [], currentU
                 </span>
             </div>
 
-            {/* New comment form */}
+            { }
             <div className={`bg-[#0a0a0a] border border-[#C9962E]/15 p-5 mb-8 ${CHAMFER_MD}`}>
                 <div className="flex items-start gap-3">
                     <Avatar user={currentUser} size={32} />
@@ -172,7 +168,7 @@ export default function CommentsSection({ postId, initialComments = [], currentU
                 </div>
             </div>
 
-            {/* Comments list */}
+            { }
             {topLevel.length === 0 ? (
                 <EmptyComments />
             ) : (
@@ -196,9 +192,7 @@ export default function CommentsSection({ postId, initialComments = [], currentU
     );
 }
 
-/* ============================================================
-   Thread = top-level comment + its replies
-   ============================================================ */
+ 
 
 function CommentThread({ comment, replies, currentUser, onAddReply, onEdit, onDelete }) {
     const [replyingTo, setReplyingTo] = useState(null);
@@ -239,7 +233,7 @@ function CommentThread({ comment, replies, currentUser, onAddReply, onEdit, onDe
                 onDelete={onDelete}
             />
 
-            {/* Reply input (toggled) */}
+            { }
             {replyingTo === "thread" && (
                 <div className="ml-8 mt-3 pl-4 border-l-2 border-[#C9962E]/20">
                     <div className={`bg-[#0a0a0a] border border-[#C9962E]/15 p-4 ${CHAMFER_SM}`}>
@@ -279,7 +273,7 @@ function CommentThread({ comment, replies, currentUser, onAddReply, onEdit, onDe
                 </div>
             )}
 
-            {/* Replies */}
+            { }
             {replies.length > 0 && (
                 <div className="ml-8 mt-3 pl-4 border-l-2 border-[#C9962E]/20 space-y-3">
                     <AnimatePresence initial={false}>
@@ -309,9 +303,7 @@ function CommentThread({ comment, replies, currentUser, onAddReply, onEdit, onDe
     );
 }
 
-/* ============================================================
-   Single comment row (used for both top-level and replies)
-   ============================================================ */
+ 
 
 function CommentItem({ comment, currentUser, canReply, isReply, onReply, onEdit, onDelete }) {
     const [editing, setEditing] = useState(false);
@@ -344,7 +336,7 @@ function CommentItem({ comment, currentUser, canReply, isReply, onReply, onEdit,
                 <Avatar user={comment.author} size={isReply ? 26 : 30} />
 
                 <div className="flex-1 min-w-0">
-                    {/* Header row */}
+                    { }
                     <div className="flex items-center gap-2 flex-wrap">
                         <span className="text-white text-sm font-semibold truncate">
                             {comment.author?.name || "Unknown"}
@@ -357,7 +349,7 @@ function CommentItem({ comment, currentUser, canReply, isReply, onReply, onEdit,
                         )}
                     </div>
 
-                    {/* Body — editing or static */}
+                    { }
                     {editing ? (
                         <div className="mt-2">
                             <textarea
@@ -394,7 +386,7 @@ function CommentItem({ comment, currentUser, canReply, isReply, onReply, onEdit,
                         </p>
                     )}
 
-                    {/* Action row */}
+                    { }
                     {!editing && (
                         <div className="flex items-center gap-3 mt-2.5">
                             {canReply && (
@@ -435,13 +427,11 @@ function CommentItem({ comment, currentUser, canReply, isReply, onReply, onEdit,
     );
 }
 
-/* ============================================================
-   Small UI bits
-   ============================================================ */
+ 
 
 function Avatar({ user, size = 28 }) {
     if (user?.image) {
-        // eslint-disable-next-line @next/next/no-img-element
+        
         return (
             <img
                 src={user.image}

@@ -19,11 +19,7 @@ async function authedFetch(path, opts = {}) {
     });
 }
 
-/**
- * Reads the current user's trainer application. Returns null if none exists.
- * Returns { error } on failure so the page can render an inline error
- * instead of crashing.
- */
+ 
 export async function getMyTrainerApplication() {
     const user = await getCurrentUser();
     if (!user) return { application: null, error: "Not authenticated" };
@@ -42,10 +38,7 @@ export async function getMyTrainerApplication() {
     }
 }
 
-/**
- * Submits a trainer application.
- * Returns { ok, error, blocked?, application? } — client surfaces error via toast.
- */
+ 
 export async function applyAsTrainerAction({ experience, specialty }) {
     try {
         const res = await authedFetch("/api/trainer-applications", {

@@ -16,14 +16,14 @@ export default async function SuccessPage({ params, searchParams }) {
         redirect("/login");
     }
 
-    // Without a session_id, this URL was hit directly — send them home
+    
     if (!sessionId) {
         redirect(`/classes/${id}`);
     }
 
-    // Verify the session with Stripe. Backend also writes the Booking
-    // here if the webhook hasn't fired yet (idempotent — upsert keyed on
-    // stripeSessionId).
+    
+    
+    
     const result = await getCheckoutSessionStatus(sessionId);
 
     if (!result.ok) {

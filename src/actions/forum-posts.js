@@ -30,7 +30,7 @@ async function authedFetch(path, options = {}) {
     });
 }
 
-/* ---------- Imgbb upload ---------- */
+ 
 
 async function uploadToImgbb(file) {
     if (!IMGBB_API_KEY) {
@@ -54,7 +54,7 @@ async function uploadToImgbb(file) {
     return data.data.url;
 }
 
-/* ---------- create ---------- */
+ 
 
 export async function createForumPostAction(formData) {
     try {
@@ -96,9 +96,9 @@ export async function createForumPostAction(formData) {
             };
         }
 
-        // Refresh both list views — admin moderation table and trainer's own
-        // list. force-dynamic on those pages already prevents stale caching,
-        // but this is belt-and-suspenders.
+        
+        
+        
         revalidatePath("/dashboard/trainer/forum");
         revalidatePath("/dashboard/admin/forum");
 
@@ -110,7 +110,7 @@ export async function createForumPostAction(formData) {
     }
 }
 
-/* ---------- list (trainer's own) ---------- */
+ 
 
 export async function getMyForumPosts() {
     try {
@@ -130,12 +130,9 @@ export async function getMyForumPosts() {
     }
 }
 
-/* ---------- list (all — admin moderation) ---------- */
+ 
 
-/**
- * Returns ALL forum posts across all users, with author info attached.
- * Admin-only on the backend. Used by the Forum Post Manage page.
- */
+ 
 export async function getAllForumPosts() {
     try {
         const res = await authedFetch("/api/forum-posts", { cache: "no-store" });
@@ -154,7 +151,7 @@ export async function getAllForumPosts() {
     }
 }
 
-/* ---------- delete ---------- */
+ 
 
 export async function deleteForumPostAction(postId) {
     try {
@@ -220,12 +217,9 @@ export async function getPublicForumPosts({ page = 1, limit = 12, search = "" } 
     }
 }
 
-/* ---------- single post details (auth required) ---------- */
+ 
 
-/**
- * Fetches a published post with vote counts, the current user's vote,
- * and the total comment count. All bundled into one call.
- */
+ 
 export async function getForumPostDetails(postId) {
     try {
         const res = await authedFetch(`/api/forum-posts/${postId}`, { cache: "no-store" });

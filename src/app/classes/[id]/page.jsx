@@ -15,8 +15,8 @@ export default async function ClassDetailsPage({ params, searchParams }) {
 
     const user = await getCurrentUser();
     if (!user) {
-        // Preserve the from param through the login round-trip so the user
-        // lands back on the same flow after authenticating
+        
+        
         const fromQs = sp?.from ? `&from=${encodeURIComponent(sp.from)}` : "";
         redirect(`/login?redirect=/classes/${id}${fromQs}`);
     }

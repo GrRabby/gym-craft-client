@@ -28,7 +28,7 @@ const STEPS = [
 export default function HowItWorksSection() {
     return (
         <section className="relative py-20 lg:py-28 bg-[#070707]">
-            {/* Faint top/bottom dividers */}
+            { }
             <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-[#C9962E]/15 to-transparent" />
             <div className="absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-[#C9962E]/15 to-transparent" />
 
@@ -54,7 +54,7 @@ function Step({ step }) {
     const { n, Icon, title, body } = step;
     return (
         <div className={`relative bg-[#0a0a0a] border border-[#C9962E]/30 p-7 overflow-hidden ${CHAMFER_MD}`}>
-            {/* Background number watermark */}
+            { }
             <span
                 className="absolute -top-4 -right-2 font-['Bebas_Neue'] text-[120px] leading-none text-[#C9962E]/5 select-none pointer-events-none"
                 aria-hidden="true"

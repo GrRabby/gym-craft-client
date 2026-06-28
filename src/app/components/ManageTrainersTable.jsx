@@ -167,7 +167,7 @@ function Th({ children, align = "left" }) {
 
 function Avatar({ user }) {
     if (user?.image) {
-        // eslint-disable-next-line @next/next/no-img-element
+        
         return <img src={user.image} alt="" className="h-8 w-8 rounded-full object-cover border border-[#C9962E]/40 shrink-0" />;
     }
     const initials = (user?.name || "U").split(" ").map(p => p[0]).slice(0, 2).join("").toUpperCase();

@@ -20,10 +20,7 @@ async function authedFetch(path, options = {}) {
     });
 }
 
-/**
- * Returns the current user's favorites with class + trainer joined.
- * Used by the Favorite Classes dashboard page.
- */
+ 
 export async function getMyFavorites() {
     try {
         const res = await authedFetch("/api/favorites/me", {
@@ -47,10 +44,7 @@ export async function getMyFavorites() {
     }
 }
 
-/**
- * Adds the class to the user's favorites. Backend uses upsert so a duplicate
- * add is silently a no-op rather than an error.
- */
+ 
 export async function addFavoriteAction(classId) {
     try {
         const res = await authedFetch("/api/favorites", {
@@ -78,10 +72,7 @@ export async function addFavoriteAction(classId) {
     }
 }
 
-/**
- * Removes the class from favorites. Idempotent on the backend — removing
- * a favorite that's already gone returns 200 rather than 404.
- */
+ 
 export async function removeFavoriteAction(classId) {
     try {
         const res = await authedFetch(`/api/favorites/${classId}`, {

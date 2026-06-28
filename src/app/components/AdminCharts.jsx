@@ -11,9 +11,7 @@ import { LineChart as LineIcon, PieChart as PieIcon, BarChart3 } from "lucide-re
 
 const CHAMFER_MD = "[clip-path:polygon(12px_0,100%_0,100%_calc(100%-12px),calc(100%-12px)_100%,0_100%,0_12px)]";
 
-// Gold-tier palette for chart segments. Starts with the brightest and walks
-// down to deep amber — enough range for the donut even if all 6 user roles
-// existed (currently only 3, so we use the first 3).
+
 const GOLD_PALETTE = ["#E8C667", "#C9962E", "#F7E4A3", "#8B6F1F", "#5C4815", "#3D2F0E"];
 
 const CATEGORY_LABELS = {
@@ -31,9 +29,7 @@ const ROLE_LABELS = {
     member:  "Member",
 };
 
-/* ============================================================
-   Top-level export
-   ============================================================ */
+ 
 
 export default function AdminCharts({
     bookingsTimeSeries = [],
@@ -42,7 +38,7 @@ export default function AdminCharts({
 }) {
     return (
         <div className="space-y-5">
-            {/* Wide area chart spans full width — momentum is the headline story */}
+            { }
             <ChartCard
                 Icon={LineIcon}
                 title="Bookings Over 30 Days"
@@ -51,7 +47,7 @@ export default function AdminCharts({
                 <BookingsAreaChart data={bookingsTimeSeries} />
             </ChartCard>
 
-            {/* Composition + popularity side-by-side */}
+            { }
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
                 <ChartCard
                     Icon={PieIcon}
@@ -72,9 +68,7 @@ export default function AdminCharts({
     );
 }
 
-/* ============================================================
-   Card chrome — all three charts sit inside this
-   ============================================================ */
+ 
 
 function ChartCard({ Icon, title, subtitle, children }) {
     return (
@@ -99,9 +93,7 @@ function ChartCard({ Icon, title, subtitle, children }) {
     );
 }
 
-/* ============================================================
-   Custom tooltip — used by all three charts
-   ============================================================ */
+ 
 
 function CustomTooltip({ active, payload, label }) {
     if (!active || !payload || !payload.length) return null;
@@ -127,9 +119,7 @@ function CustomTooltip({ active, payload, label }) {
     );
 }
 
-/* ============================================================
-   Chart 1 — Area chart, bookings over 30 days
-   ============================================================ */
+ 
 
 function BookingsAreaChart({ data }) {
     if (!data || data.length === 0) {
@@ -193,9 +183,7 @@ function BookingsAreaChart({ data }) {
     );
 }
 
-/* ============================================================
-   Chart 2 — Donut, users by role
-   ============================================================ */
+ 
 
 function UsersDonutChart({ data }) {
     if (!data || data.length === 0) {
@@ -233,7 +221,7 @@ function UsersDonutChart({ data }) {
                     </PieChart>
                 </ResponsiveContainer>
 
-                {/* Center total */}
+                { }
                 <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
                     <p className="font-['Bebas_Neue'] text-4xl text-white leading-none">{total}</p>
                     <p className="font-['Oswald'] text-[9px] tracking-[2px] uppercase text-[#7c7468] mt-1">
@@ -242,7 +230,7 @@ function UsersDonutChart({ data }) {
                 </div>
             </div>
 
-            {/* Legend below */}
+            { }
             <div className="flex justify-center gap-4 mt-4 flex-wrap">
                 {chartData.map((entry, i) => (
                     <div key={i} className="flex items-center gap-1.5 text-xs">
@@ -259,9 +247,7 @@ function UsersDonutChart({ data }) {
     );
 }
 
-/* ============================================================
-   Chart 3 — Horizontal bar, bookings by category
-   ============================================================ */
+ 
 
 function CategoryBarChart({ data }) {
     if (!data || data.length === 0) {
@@ -324,9 +310,7 @@ function CategoryBarChart({ data }) {
     );
 }
 
-/* ============================================================
-   Empty state — shared by all 3 charts
-   ============================================================ */
+ 
 
 function EmptyChart({ message }) {
     return (

@@ -17,10 +17,7 @@ async function authedFetch(path, options = {}) {
     });
 }
 
-/**
- * Fetches the user's recent notifications + their unread count.
- * Called on mount + every 30 seconds + on tab focus.
- */
+ 
 export async function getMyNotifications(limit = 20) {
     try {
         const res = await authedFetch(

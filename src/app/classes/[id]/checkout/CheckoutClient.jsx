@@ -30,7 +30,7 @@ const CHAMFER_SM = "[clip-path:polygon(8px_0,100%_0,100%_calc(100%-8px),calc(100
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
-// Helper — format a USD dollar amount with 2 decimals, no extra padding
+
 function fmtUSD(amount) {
     return Number(amount).toLocaleString("en-US", {
         minimumFractionDigits: 2,
@@ -103,7 +103,7 @@ function OrderSummary({ cls, CatIcon, categoryLabel }) {
         <div className={`bg-[#0a0a0a] border border-[#C9962E]/20 p-6 ${CHAMFER_MD} lg:sticky lg:top-24`}>
             {cls.image && (
                 <div className={`relative aspect-[16/10] overflow-hidden mb-5 ${CHAMFER_SM}`}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    { }
                     <img src={cls.image} alt="" className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-linear-to-t from-black/40 to-transparent" />
                 </div>

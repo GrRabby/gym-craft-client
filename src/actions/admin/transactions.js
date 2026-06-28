@@ -5,9 +5,7 @@ import { getAuthJwt } from "@/lib/api-token";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
-/**
- * Wraps fetch with the Better Auth JWT forwarded as Authorization header.
- */
+ 
 async function authedFetch(path, opts = {}) {
     const token = await getAuthJwt();
     return fetch(`${API_URL}${path}`, {

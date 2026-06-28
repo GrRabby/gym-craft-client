@@ -19,7 +19,7 @@ export default async function MyForumPostsPage() {
 
     return (
         <div className="flex-1 flex flex-col">
-            {/* Header */}
+            { }
             <div className="mb-8">
                 <div className="flex items-center gap-3 mb-3">
                     <div className="h-px w-10 bg-[#E8C667]" />

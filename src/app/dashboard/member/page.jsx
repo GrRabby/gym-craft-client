@@ -84,7 +84,7 @@ export default async function MemberOverviewPage() {
     );
 }
 
-/* ---------- shared section header ---------- */
+ 
 
 function SectionHeader({ children }) {
     return (
@@ -97,7 +97,7 @@ function SectionHeader({ children }) {
     );
 }
 
-/* ---------- stat card ---------- */
+ 
 
 function StatCard({ href, Icon, label, value, sublabel }) {
     return (
@@ -128,7 +128,7 @@ function StatCard({ href, Icon, label, value, sublabel }) {
     );
 }
 
-/* ---------- profile card (just user info) ---------- */
+ 
 
 function ProfileCard({ user }) {
     return (
@@ -163,7 +163,7 @@ function RoleBadge() {
     );
 }
 
-/* ---------- trainer application card ---------- */
+ 
 
 const STATUS_ACCENTS = {
     none:     { glow: "rgba(232,198,103,0.15)", border: "border-[#C9962E]/25" },
@@ -178,7 +178,7 @@ function TrainerApplicationCard({ application }) {
 
     return (
         <div className={`relative bg-[#0a0a0a] border ${accent.border} p-6 lg:p-8 ${CHAMFER_MD} overflow-hidden`}>
-            {/* Status-tinted ambient glow to reinforce state visually */}
+            { }
             <div
                 className="absolute top-0 right-0 h-40 w-40 pointer-events-none"
                 style={{
@@ -288,8 +288,8 @@ function RejectedContent({ application }) {
 }
 
 function ApprovedContent() {
-    // Defensive — approved applicants are promoted to trainer and shouldn't
-    // land on this page. Kept just in case there's a transient state.
+    
+    
     return (
         <>
             <div className="flex items-start justify-between gap-3 flex-wrap mb-3">
@@ -305,7 +305,7 @@ function ApprovedContent() {
     );
 }
 
-/* ---------- shared bits ---------- */
+ 
 
 function PrimaryActionLink({ href, children }) {
     return (
@@ -354,7 +354,7 @@ function StatusBadge({ status }) {
 
 function Avatar({ user, size = 96 }) {
     if (user?.image) {
-        // eslint-disable-next-line @next/next/no-img-element
+        
         return (
             <img
                 src={user.image}

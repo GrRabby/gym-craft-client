@@ -1,6 +1,6 @@
 "use server";
 import { auth } from "@/lib/auth";
-// TODO: import your real better-auth server instance
+
 import { v2 as cloudinary } from "cloudinary";
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -8,7 +8,7 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET,
     secure: true,
 });
-const MAX_AVATAR_SIZE = 2 * 1024 * 1024; // 2MB
+const MAX_AVATAR_SIZE = 2 * 1024 * 1024; 
 const ALLOWED_AVATAR_TYPES = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
 
 async function uploadAvatarFile(file) {
@@ -49,9 +49,9 @@ export async function registerUserAction(formData) {
         const name = String(formData.get("name") || "").trim();
         const email = String(formData.get("email") || "").trim().toLowerCase();
         const password = String(formData.get("password") || "");
-        const file = formData.get("image"); // File | null
+        const file = formData.get("image"); 
 
-        // Server-side validation — never trust the client.
+        
         if (name.length < 2) return { ok: false, error: "Name is required.", field: "name" };
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return { ok: false, error: "Enter a valid email.", field: "email" };
         if (password.length < 6) return { ok: false, error: "Password must be at least 6 characters.", field: "password" };
@@ -84,7 +84,7 @@ export async function registerUserAction(formData) {
                 return { ok: false, error: message || "Password didn't meet the requirements.", field: "password" };
             }
 
-            // Unknown Better Auth error — log it, surface its message if it has one.
+            
             console.error("signUpEmail failed:", err);
             return { ok: false, error: message || "Sign-up failed. Please try again." };
         }

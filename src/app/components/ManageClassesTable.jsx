@@ -50,7 +50,7 @@ export default function ManageClassesTable({ initialClasses = [] }) {
 
     return (
         <div className="space-y-6">
-            {/* Header */}
+            { }
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
                 <div>
                     <div className="flex items-center gap-3 mb-3">
@@ -91,7 +91,7 @@ export default function ManageClassesTable({ initialClasses = [] }) {
                 </div>
             </div>
 
-            {/* Table */}
+            { }
             <div className="bg-[#0a0a0a] border border-[#C9962E]/15 overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-sm min-w-[800px]">
@@ -132,7 +132,7 @@ export default function ManageClassesTable({ initialClasses = [] }) {
     );
 }
 
-/* ---------- Row ---------- */
+ 
 
 function ClassRow({ cls, onViewDetails }) {
     const meta = CATEGORY_META[cls.category] || { label: cls.category, Icon: Dumbbell };
@@ -146,7 +146,7 @@ function ClassRow({ cls, onViewDetails }) {
             <td className="px-5 py-3.5">
                 <div className="flex items-center gap-3 min-w-0">
                     {cls.image ? (
-                        // eslint-disable-next-line @next/next/no-img-element
+                        
                         <img src={cls.image} alt="" className="h-10 w-16 object-cover border border-[#C9962E]/30 shrink-0" />
                     ) : (
                         <div className="h-10 w-16 bg-[#0f0f0f] border border-[#C9962E]/20 shrink-0" />
@@ -197,12 +197,12 @@ function StatusBadge({ status }) {
     );
 }
 
-/* ---------- Modal ---------- */
+ 
 
 function DetailsModal({ cls, isOpen, onClose }) {
     const router = useRouter();
     const [feedback, setFeedback] = useState("");
-    const [actioning, setActioning] = useState(null);     // "approve" | "reject" | "delete"
+    const [actioning, setActioning] = useState(null);     
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [isPending, startTransition] = useTransition();
 
@@ -265,21 +265,21 @@ function DetailsModal({ cls, isOpen, onClose }) {
 
     return (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-            {/* Backdrop */}
+            { }
             <div
                 onClick={!isPending ? onClose : undefined}
                 className="absolute inset-0 bg-black/80 backdrop-blur-sm"
                 aria-hidden="true"
             />
 
-            {/* Card */}
+            { }
             <div
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="class-modal-title"
                 className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-[#0a0a0a] border border-[#C9962E]/30 shadow-[0_30px_80px_rgba(0,0,0,0.7),0_0_60px_rgba(201,150,46,0.08)] [clip-path:polygon(14px_0,100%_0,100%_calc(100%-14px),calc(100%-14px)_100%,0_100%,0_14px)]"
             >
-                {/* Header */}
+                { }
                 <div className="flex items-start justify-between gap-4 p-6 border-b border-[#C9962E]/15">
                     <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-2 mb-2 flex-wrap">
@@ -310,10 +310,10 @@ function DetailsModal({ cls, isOpen, onClose }) {
                     </button>
                 </div>
 
-                {/* Hero image */}
+                { }
                 {cls.image && (
                     <div className="px-6 pt-6">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        { }
                         <img
                             src={cls.image}
                             alt=""
@@ -322,9 +322,9 @@ function DetailsModal({ cls, isOpen, onClose }) {
                     </div>
                 )}
 
-                {/* Body */}
+                { }
                 <div className="p-6 space-y-6">
-                    {/* Description */}
+                    { }
                     <div>
                         <p className="font-['Oswald'] text-[10px] tracking-[3px] uppercase text-[#7c7468] mb-2">
                             Description
@@ -334,7 +334,7 @@ function DetailsModal({ cls, isOpen, onClose }) {
                         </p>
                     </div>
 
-                    {/* Details grid */}
+                    { }
                     <dl className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                         <Detail Icon={SIcon} label="Category" value={meta.label} highlight />
                         <Detail label="Difficulty" value={cls.difficulty.charAt(0).toUpperCase() + cls.difficulty.slice(1)} />
@@ -342,7 +342,7 @@ function DetailsModal({ cls, isOpen, onClose }) {
                         <Detail Icon={DollarSign} label="Price" value={`USD ${cls.price}`} />
                     </dl>
 
-                    {/* Schedule */}
+                    { }
                     <div>
                         <p className="font-['Oswald'] text-[10px] tracking-[3px] uppercase text-[#7c7468] mb-2">
                             Schedule
@@ -352,7 +352,7 @@ function DetailsModal({ cls, isOpen, onClose }) {
                         </p>
                     </div>
 
-                    {/* Previous feedback */}
+                    { }
                     {cls.feedback && (
                         <div className="p-3 bg-white/[0.02] border-l-2 border-[#C9962E]/50">
                             <p className="font-['Oswald'] text-[10px] tracking-[3px] uppercase text-[#7c7468] mb-1">
@@ -362,7 +362,7 @@ function DetailsModal({ cls, isOpen, onClose }) {
                         </div>
                     )}
 
-                    {/* Feedback input — only for pending */}
+                    { }
                     {cls.status === "pending" && (
                         <div>
                             <label htmlFor="feedback" className="block font-['Oswald'] text-[#cfc6b8] text-xs font-semibold tracking-[3px] uppercase mb-2">
@@ -381,7 +381,7 @@ function DetailsModal({ cls, isOpen, onClose }) {
                     )}
                 </div>
 
-                {/* Footer */}
+                { }
                 <div className="p-6 pt-2 border-t border-[#C9962E]/10">
                     {confirmDelete ? (
                         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-end gap-3">
@@ -456,7 +456,7 @@ function DetailsModal({ cls, isOpen, onClose }) {
     );
 }
 
-/* ---------- helpers ---------- */
+ 
 
 function Th({ children, align = "left" }) {
     return (

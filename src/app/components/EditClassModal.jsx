@@ -57,7 +57,7 @@ export default function EditClassModal({ cls, isOpen, onClose }) {
         }
     });
 
-    // Reset form states when modal opens with a new class
+    
     useEffect(() => {
         if (cls) {
             reset({
@@ -75,7 +75,7 @@ export default function EditClassModal({ cls, isOpen, onClose }) {
         }
     }, [cls, reset]);
 
-    // Handle ESC key press to close modal
+    
     useEffect(() => {
         if (!isOpen) return;
         const onEsc = (e) => e.key === "Escape" && !isPending && onClose();
@@ -83,7 +83,7 @@ export default function EditClassModal({ cls, isOpen, onClose }) {
         return () => document.removeEventListener("keydown", onEsc);
     }, [isOpen, isPending, onClose]);
 
-    // Prevent body scroll when modal is open
+    
     useEffect(() => {
         if (!isOpen) return;
         document.body.style.overflow = "hidden";
@@ -153,21 +153,21 @@ export default function EditClassModal({ cls, isOpen, onClose }) {
 
     return (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-            {/* Backdrop */}
+            { }
             <div
                 onClick={!isPending ? onClose : undefined}
                 className="absolute inset-0 bg-black/80 backdrop-blur-sm"
                 aria-hidden="true"
             />
 
-            {/* Modal Card */}
+            { }
             <div
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="edit-class-modal-title"
                 className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-[#0a0a0a] border border-[#C9962E]/30 shadow-[0_30px_80px_rgba(0,0,0,0.7),0_0_60px_rgba(201,150,46,0.08)] [clip-path:polygon(14px_0,100%_0,100%_calc(100%-14px),calc(100%-14px)_100%,0_100%,0_14px)]"
             >
-                {/* Header */}
+                { }
                 <div className="sticky top-0 z-10 bg-[#0a0a0a] flex items-start justify-between gap-4 p-6 border-b border-[#C9962E]/15">
                     <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-3 mb-1">
@@ -190,9 +190,9 @@ export default function EditClassModal({ cls, isOpen, onClose }) {
                     </button>
                 </div>
 
-                {/* Form Body */}
+                { }
                 <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-8">
-                    {/* Image Upload */}
+                    { }
                     <Section title="Class Image" subtitle="Optional. Change your class cover image (PNG, JPG, or WEBP under 5MB).">
                         <input
                             ref={fileInputRef}
@@ -217,7 +217,7 @@ export default function EditClassModal({ cls, isOpen, onClose }) {
                             </button>
                         ) : (
                             <div className="relative aspect-[2/1] overflow-hidden border border-[#C9962E]/40 [clip-path:polygon(12px_0,100%_0,100%_calc(100%-12px),calc(100%-12px)_100%,0_100%,0_12px)]">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                { }
                                 <img src={imagePreview} alt="Class preview" className="absolute inset-0 w-full h-full object-cover" />
                                 <button
                                     type="button"
@@ -239,7 +239,7 @@ export default function EditClassModal({ cls, isOpen, onClose }) {
                         )}
                     </Section>
 
-                    {/* Basic Info */}
+                    { }
                     <Section title="Basic Info" subtitle="Keep title clear and description detailed.">
                         <div className="space-y-4">
                             <Field id="title" label="Class Name" error={errors.title?.message}>
@@ -271,7 +271,7 @@ export default function EditClassModal({ cls, isOpen, onClose }) {
                         </div>
                     </Section>
 
-                    {/* Category Selection */}
+                    { }
                     <Section title="Category" subtitle="Pick the one that fits best.">
                         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
                             {CATEGORIES.map(({ value, label, Icon }) => {
@@ -304,10 +304,10 @@ export default function EditClassModal({ cls, isOpen, onClose }) {
                         </div>
                     </Section>
 
-                    {/* Difficulty & Details */}
+                    { }
                     <Section title="Details">
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                            {/* Difficulty */}
+                            { }
                             <div>
                                 <label className="block font-['Oswald'] text-[#cfc6b8] text-xs font-semibold tracking-[3px] uppercase mb-2">
                                     Difficulty
@@ -337,7 +337,7 @@ export default function EditClassModal({ cls, isOpen, onClose }) {
                                 </div>
                             </div>
 
-                            {/* Duration & Price */}
+                            { }
                             <div className="grid grid-cols-2 gap-4">
                                 <Field id="duration" label="Duration" error={errors.duration?.message} hint="Minutes">
                                     <div className="flex items-center">
@@ -379,7 +379,7 @@ export default function EditClassModal({ cls, isOpen, onClose }) {
                         </div>
                     </Section>
 
-                    {/* Schedule */}
+                    { }
                     <Section title="Schedule" subtitle="Pick days and time for this class.">
                         <div className="space-y-4">
                             <div>
@@ -422,7 +422,7 @@ export default function EditClassModal({ cls, isOpen, onClose }) {
                         </div>
                     </Section>
 
-                    {/* Actions Footer */}
+                    { }
                     <div className="pt-6 border-t border-[#C9962E]/15 flex justify-end gap-3">
                         <button
                             type="button"

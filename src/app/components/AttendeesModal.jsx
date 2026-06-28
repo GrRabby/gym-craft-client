@@ -35,7 +35,7 @@ export default function AttendeesModal({ classId, className, isOpen, onClose }) 
         };
     }, [isOpen, classId]);
 
-    // Handle ESC key press to close modal
+    
     useEffect(() => {
         if (!isOpen) return;
         const onEsc = (e) => e.key === "Escape" && !loading && onClose();
@@ -43,7 +43,7 @@ export default function AttendeesModal({ classId, className, isOpen, onClose }) 
         return () => document.removeEventListener("keydown", onEsc);
     }, [isOpen, loading, onClose]);
 
-    // Prevent body scroll when modal is open
+    
     useEffect(() => {
         if (!isOpen) return;
         document.body.style.overflow = "hidden";
@@ -54,21 +54,21 @@ export default function AttendeesModal({ classId, className, isOpen, onClose }) 
 
     return (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-            {/* Backdrop */}
+            { }
             <div
                 onClick={onClose}
                 className="absolute inset-0 bg-black/80 backdrop-blur-sm"
                 aria-hidden="true"
             />
 
-            {/* Modal Card */}
+            { }
             <div
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="attendees-modal-title"
                 className="relative w-full max-w-lg max-h-[80vh] overflow-y-auto bg-[#0a0a0a] border border-[#C9962E]/30 shadow-[0_30px_80px_rgba(0,0,0,0.7),0_0_60px_rgba(201,150,46,0.08)] [clip-path:polygon(14px_0,100%_0,100%_calc(100%-14px),calc(100%-14px)_100%,0_100%,0_14px)] flex flex-col"
             >
-                {/* Header */}
+                { }
                 <div className="flex items-start justify-between gap-4 p-5 border-b border-[#C9962E]/15">
                     <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-2 mb-1">
@@ -90,12 +90,12 @@ export default function AttendeesModal({ classId, className, isOpen, onClose }) 
                     </button>
                 </div>
 
-                {/* Body Content */}
+                { }
                 <div className="flex-1 p-5 overflow-y-auto min-h-[200px] flex flex-col">
                     {loading ? (
                         <div className="flex-1 flex flex-col items-center justify-center py-10 text-[#7c7468]">
                             <DumbbellSpinner size={30} label="Loading students..." />
-                            {/* <p className="font-['Oswald'] text-xs tracking-[2px] uppercase">Loading students...</p> */}
+                            { }
                         </div>
                     ) : error ? (
                         <div className="flex-1 flex flex-col items-center justify-center py-10 text-[#ff8585] text-center">
@@ -133,7 +133,7 @@ export default function AttendeesModal({ classId, className, isOpen, onClose }) 
                     )}
                 </div>
 
-                {/* Footer */}
+                { }
                 <div className="p-5 pt-3 border-t border-[#C9962E]/10 flex justify-end">
                     <button
                         onClick={onClose}

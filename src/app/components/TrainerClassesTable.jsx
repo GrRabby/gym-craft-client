@@ -37,7 +37,7 @@ export default function TrainerClassesTable({ initialClasses = [] }) {
     const [search, setSearch] = useState("");
     const [statusFilter, setStatusFilter] = useState("all");
 
-    // Modal states
+    
     const [editingClass, setEditingClass] = useState(null);
     const [attendeesClass, setAttendeesClass] = useState(null);
     const [deletingClass, setDeletingClass] = useState(null);
@@ -68,7 +68,7 @@ export default function TrainerClassesTable({ initialClasses = [] }) {
 
     return (
         <div className="space-y-6">
-            {/* Header section */}
+            { }
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
                 <div>
                     <div className="flex items-center gap-3 mb-3">
@@ -109,7 +109,7 @@ export default function TrainerClassesTable({ initialClasses = [] }) {
                 </div>
             </div>
 
-            {/* Table */}
+            { }
             <div className="bg-[#0a0a0a] border border-[#C9962E]/15 overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-sm min-w-[1200px]">
@@ -145,7 +145,7 @@ export default function TrainerClassesTable({ initialClasses = [] }) {
                                         <td className="px-5 py-3.5">
                                             <div className="flex items-center gap-3 min-w-0">
                                                 {cls.image ? (
-                                                    // eslint-disable-next-line @next/next/no-img-element
+                                                    
                                                     <img src={cls.image} alt="" className="h-10 w-16 object-cover border border-[#C9962E]/30 shrink-0" />
                                                 ) : (
                                                     <div className="h-10 w-16 bg-[#0f0f0f] border border-[#C9962E]/20 shrink-0" />
@@ -208,7 +208,7 @@ export default function TrainerClassesTable({ initialClasses = [] }) {
                 </div>
             </div>
 
-            {/* Modals */}
+            { }
             <EditClassModal
                 cls={editingClass}
                 isOpen={!!editingClass}
@@ -225,7 +225,7 @@ export default function TrainerClassesTable({ initialClasses = [] }) {
                 onClose={() => setAttendeesClass(null)}
             />
 
-            {/* Delete Confirmation Modal */}
+            { }
             {deletingClass && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
                     <div onClick={() => !isPending && setDeletingClass(null)} className="absolute inset-0 bg-black/80 backdrop-blur-sm" />

@@ -130,10 +130,7 @@ export default function LoginPage() {
                                 <span className="text-white ml-1">CRAFT</span>
                             </div>
                         </Link>
-                        {/* <div className="font-['Oswald'] font-bold text-lg tracking-wider uppercase leading-none">
-                            <span className="bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] bg-clip-text text-transparent">GYM</span>
-                            <span className="text-white">CRAFT</span>
-                        </div> */}
+                        { }
                     </div>
                 </div>
 
@@ -262,7 +259,7 @@ export default function LoginPage() {
     );
 }
 
-/* ---------- Recessed-channel input field ---------- */
+ 
 
 function Field({ id, label, icon: Icon, error, rightLink, children }) {
     return (
@@ -284,7 +281,7 @@ function Field({ id, label, icon: Icon, error, rightLink, children }) {
     );
 }
 
-/* ---------- Small pieces ---------- */
+ 
 
 function Rivet({ className = "" }) {
     return (

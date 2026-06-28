@@ -20,14 +20,7 @@ async function authedFetch(path, options = {}) {
     });
 }
 
-/**
- * Creates a Stripe Embedded Checkout session for the given class.
- * Returns clientSecret which is passed to <EmbeddedCheckoutProvider>.
- *
- * Called from the checkout page (server component). Errors are returned
- * as { ok: false, error } rather than thrown so the page can render an
- * error state instead of crashing.
- */
+ 
 export async function createCheckoutSessionAction(classId) {
     try {
         const res = await authedFetch("/api/checkout/session", {
@@ -60,11 +53,7 @@ export async function createCheckoutSessionAction(classId) {
     }
 }
 
-/**
- * Verifies a Stripe session by ID. If the session is complete + paid, the
- * backend idempotently creates the Booking record and returns class details
- * for the success page. Safe to call multiple times.
- */
+ 
 export async function getCheckoutSessionStatus(sessionId) {
     try {
         const res = await authedFetch(`/api/checkout/session-status/${sessionId}`);

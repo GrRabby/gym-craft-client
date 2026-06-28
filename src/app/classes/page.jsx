@@ -2,7 +2,7 @@ import { getPublicClasses } from "@/actions/classes";
 import ClassesGrid from "../components/ClassesGrid";
 
 
-export const dynamic = "force-dynamic"; // searchParams aren't statically determinable
+export const dynamic = "force-dynamic"; 
 
 export default async function ClassesPage({ searchParams }) {
     const sp       = await searchParams;
@@ -14,7 +14,7 @@ export default async function ClassesPage({ searchParams }) {
         page, search, category,
     });
 
-    // Split the comma-separated category param into an array for the client
+    
     const currentCategories = category
         .split(",")
         .map((c) => c.trim())
@@ -22,7 +22,7 @@ export default async function ClassesPage({ searchParams }) {
 
     return (
         <>
-            {/* Hero */}
+            { }
             <section className="relative bg-[#050505] py-20 lg:py-28 overflow-hidden">
                 <div className="absolute inset-0 bg-[radial-gradient(620px_320px_at_50%_-8%,rgba(201,150,46,0.18),transparent_62%),linear-gradient(180deg,#0a0a0a,#040404)] pointer-events-none" />
                 <div className="absolute inset-0 opacity-[0.06] pointer-events-none [background-image:linear-gradient(rgba(247,228,163,1)_1px,transparent_1px),linear-gradient(90deg,rgba(247,228,163,1)_1px,transparent_1px)] [background-size:56px_56px] [mask-image:radial-gradient(ellipse_at_50%_50%,black_0%,transparent_70%)]" />

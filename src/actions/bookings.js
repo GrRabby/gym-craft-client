@@ -4,10 +4,7 @@ import { getAuthJwt } from "@/lib/api-token";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
-/**
- * Returns the current user's paid bookings with class + trainer joined.
- * Used by the member dashboard's "Booked Classes" page.
- */
+ 
 export async function getMyBookings() {
     try {
         const jwt = await getAuthJwt();
@@ -17,7 +14,7 @@ export async function getMyBookings() {
 
         const res = await fetch(`${API_URL}/api/bookings/me`, {
             headers: { Authorization: `Bearer ${jwt}` },
-            cache: "no-store", // per-user data — never cache
+            cache: "no-store", 
         });
 
         if (!res.ok) {

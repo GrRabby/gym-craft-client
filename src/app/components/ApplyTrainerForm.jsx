@@ -24,7 +24,7 @@ const SPECIALTY_LABEL = Object.fromEntries(SPECIALTIES.map((s) => [s.value, s.la
 export default function ApplyTrainerForm({ initialApplication }) {
     const [application, setApplication] = useState(initialApplication);
 
-    // Show status when an application exists and isn't being "reapplied"
+    
     if (application) {
         return (
             <ApplicationStatus
@@ -37,7 +37,7 @@ export default function ApplyTrainerForm({ initialApplication }) {
     return <Form onSubmitted={(app) => setApplication(app)} />;
 }
 
-/* ---------- The form ---------- */
+ 
 
 function Form({ onSubmitted }) {
     const router = useRouter();
@@ -72,7 +72,7 @@ function Form({ onSubmitted }) {
 
     return (
         <div className="max-w-3xl">
-            {/* Header */}
+            { }
             <div className="flex items-center gap-3 mb-3">
                 <div className="h-px w-8 bg-[#E8C667]" />
                 <span className="font-['Oswald'] text-[#E8C667] text-[10px] font-semibold tracking-[4px] uppercase">
@@ -88,7 +88,7 @@ function Form({ onSubmitted }) {
             </p>
 
             <form onSubmit={handleSubmit(onSubmit)} className="mt-10 space-y-9">
-                {/* Experience */}
+                { }
                 <div>
                     <label htmlFor="experience" className="block font-['Oswald'] text-[#cfc6b8] text-xs font-semibold tracking-[3px] uppercase mb-2">
                         Years of Experience
@@ -119,7 +119,7 @@ function Form({ onSubmitted }) {
                     )}
                 </div>
 
-                {/* Specialty pills */}
+                { }
                 <div>
                     <label className="block font-['Oswald'] text-[#cfc6b8] text-xs font-semibold tracking-[3px] uppercase mb-3">
                         Your Specialty
@@ -172,7 +172,7 @@ function Form({ onSubmitted }) {
                     )}
                 </div>
 
-                {/* Info banner */}
+                { }
                 <div className="flex items-start gap-3 p-4 bg-[#C9962E]/5 border-l-2 border-[#C9962E]/50">
                     <AlertCircle size={16} className="text-[#E8C667] mt-0.5 shrink-0" />
                     <p className="text-[#cfc6b8] text-xs leading-relaxed">
@@ -181,7 +181,7 @@ function Form({ onSubmitted }) {
                     </p>
                 </div>
 
-                {/* Submit */}
+                { }
                 <button
                     type="submit"
                     disabled={busy}
@@ -237,7 +237,7 @@ function ApplicationStatus({ application, onReapply }) {
 
     return (
         <div className="max-w-3xl">
-            {/* Header */}
+            { }
             <div className="flex items-center gap-3 mb-3">
                 <div className="h-px w-8 bg-[#E8C667]" />
                 <span className="font-['Oswald'] text-[#E8C667] text-[10px] font-semibold tracking-[4px] uppercase">
@@ -248,7 +248,7 @@ function ApplicationStatus({ application, onReapply }) {
                 Your <span className="text-[#E8C667]">application.</span>
             </h2>
 
-            {/* Status card */}
+            { }
             <div className={`mt-8 p-6 border ${p.ring} ${p.bg} [clip-path:polygon(12px_0,100%_0,100%_calc(100%-12px),calc(100%-12px)_100%,0_100%,0_12px)]`}>
                 <div className="flex items-start gap-4">
                     <span className={`inline-flex items-center justify-center h-12 w-12 shrink-0 border ${p.ring} ${p.bg} [clip-path:polygon(7px_0,100%_0,100%_calc(100%-7px),calc(100%-7px)_100%,0_100%,0_7px)]`}>
@@ -266,7 +266,7 @@ function ApplicationStatus({ application, onReapply }) {
                 </div>
             </div>
 
-            {/* Submitted details */}
+            { }
             <div className="mt-6 p-6 bg-[#0a0a0a] border border-[#C9962E]/15">
                 <p className="font-['Oswald'] text-[10px] tracking-[3px] uppercase text-[#7c7468] mb-4">
                     What you submitted
@@ -278,7 +278,7 @@ function ApplicationStatus({ application, onReapply }) {
                 </dl>
             </div>
 
-            {/* Reapply (only if rejected) */}
+            { }
             {status === "rejected" && (
                 <button
                     onClick={onReapply}

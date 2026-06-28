@@ -47,14 +47,14 @@ export default function MyFavoritesTable({ initialFavorites = [] }) {
     function handleRemove(favorite) {
         const { id: favoriteId, class: cls } = favorite;
 
-        // setRemovingIds((prev) => new Set(prev).add(favoriteId));
-        // setFavorites((prev) => prev.filter((f) => f.id !== favoriteId));
+        
+        
 
         startTransition(async () => {
             const result = await removeFavoriteAction(cls.id);
 
             if (!result.ok) {
-                // Failed — refresh from the server to restore truth
+                
                 router.refresh();
                 toast.error(
                     result.blocked
@@ -126,12 +126,12 @@ function FavoriteRow({ favorite, isLast, isRemoving, onRemove }) {
             className={`group transition-colors hover:bg-[#C9962E]/[0.04] ${isLast ? "" : "border-b border-[#C9962E]/10"
                 }`}
         >
-            {/* Class */}
+            { }
             <td className="px-5 py-4">
                 <div className="flex items-center gap-3 min-w-[200px]">
                     {cls.image ? (
                         <div className={`relative w-14 h-14 shrink-0 overflow-hidden bg-[#0f0f0f] border border-[#C9962E]/20 ${CHAMFER_SM}`}>
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            { }
                             <img
                                 src={cls.image}
                                 alt=""
@@ -155,7 +155,7 @@ function FavoriteRow({ favorite, isLast, isRemoving, onRemove }) {
                 </div>
             </td>
 
-            {/* Trainer */}
+            { }
             <td className="px-5 py-4">
                 <div className="flex items-center gap-2.5">
                     <Avatar user={trainer} size={28} />
@@ -165,7 +165,7 @@ function FavoriteRow({ favorite, isLast, isRemoving, onRemove }) {
                 </div>
             </td>
 
-            {/* Schedule */}
+            { }
             <td className="px-5 py-4">
                 <div className="text-sm whitespace-nowrap">
                     <div className="inline-flex items-center gap-1.5 text-[#cfc6b8]">
@@ -179,7 +179,7 @@ function FavoriteRow({ favorite, isLast, isRemoving, onRemove }) {
                 </div>
             </td>
 
-            {/* Actions — Details link + Remove icon button */}
+            { }
             <td className="px-5 py-4 text-right">
                 <div className="flex items-center justify-end gap-2">
                     <Link
@@ -209,7 +209,7 @@ function FavoriteRow({ favorite, isLast, isRemoving, onRemove }) {
     );
 }
 
-/* ---------- helpers ---------- */
+ 
 
 function Th({ children, align = "left" }) {
     return (
@@ -223,7 +223,7 @@ function Th({ children, align = "left" }) {
 
 function Avatar({ user, size = 28 }) {
     if (user?.image) {
-        // eslint-disable-next-line @next/next/no-img-element
+        
         return (
             <img
                 src={user.image}

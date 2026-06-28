@@ -21,9 +21,9 @@ export default function ManageForumPostsTable({ initialPosts = [] }) {
     const [search, setSearch] = useState("");
     const [isPending, startTransition] = useTransition();
 
-    // Client-side search filter — case-insensitive substring match against
-    // title, description, and author name/email. Cheap for any realistic
-    // moderation queue (< a few thousand posts).
+    
+    
+    
     const filteredPosts = useMemo(() => {
         if (!search.trim()) return posts;
         const q = search.trim().toLowerCase();
@@ -60,7 +60,7 @@ export default function ManageForumPostsTable({ initialPosts = [] }) {
                 <EmptyState />
             ) : (
                 <div className="space-y-4">
-                    {/* Search */}
+                    { }
                     <div className="relative max-w-md">
                         <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#7c7468] pointer-events-none" />
                         <input
@@ -72,7 +72,7 @@ export default function ManageForumPostsTable({ initialPosts = [] }) {
                         />
                     </div>
 
-                    {/* Table */}
+                    { }
                     <div className={`bg-[#0a0a0a] border border-[#C9962E]/15 overflow-hidden ${CHAMFER_MD}`}>
                         <div className="overflow-x-auto">
                             <table className="w-full text-left min-w-[800px]">
@@ -112,7 +112,7 @@ export default function ManageForumPostsTable({ initialPosts = [] }) {
                 </div>
             )}
 
-            {/* Delete Confirmation Modal */}
+            { }
             {deletingPost && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
                     <div onClick={() => !isPending && setDeletingPost(null)} className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
@@ -151,7 +151,7 @@ export default function ManageForumPostsTable({ initialPosts = [] }) {
     );
 }
 
-/* ---------- row ---------- */
+ 
 
 function PostRow({ post, isLast, isRemoving, onDelete }) {
     const isHidden = post.status === "flagged" || post.status === "removed";
@@ -166,12 +166,12 @@ function PostRow({ post, isLast, isRemoving, onDelete }) {
             className={`group transition-colors hover:bg-[#C9962E]/[0.04] ${isLast ? "" : "border-b border-[#C9962E]/10"
                 }`}
         >
-            {/* Post — thumbnail + title + description preview */}
+            { }
             <td className="px-5 py-4">
                 <div className="flex items-start gap-3 min-w-[280px] max-w-[480px]">
                     {post.image ? (
                         <div className={`relative w-16 h-16 shrink-0 overflow-hidden bg-[#0f0f0f] border border-[#C9962E]/20 ${CHAMFER_SM}`}>
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            { }
                             <img src={post.image} alt="" className="w-full h-full object-cover" />
                         </div>
                     ) : (
@@ -190,7 +190,7 @@ function PostRow({ post, isLast, isRemoving, onDelete }) {
                 </div>
             </td>
 
-            {/* Author — avatar + name + role */}
+            { }
             <td className="px-5 py-4">
                 <div className="flex items-center gap-2.5 min-w-[160px]">
                     <Avatar user={post.author} size={28} />
@@ -201,7 +201,7 @@ function PostRow({ post, isLast, isRemoving, onDelete }) {
                 </div>
             </td>
 
-            {/* Status */}
+            { }
             <td className="px-5 py-4">
                 {isHidden ? (
                     <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#ff5a5a]/10 border border-[#ff5a5a]/40 text-[#ff8585] font-['Oswald'] text-[10px] font-bold tracking-[2px] uppercase [clip-path:polygon(4px_0,100%_0,100%_calc(100%-4px),calc(100%-4px)_100%,0_100%,0_4px)]">
@@ -216,14 +216,14 @@ function PostRow({ post, isLast, isRemoving, onDelete }) {
                 )}
             </td>
 
-            {/* Date */}
+            { }
             <td className="px-5 py-4">
                 <span className="text-[#cfc6b8] text-xs whitespace-nowrap">
                     {formatDate(post.createdAt)}
                 </span>
             </td>
 
-            {/* Delete */}
+            { }
             <td className="px-5 py-4 text-right">
                 <button
                     type="button"
@@ -244,7 +244,7 @@ function PostRow({ post, isLast, isRemoving, onDelete }) {
     );
 }
 
-/* ---------- helpers ---------- */
+ 
 
 function Th({ children, align = "left" }) {
     return (
@@ -274,7 +274,7 @@ function RoleLabel({ role }) {
 
 function Avatar({ user, size = 28 }) {
     if (user?.image) {
-        // eslint-disable-next-line @next/next/no-img-element
+        
         return (
             <img
                 src={user.image}

@@ -7,10 +7,10 @@ const PAGE_SIZE = 10;
 
 export default function TransactionsTable({ initialTransactions = [] }) {
     const [search, setSearch] = useState("");
-    const [sortBy, setSortBy] = useState("date_desc"); // date_desc, date_asc, amount_desc, amount_asc
+    const [sortBy, setSortBy] = useState("date_desc"); 
     const [page, setPage] = useState(1);
 
-    // Filtered & Sorted Transactions
+    
     const processed = useMemo(() => {
         const q = search.trim().toLowerCase();
         let items = initialTransactions.filter((t) => {
@@ -20,7 +20,7 @@ export default function TransactionsTable({ initialTransactions = [] }) {
             return true;
         });
 
-        // Sorting
+        
         items.sort((a, b) => {
             if (sortBy === "date_desc") {
                 return new Date(b.paidAt) - new Date(a.paidAt);

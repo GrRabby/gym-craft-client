@@ -4,13 +4,7 @@ import { getAuthJwt } from "@/lib/api-token";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
-/**
- * Returns headline stats for the current trainer:
- *   - classesCount: total classes created (any status)
- *   - studentsCount: total paid bookings across all their classes
- *
- * Used by the Trainer Overview dashboard.
- */
+ 
 export async function getTrainerStats() {
     try {
         const jwt = await getAuthJwt();

@@ -28,17 +28,17 @@ export default function ForumGrid({
     const gridRef = useRef(null);
     const [isPending, startTransition] = useTransition();
 
-    // Local input value — drives debounced URL updates
+    
     const [searchInput, setSearchInput] = useState(initialSearch);
 
-    // Sync local input to URL changes that come from elsewhere
-    // (e.g., back button restoring a previous search)
+    
+    
     useEffect(() => {
         setSearchInput(initialSearch);
     }, [initialSearch]);
 
-    // Debounce: push to URL DEBOUNCE_MS after user stops typing.
-    // No push if the trimmed input equals what's already in the URL.
+    
+    
     useEffect(() => {
         const trimmed = searchInput.trim();
         if (trimmed === initialSearch) return;
@@ -47,7 +47,7 @@ export default function ForumGrid({
             const params = new URLSearchParams(searchParams);
             if (trimmed) params.set("search", trimmed);
             else params.delete("search");
-            params.delete("page");  // any new search resets to page 1
+            params.delete("page");  
 
             startTransition(() => {
                 router.push(`/forum${params.toString() ? `?${params}` : ""}`, { scroll: false });
@@ -55,7 +55,7 @@ export default function ForumGrid({
         }, DEBOUNCE_MS);
 
         return () => clearTimeout(t);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        
     }, [searchInput]);
 
     function clearSearch() {
@@ -77,7 +77,7 @@ export default function ForumGrid({
 
     return (
         <div ref={gridRef} className="scroll-mt-24">
-            {/* Search + result count */}
+            { }
             <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                 <div className="relative w-full sm:max-w-md">
                     {isPending ? (
@@ -151,7 +151,7 @@ export default function ForumGrid({
                 </motion.div>
             )}
 
-            {/* Pagination */}
+            { }
             {!isPending && hasResults && totalPages > 1 && (
                 <Pagination
                     currentPage={currentPage}
@@ -163,14 +163,14 @@ export default function ForumGrid({
     );
 }
 
-/* ---------- card ---------- */
+ 
 
 function PostCard({ post }) {
     return (
         <div className={`group h-full flex flex-col bg-[#0a0a0a] border border-[#C9962E]/40 hover:border-[#C9962E]/80 transition-colors overflow-hidden ${CHAMFER_MD}`}>
             <div className="relative aspect-[16/10] bg-[#0f0f0f] overflow-hidden">
                 {post.image ? (
-                    // eslint-disable-next-line @next/next/no-img-element
+                    
                     <img
                         src={post.image}
                         alt=""
@@ -212,11 +212,11 @@ function PostCard({ post }) {
     );
 }
 
-/* ---------- bits ---------- */
+ 
 
 function Avatar({ user, size = 24 }) {
     if (user?.image) {
-        // eslint-disable-next-line @next/next/no-img-element
+        
         return (
             <img
                 src={user.image}

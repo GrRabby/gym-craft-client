@@ -15,25 +15,25 @@ export const dynamic = "force-dynamic";
 export default async function ForumPostDetailsPage({ params }) {
     const { id } = await params;
 
-    // Auth gate — only logged-in users see post details
+    
     const user = await getCurrentUser();
     if (!user) {
         redirect(`/login?redirect=/forum/${id}`);
     }
 
-    // Parallel: details + comments
+    
     const [details, commentsResult] = await Promise.all([
         getForumPostDetails(id),
         getComments(id),
     ]);
     if (!details.post) {
         if (details.status === 404) notFound();
-        // For other errors, still render a soft error rather than 500
+        
     }
     return (
         <main className="min-h-screen bg-[#050505] pb-20">
             <div className="max-w-4xl mx-auto px-6 lg:px-8 pt-24 lg:pt-28">
-                {/* Back link */}
+                { }
                 <Link
                     href="/forum"
                     className="inline-flex items-center gap-2 text-[#cfc6b8] hover:text-[#E8C667] transition-colors text-sm font-['Oswald'] tracking-[2px] uppercase mb-8 no-underline"
@@ -46,10 +46,10 @@ export default async function ForumPostDetailsPage({ params }) {
                     <ErrorBanner message={details.error} />
                 ) : (
                     <>
-                        {/* Article */}
+                        { }
                         <PostDetailsView post={details.post} />
 
-                        {/* Vote bar */}
+                        { }
                         <PostVoteButtons
                             postId={details.post.id}
                             initialLikes={details.likes}
@@ -57,10 +57,10 @@ export default async function ForumPostDetailsPage({ params }) {
                             initialUserVote={details.userVote}
                         />
 
-                        {/* Divider */}
+                        { }
                         <hr className="my-10 border-[#C9962E]/15" />
 
-                        {/* Comments */}
+                        { }
                         <CommentsSection
                             postId={details.post.id}
                             initialComments={commentsResult.comments}

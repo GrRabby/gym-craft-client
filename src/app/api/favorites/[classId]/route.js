@@ -4,12 +4,7 @@ import { getAuthJwt } from "@/lib/api-token";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
-/**
- * Thin proxy routes that forward favorite add/remove to Express with the
- * user's JWT attached. Used by ClassDetailsView's toggleFavorite, which
- * needs to avoid the server-action auto-refresh behavior that nudges
- * scroll position on the class details page.
- */
+ 
 
 export async function POST(req, { params }) {
     try {

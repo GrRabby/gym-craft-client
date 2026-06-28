@@ -38,7 +38,7 @@ const CHAMFER_MD = "[clip-path:polygon(12px_0,100%_0,100%_calc(100%-12px),calc(1
 const CHAMFER_SM = "[clip-path:polygon(6px_0,100%_0,100%_calc(100%-6px),calc(100%-6px)_100%,0_100%,0_6px)]";
 const CHAMFER_XS = "[clip-path:polygon(4px_0,100%_0,100%_calc(100%-4px),calc(100%-4px)_100%,0_100%,0_4px)]";
 
-// Map the validated ?from= value to a real back link
+
 const BACK_LINKS = {
     bookings: { href: "/dashboard/member/bookings", label: "Back to bookings" },
     favorites: { href: "/dashboard/member/favorites", label: "Back to favorites" },
@@ -54,7 +54,7 @@ export default function ClassDetailsView({ cls, initialBooked, initialFavorited,
     const isBooked = initialBooked;
     const back = BACK_LINKS[from] || DEFAULT_BACK;
 
-    /* ---------- handlers ---------- */
+     
 
     function handleBookClick() {
         if (isBooked) {
@@ -69,7 +69,7 @@ export default function ClassDetailsView({ cls, initialBooked, initialFavorited,
 
         const wasFavorited = isFavorited;
 
-        // Optimistic flip — UI updates instantly
+        
         setIsFavorited(!wasFavorited);
 
         startFavoriteTransition(async () => {
@@ -81,7 +81,7 @@ export default function ClassDetailsView({ cls, initialBooked, initialFavorited,
                 const data = await res.json().catch(() => ({}));
 
                 if (!res.ok) {
-                    // Roll back the optimistic update
+                    
                     setIsFavorited(wasFavorited);
                     if (data.blocked) {
                         toast.error("Action restricted by Admin");
@@ -103,7 +103,7 @@ export default function ClassDetailsView({ cls, initialBooked, initialFavorited,
         });
     }
 
-    /* ---------- render ---------- */
+     
 
     const categoryMeta = CATEGORY_META[cls.category] || { label: cls.category, Icon: Dumbbell };
     const CatIcon = categoryMeta.Icon;
@@ -112,7 +112,7 @@ export default function ClassDetailsView({ cls, initialBooked, initialFavorited,
     return (
         <div className="bg-[#070707] min-h-screen">
             <div className="max-w-7xl mx-auto px-6 lg:px-10 pt-8 pb-20">
-                {/* Context-aware back link */}
+                { }
                 <Link
                     href={back.href}
                     className="inline-flex items-center gap-2 text-[#7c7468] hover:text-[#E8C667] text-xs font-['Oswald'] tracking-[2px] uppercase transition-colors"
@@ -121,7 +121,7 @@ export default function ClassDetailsView({ cls, initialBooked, initialFavorited,
                     {back.label}
                 </Link>
 
-                {/* Hero */}
+                { }
                 <motion.div
                     initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -129,7 +129,7 @@ export default function ClassDetailsView({ cls, initialBooked, initialFavorited,
                     className={`mt-6 relative aspect-[21/9] overflow-hidden bg-[#0a0a0a] border border-[#C9962E]/20 ${CHAMFER_LG}`}
                 >
                     {cls.image ? (
-                        // eslint-disable-next-line @next/next/no-img-element
+                        
                         <img src={cls.image} alt="" className="w-full h-full object-cover" />
                     ) : (
                         <div className="w-full h-full flex items-center justify-center">
@@ -163,7 +163,7 @@ export default function ClassDetailsView({ cls, initialBooked, initialFavorited,
                     </div>
                 </motion.div>
 
-                {/* Content grid */}
+                { }
                 <div className="mt-10 grid grid-cols-1 lg:grid-cols-3 gap-8">
                     <aside className="lg:col-start-3 lg:row-start-1">
                         <div className="lg:sticky lg:top-24">
@@ -189,7 +189,7 @@ export default function ClassDetailsView({ cls, initialBooked, initialFavorited,
     );
 }
 
-/* ---------- action card ---------- */
+ 
 
 function ActionCard({
     cls, isBooked, isFavorited, isFavoritePending, onBook, onToggleFavorite,
@@ -269,7 +269,7 @@ function ActionCard({
     );
 }
 
-/* ---------- left-column sections ---------- */
+ 
 
 function DescriptionSection({ cls }) {
     return (
@@ -352,7 +352,7 @@ function SectionTitle({ children }) {
 
 function Avatar({ user, size = 24 }) {
     if (user?.image) {
-        // eslint-disable-next-line @next/next/no-img-element
+        
         return (
             <img
                 src={user.image}

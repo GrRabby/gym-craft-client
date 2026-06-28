@@ -19,8 +19,8 @@ export default function PostVoteButtons({
     const [userVote, setUserVote] = useState(initialUserVote);
     const [, startTransition] = useTransition();
 
-    // Local prediction of what state the server will report after the click.
-    // We update the UI immediately, then reconcile with the server response.
+    
+    
     function predictNext(type) {
         let nextLikes = likes;
         let nextDislikes = dislikes;
@@ -30,12 +30,12 @@ export default function PostVoteButtons({
             if (type === "like")    { nextLikes++; nextVote = "like"; }
             else                    { nextDislikes++; nextVote = "dislike"; }
         } else if (userVote === type) {
-            // Toggle off
+            
             if (type === "like")    { nextLikes--; }
             else                    { nextDislikes--; }
             nextVote = null;
         } else {
-            // Switch
+            
             if (type === "like")    { nextLikes++; nextDislikes--; }
             else                    { nextDislikes++; nextLikes--; }
             nextVote = type;
@@ -55,7 +55,7 @@ export default function PostVoteButtons({
             const result = await votePostAction(postId, type);
 
             if (!result.ok) {
-                // Roll back to pre-click state
+                
                 setLikes(before.likes);
                 setDislikes(before.dislikes);
                 setUserVote(before.userVote);
@@ -63,7 +63,7 @@ export default function PostVoteButtons({
                 return;
             }
 
-            // Reconcile with server truth (in case another tab voted too)
+            
             setLikes(result.likes);
             setDislikes(result.dislikes);
             setUserVote(result.userVote);

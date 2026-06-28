@@ -17,10 +17,7 @@ async function authedFetch(path, options = {}) {
     });
 }
 
-/**
- * Sends a vote to the backend. Returns fresh counts + the user's
- * current vote state so the client can sync optimistic UI.
- */
+ 
 export async function votePostAction(postId, type) {
     try {
         const res = await authedFetch("/api/post-votes", {

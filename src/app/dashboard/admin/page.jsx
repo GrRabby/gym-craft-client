@@ -19,7 +19,7 @@ export default async function AdminOverviewPage() {
 
     return (
         <div className="flex-1 flex flex-col gap-8">
-            {/* Header */}
+            { }
             <header>
                 <div className="flex items-center gap-3 mb-3">
                     <div className="h-px w-10 bg-[#E8C667]" />
@@ -38,7 +38,7 @@ export default async function AdminOverviewPage() {
                 </p>
             </header>
 
-            {/* Error banner (rare — usually backend down) */}
+            { }
             {stats.error && (
                 <div className={`p-4 border border-[#ff5a5a]/30 bg-[#ff5a5a]/5 text-[#ff8585] ${CHAMFER_MD}`}>
                     <p className="font-['Oswald'] text-xs tracking-[3px] uppercase mb-1">Couldn&apos;t load stats</p>
@@ -46,7 +46,7 @@ export default async function AdminOverviewPage() {
                 </div>
             )}
 
-            {/* Stat cards */}
+            { }
             <section className="grid grid-cols-1 md:grid-cols-3 gap-5">
                 <StatCard
                     Icon={Users}
@@ -68,7 +68,7 @@ export default async function AdminOverviewPage() {
                 />
             </section>
 
-            {/* Charts */}
+            { }
             <section>
                 <SectionHeading title="Platform Insights" />
                 <AdminCharts
@@ -78,7 +78,7 @@ export default async function AdminOverviewPage() {
                 />
             </section>
 
-            {/* Profile */}
+            { }
             <section>
                 <SectionHeading title="Your Profile" />
                 <ProfileCard user={user} />
@@ -87,7 +87,7 @@ export default async function AdminOverviewPage() {
     );
 }
 
-/* ---------- pieces ---------- */
+ 
 
 function SectionHeading({ title }) {
     return (
@@ -106,7 +106,7 @@ function StatCard({ Icon, label, value, accent }) {
         <div
             className={`relative bg-[#0a0a0a] border border-[#C9962E]/15 p-6 overflow-hidden ${CHAMFER_MD}`}
         >
-            {/* Ambient corner glow */}
+            { }
             <div className="absolute -top-12 -right-12 h-32 w-32 rounded-full bg-[#E8C667]/10 blur-3xl pointer-events-none" />
 
             <div className="relative flex items-start justify-between">
@@ -142,9 +142,9 @@ function ProfileCard({ user }) {
             <div className="absolute -bottom-16 -left-16 h-40 w-40 rounded-full bg-[#E8C667]/8 blur-3xl pointer-events-none" />
 
             <div className="relative flex items-center gap-5 flex-wrap">
-                {/* Avatar */}
+                { }
                 {user.image ? (
-                    // eslint-disable-next-line @next/next/no-img-element
+                    
                     <img
                         src={user.image}
                         alt=""
@@ -156,7 +156,7 @@ function ProfileCard({ user }) {
                     </span>
                 )}
 
-                {/* Identity */}
+                { }
                 <div className="min-w-0 flex-1">
                     <p className="font-['Bebas_Neue'] text-3xl text-white tracking-wide leading-none">
                         {user.name}
@@ -167,7 +167,7 @@ function ProfileCard({ user }) {
                     </p>
                 </div>
 
-                {/* Admin badge */}
+                { }
                 <span className="inline-flex items-center gap-2 px-4 py-2 bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] text-[#1a1304] font-['Oswald'] text-xs font-bold tracking-[3px] uppercase shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_3px_10px_rgba(201,150,46,0.25)] [clip-path:polygon(6px_0,100%_0,100%_calc(100%-6px),calc(100%-6px)_100%,0_100%,0_6px)]">
                     <ShieldCheck size={13} />
                     Admin

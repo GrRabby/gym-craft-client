@@ -6,33 +6,33 @@ import { getClassDetails } from "@/actions/classes";
 import { createCheckoutSessionAction } from "@/actions/checkout";
 import CheckoutClient from "./CheckoutClient";
 
-// Per-user data + fresh Stripe session every load — never cache
+
 export const dynamic = "force-dynamic";
 
 export default async function CheckoutPage({ params }) {
     const { id } = await params;
 
-    // Gate the route
+    
     const user = await getCurrentUser();
     if (!user) {
         redirect(`/login?redirect=/classes/${id}/checkout`);
     }
 
-    // Fetch class + booking status — single round trip
+    
     const { class: cls, isBooked, error } = await getClassDetails(id);
 
     if (error || !cls) notFound();
 
-    // If they're already booked, send them back to the details page.
-    // The Book Now button there will show "Already Booked" and they
-    // can decide what to do.
+    
+    
+    
     if (isBooked) {
         redirect(`/classes/${id}`);
     }
 
-    // Create the Stripe session server-side so we never expose creation
-    // details to the client (auth, validation, double-booking check all
-    // happen in Express before Stripe is called).
+    
+    
+    
     const session = await createCheckoutSessionAction(id);
 
     if (!session.ok || !session.clientSecret) {

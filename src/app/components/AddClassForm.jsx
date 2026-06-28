@@ -110,7 +110,7 @@ export default function AddClassForm() {
 
     return (
         <div className="max-w-4xl">
-            {/* Page header */}
+            { }
             <div className="flex items-center gap-3 mb-3">
                 <div className="h-px w-8 bg-[#E8C667]" />
                 <span className="font-['Oswald'] text-[#E8C667] text-[10px] font-semibold tracking-[4px] uppercase">
@@ -125,15 +125,15 @@ export default function AddClassForm() {
                 approve before it goes live on the schedule.
             </p>
 
-            {/* THE PANEL — form sits inside a dark surface that doesn't blend with the page */}
+            { }
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 className="relative overflow-hidden mt-10 bg-[#0a0a0a] border border-[#C9962E]/15 p-6 lg:p-10 space-y-10 [clip-path:polygon(14px_0,100%_0,100%_calc(100%-14px),calc(100%-14px)_100%,0_100%,0_14px)]"
             >
-                {/* Ambient gold glow — decorative, doesn't affect layout */}
+                { }
                 <div className="absolute -top-32 -right-32 w-64 h-64 bg-[radial-gradient(closest-side,rgba(201,150,46,0.10),transparent)] pointer-events-none" />
 
-                {/* SECTION: Image */}
+                { }
                 <Section title="Class Image" subtitle="A hero shot. PNG, JPG, or WEBP, up to 5MB.">
                     <input
                         ref={fileInputRef}
@@ -158,7 +158,7 @@ export default function AddClassForm() {
                         </button>
                     ) : (
                         <div className="relative aspect-[2/1] overflow-hidden border border-[#C9962E]/40 [clip-path:polygon(12px_0,100%_0,100%_calc(100%-12px),calc(100%-12px)_100%,0_100%,0_12px)]">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            { }
                             <img src={imagePreview} alt="Class preview" className="absolute inset-0 w-full h-full object-cover" />
                             <button
                                 type="button"
@@ -180,7 +180,7 @@ export default function AddClassForm() {
                     )}
                 </Section>
 
-                {/* SECTION: Basic info */}
+                { }
                 <Section title="Basics" subtitle="What people will see first.">
                     <div className="space-y-5">
                         <Field id="title" label="Class Name" error={errors.title?.message}>
@@ -212,7 +212,7 @@ export default function AddClassForm() {
                     </div>
                 </Section>
 
-                {/* SECTION: Category */}
+                { }
                 <Section title="Category" subtitle="Pick the one that fits best.">
                     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
                         {CATEGORIES.map(({ value, label, Icon }) => {
@@ -245,10 +245,10 @@ export default function AddClassForm() {
                     </div>
                 </Section>
 
-                {/* SECTION: Difficulty + Duration + Price */}
+                { }
                 <Section title="Details">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        {/* Difficulty pills */}
+                        { }
                         <div>
                             <label className="block font-['Oswald'] text-[#cfc6b8] text-xs font-semibold tracking-[3px] uppercase mb-2">
                                 Difficulty
@@ -278,7 +278,7 @@ export default function AddClassForm() {
                             </div>
                         </div>
 
-                        {/* Duration + Price */}
+                        { }
                         <div className="grid grid-cols-2 gap-4">
                             <Field id="duration" label="Duration" error={errors.duration?.message} hint="Minutes">
                                 <div className="flex items-center">
@@ -320,10 +320,10 @@ export default function AddClassForm() {
                     </div>
                 </Section>
 
-                {/* SECTION: Schedule */}
+                { }
                 <Section title="Schedule" subtitle="Pick the days this class runs and the time.">
                     <div className="space-y-5">
-                        {/* Days */}
+                        { }
                         <div>
                             <label className="block font-['Oswald'] text-[#cfc6b8] text-xs font-semibold tracking-[3px] uppercase mb-2">
                                 Days
@@ -350,7 +350,7 @@ export default function AddClassForm() {
                             </div>
                         </div>
 
-                        {/* Time */}
+                        { }
                         <Field id="scheduleTime" label="Time" hint="24-hour format" error={errors.scheduleTime?.message}>
                             <div className="flex items-center">
                                 <Calendar size={16} className="ml-3 text-[#7c7468] shrink-0" />
@@ -365,7 +365,7 @@ export default function AddClassForm() {
                     </div>
                 </Section>
 
-                {/* Submit */}
+                { }
                 <div className="pt-4 border-t border-[#C9962E]/15">
                     <button
                         type="submit"
@@ -384,7 +384,7 @@ export default function AddClassForm() {
     );
 }
 
-/* ---------- shared pieces ---------- */
+ 
 
 function Section({ title, subtitle, children }) {
     return (

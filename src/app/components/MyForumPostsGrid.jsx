@@ -63,7 +63,7 @@ export default function MyForumPostsGrid({ initialPosts = [] }) {
                 </div>
             )}
 
-            {/* Delete Confirmation Modal */}
+            { }
             {deletingPost && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
                     <div onClick={() => !isPending && setDeletingPost(null)} className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
@@ -102,7 +102,7 @@ export default function MyForumPostsGrid({ initialPosts = [] }) {
     );
 }
 
-/* ---------- card ---------- */
+ 
 
 function PostCard({ post, isRemoving, onDelete }) {
     const isHidden = post.status === "flagged" || post.status === "removed";
@@ -117,10 +117,10 @@ function PostCard({ post, isRemoving, onDelete }) {
             className={`group relative bg-[#0a0a0a] border ${isHidden ? "border-[#ff5a5a]/25" : "border-[#C9962E]/50 hover:border-[#C9962E]/80"
                 } transition-colors overflow-hidden flex flex-col ${CHAMFER_MD}`}
         >
-            {/* Cover image with overlaid delete button */}
+            { }
             <div className="relative aspect-[16/10] bg-[#0f0f0f] overflow-hidden">
                 {post.image ? (
-                    // eslint-disable-next-line @next/next/no-img-element
+                    
                     <img
                         src={post.image}
                         alt=""
@@ -133,7 +133,7 @@ function PostCard({ post, isRemoving, onDelete }) {
                 )}
                 <div className="absolute inset-x-0 top-0 h-16 bg-linear-to-b from-black/50 to-transparent pointer-events-none" />
 
-                {/* Status badge — only shown for non-published states */}
+                { }
                 {isHidden && (
                     <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 bg-black/70 backdrop-blur-sm border border-[#ff5a5a]/40 text-[#ff8585] font-['Oswald'] text-[10px] font-semibold tracking-[2px] uppercase [clip-path:polygon(4px_0,100%_0,100%_calc(100%-4px),calc(100%-4px)_100%,0_100%,0_4px)]">
                         <EyeOff size={10} />
@@ -141,7 +141,7 @@ function PostCard({ post, isRemoving, onDelete }) {
                     </span>
                 )}
 
-                {/* Delete button — top right of image */}
+                { }
                 <button
                     type="button"
                     onClick={onDelete}
@@ -158,7 +158,7 @@ function PostCard({ post, isRemoving, onDelete }) {
                 </button>
             </div>
 
-            {/* Body */}
+            { }
             <div className="p-5 flex flex-col flex-1">
                 <h3 className="font-['Bebas_Neue'] text-2xl text-white tracking-wide leading-tight line-clamp-2 group-hover:text-[#E8C667] transition-colors">
                     {post.title}
@@ -177,7 +177,7 @@ function PostCard({ post, isRemoving, onDelete }) {
     );
 }
 
-/* ---------- empty state ---------- */
+ 
 
 function EmptyState() {
     return (
@@ -203,7 +203,7 @@ function EmptyState() {
     );
 }
 
-/* ---------- helpers ---------- */
+ 
 
 function truncate(s, n) {
     if (!s) return "";

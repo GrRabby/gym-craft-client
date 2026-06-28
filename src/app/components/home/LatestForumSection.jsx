@@ -50,7 +50,7 @@ function PostCard({ post }) {
         <article className={`group h-full flex flex-col bg-[#0a0a0a] border border-[#C9962E]/30 hover:border-[#C9962E]/70 transition-colors overflow-hidden ${CHAMFER_MD}`}>
             <div className="relative aspect-[16/10] bg-[#0f0f0f] overflow-hidden">
                 {post.image ? (
-                    // eslint-disable-next-line @next/next/no-img-element
+                    
                     <img
                         src={post.image}
                         alt=""
@@ -99,7 +99,7 @@ function PostCard({ post }) {
 
 function Avatar({ user, size = 24 }) {
     if (user?.image) {
-        // eslint-disable-next-line @next/next/no-img-element
+        
         return (
             <img
                 src={user.image}

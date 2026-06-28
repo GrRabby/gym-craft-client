@@ -4,9 +4,7 @@ import { getAuthJwt } from "@/lib/api-token";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
-/**
- * Public — no auth needed. Forwards pagination + filter params to Express.
- */
+ 
 export async function getPublicClasses({
     page = 1, limit = 9, search = "", category = "",
 } = {}) {
@@ -39,14 +37,7 @@ export async function getPublicClasses({
     }
 }
 
-/**
- * Auth-required. Returns the class + booking/favorite status for the
- * currently logged-in user in a single round trip.
- *
- * Caller (the page) is expected to redirect to /login before calling this
- * when there's no session. If called without auth, getAuthJwt() will throw
- * or return null and the request will 401 — we surface that as an error.
- */
+ 
 export async function getClassDetails(classId) {
     try {
         const jwt = await getAuthJwt();
@@ -59,7 +50,7 @@ export async function getClassDetails(classId) {
 
         const res = await fetch(`${API_URL}/api/classes/${classId}`, {
             headers: { Authorization: `Bearer ${jwt}` },
-            cache: "no-store", // per-user data — never cache
+            cache: "no-store", 
         });
 
         if (!res.ok) {

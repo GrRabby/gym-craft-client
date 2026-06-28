@@ -7,10 +7,10 @@ export default function PostDetailsView({ post }) {
 
     return (
         <article>
-            {/* Hero image */}
+            { }
             {post.image && (
                 <div className={`relative aspect-[16/9] bg-[#0f0f0f] overflow-hidden mb-8 ${CHAMFER_MD}`}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    { }
                     <img
                         src={post.image}
                         alt=""
@@ -19,12 +19,12 @@ export default function PostDetailsView({ post }) {
                 </div>
             )}
 
-            {/* Title */}
+            { }
             <h1 className="font-['Bebas_Neue'] text-4xl lg:text-6xl text-white tracking-wide leading-none">
                 {post.title}
             </h1>
 
-            {/* Author meta */}
+            { }
             <div className="flex items-center gap-3 mt-5 pb-6 border-b border-[#C9962E]/15">
                 <Avatar user={post.author} size={36} />
                 <div className="min-w-0">
@@ -39,7 +39,7 @@ export default function PostDetailsView({ post }) {
                 </div>
             </div>
 
-            {/* Body */}
+            { }
             <div className="prose prose-invert max-w-none mt-8">
                 <p className="text-[#cfc6b8] text-base lg:text-lg leading-relaxed whitespace-pre-line">
                     {post.description}
@@ -51,7 +51,7 @@ export default function PostDetailsView({ post }) {
 
 function Avatar({ user, size = 32 }) {
     if (user?.image) {
-        // eslint-disable-next-line @next/next/no-img-element
+        
         return (
             <img
                 src={user.image}

@@ -17,7 +17,7 @@ export default function SuccessView({ cls, amount, classId, error, pending }) {
 
     return (
         <div className="bg-[#070707] min-h-screen flex items-center justify-center px-6 py-16 relative overflow-hidden">
-            {/* Ambient gold glow */}
+            { }
             <div className="absolute inset-0 bg-[radial-gradient(800px_400px_at_50%_-10%,rgba(201,150,46,0.15),transparent_60%)] pointer-events-none" />
 
             <motion.div
@@ -26,7 +26,7 @@ export default function SuccessView({ cls, amount, classId, error, pending }) {
                 transition={{ duration: 0.5 }}
                 className="relative max-w-2xl w-full"
             >
-                {/* Checkmark */}
+                { }
                 <motion.div
                     initial={{ scale: 0, rotate: -180 }}
                     animate={{ scale: 1, rotate: 0 }}
@@ -36,7 +36,7 @@ export default function SuccessView({ cls, amount, classId, error, pending }) {
                     <CheckCircle2 size={48} className="text-[#1a1304]" strokeWidth={2.5} />
                 </motion.div>
 
-                {/* Headline */}
+                { }
                 <div className="text-center mb-10">
                     <div className="flex items-center justify-center gap-3 mb-4">
                         <div className="h-px w-10 bg-[#E8C667]" />
@@ -56,7 +56,7 @@ export default function SuccessView({ cls, amount, classId, error, pending }) {
                     </p>
                 </div>
 
-                {/* Booking summary */}
+                { }
                 {cls && (
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
@@ -67,7 +67,7 @@ export default function SuccessView({ cls, amount, classId, error, pending }) {
                         <div className="flex gap-4">
                             {cls.image && (
                                 <div className={`w-24 h-24 flex-shrink-0 overflow-hidden ${CHAMFER_SM}`}>
-                                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                                    { }
                                     <img src={cls.image} alt="" className="w-full h-full object-cover" />
                                 </div>
                             )}
@@ -101,7 +101,7 @@ export default function SuccessView({ cls, amount, classId, error, pending }) {
                     </motion.div>
                 )}
 
-                {/* Actions */}
+                { }
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}

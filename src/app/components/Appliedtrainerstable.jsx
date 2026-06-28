@@ -82,7 +82,7 @@ export default function AppliedTrainersTable({ initialApplications = [] }) {
     );
 }
 
-/* ---------- Row ---------- */
+ 
 
 function ApplicationRow({ app, onViewDetails }) {
     const meta = SPECIALTY_META[app.specialty] || { label: app.specialty, Icon: Dumbbell };
@@ -127,21 +127,21 @@ function ApplicationRow({ app, onViewDetails }) {
     );
 }
 
-/* ---------- Modal ---------- */
+ 
 
 function DetailsModal({ application, isOpen, onClose }) {
     const router = useRouter();
     const [feedback, setFeedback] = useState("");
     const [isPending, startTransition] = useTransition();
-    const [actioning, setActioning] = useState(null); // "approve" | "reject"
+    const [actioning, setActioning] = useState(null); 
 
-    // Reset internal state whenever the modal opens for a new application
+    
     useEffect(() => {
         setFeedback("");
         setActioning(null);
     }, [application?.id]);
 
-    // ESC to close
+    
     useEffect(() => {
         if (!isOpen) return;
         const onEsc = (e) => e.key === "Escape" && !isPending && onClose();
@@ -149,7 +149,7 @@ function DetailsModal({ application, isOpen, onClose }) {
         return () => document.removeEventListener("keydown", onEsc);
     }, [isOpen, isPending, onClose]);
 
-    // Body scroll lock
+    
     useEffect(() => {
         if (!isOpen) return;
         document.body.style.overflow = "hidden";
@@ -202,21 +202,21 @@ function DetailsModal({ application, isOpen, onClose }) {
 
     return (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-            {/* Backdrop */}
+            { }
             <div
                 onClick={!isPending ? onClose : undefined}
                 className="absolute inset-0 bg-black/80 backdrop-blur-sm"
                 aria-hidden="true"
             />
 
-            {/* Card */}
+            { }
             <div
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="app-modal-title"
                 className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-[#0a0a0a] border border-[#C9962E]/30 shadow-[0_30px_80px_rgba(0,0,0,0.7),0_0_60px_rgba(201,150,46,0.08)] [clip-path:polygon(14px_0,100%_0,100%_calc(100%-14px),calc(100%-14px)_100%,0_100%,0_14px)]"
             >
-                {/* Header */}
+                { }
                 <div className="flex items-start justify-between gap-4 p-6 border-b border-[#C9962E]/15">
                     <div className="flex items-center gap-4 min-w-0">
                         <Avatar user={application.applicant} size={48} />
@@ -243,16 +243,16 @@ function DetailsModal({ application, isOpen, onClose }) {
                     </button>
                 </div>
 
-                {/* Body */}
+                { }
                 <div className="p-6 space-y-6">
-                    {/* Detail grid */}
+                    { }
                     <dl className="grid grid-cols-1 sm:grid-cols-3 gap-5">
                         <Detail Icon={SIcon} label="Specialty" value={meta.label} highlight />
                         <Detail Icon={Clock} label="Experience" value={`${application.experience} ${application.experience === 1 ? "year" : "years"}`} />
                         <Detail Icon={Award} label="Applied" value={applied} />
                     </dl>
 
-                    {/* Feedback */}
+                    { }
                     <div>
                         <label htmlFor="feedback" className="block font-['Oswald'] text-[#cfc6b8] text-xs font-semibold tracking-[3px] uppercase mb-2">
                             Feedback <span className="text-[#7c7468] normal-case tracking-normal font-normal">— required for rejection</span>
@@ -270,7 +270,7 @@ function DetailsModal({ application, isOpen, onClose }) {
                     </div>
                 </div>
 
-                {/* Footer */}
+                { }
                 <div className="flex flex-col sm:flex-row gap-3 justify-end p-6 pt-2 border-t border-[#C9962E]/10">
                     <button
                         onClick={onClose}
@@ -305,7 +305,7 @@ function DetailsModal({ application, isOpen, onClose }) {
     );
 }
 
-/* ---------- helpers ---------- */
+ 
 
 function Th({ children, align = "left" }) {
     return (
@@ -331,7 +331,7 @@ function Detail({ Icon, label, value, highlight }) {
 
 function Avatar({ user, size = 38 }) {
     if (user?.image) {
-        // eslint-disable-next-line @next/next/no-img-element
+        
         return <img src={user.image} alt="" className="rounded-full object-cover border-2 border-[#C9962E]/55 shrink-0" style={{ width: size, height: size }} />;
     }
     const initials = (user?.name || "U").split(" ").map(p => p[0]).slice(0, 2).join("").toUpperCase();
