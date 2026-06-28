@@ -85,7 +85,7 @@ function CategoryTile({ cat }) {
     return (
         <Link
             href={`/classes?category=${slug}`}
-            className={`group relative bg-[#0a0a0a] border border-[#C9962E]/15 hover:border-[#C9962E]/45 transition-all p-6 overflow-hidden no-underline hover:-translate-y-1 ${CHAMFER_MD}`}
+            className={`group relative bg-[#0a0a0a] border border-[#C9962E]/20 hover:border-[#C9962E]/40 transition-all p-6 overflow-hidden no-underline hover:-translate-y-1 ${CHAMFER_MD}`}
         >
             {/* Hover-aware glow */}
             <div className="absolute -top-12 -right-12 h-28 w-28 rounded-full bg-[#E8C667]/0 group-hover:bg-[#E8C667]/15 blur-2xl transition-colors pointer-events-none" />

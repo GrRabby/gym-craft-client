@@ -102,7 +102,7 @@ export default function BmiCalculatorSection() {
                     subtitle="A quick check-in on where you stand. Body Mass Index is a starting point, not a verdict."
                 />
 
-                <div className={`mt-14 bg-[#0a0a0a] border border-[#C9962E]/15 overflow-hidden ${CHAMFER_MD}`}>
+                <div className={`mt-14 bg-[#0a0a0a] border border-[#C9962E]/30 overflow-hidden ${CHAMFER_MD}`}>
                     {/* Ambient glow */}
                     <div className="relative">
                         <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-[#E8C667]/8 blur-3xl pointer-events-none" />

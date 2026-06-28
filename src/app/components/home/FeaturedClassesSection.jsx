@@ -59,7 +59,7 @@ export default function FeaturedClassesSection({ classes = [] }) {
 
 function FeaturedCard({ cls }) {
     return (
-        <article className={`group h-full flex flex-col bg-[#0a0a0a] border border-[#C9962E]/15 hover:border-[#C9962E]/40 transition-colors overflow-hidden ${CHAMFER_MD}`}>
+        <article className={`group h-full flex flex-col bg-[#0a0a0a] border border-[#C9962E]/30 hover:border-[#C9962E]/70 transition-colors overflow-hidden ${CHAMFER_MD}`}>
             {/* Image with booking-count badge */}
             <div className="relative aspect-[16/10] bg-[#0f0f0f] overflow-hidden">
                 {cls.image ? (

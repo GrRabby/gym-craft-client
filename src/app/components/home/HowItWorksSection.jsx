@@ -53,7 +53,7 @@ export default function HowItWorksSection() {
 function Step({ step }) {
     const { n, Icon, title, body } = step;
     return (
-        <div className={`relative bg-[#0a0a0a] border border-[#C9962E]/15 p-7 overflow-hidden ${CHAMFER_MD}`}>
+        <div className={`relative bg-[#0a0a0a] border border-[#C9962E]/30 p-7 overflow-hidden ${CHAMFER_MD}`}>
             {/* Background number watermark */}
             <span
                 className="absolute -top-4 -right-2 font-['Bebas_Neue'] text-[120px] leading-none text-[#C9962E]/5 select-none pointer-events-none"
