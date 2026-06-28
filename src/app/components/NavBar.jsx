@@ -144,7 +144,7 @@ export function GymCraftNavbar() {
             <div className="relative z-10 max-w-310 mx-auto px-6 h-18.5 flex items-center gap-7 justify-between">
 
                 <Link href="/" className="flex items-center gap-3 no-underline shrink-0" aria-label="GymCraft home">
-                    <img src="/Logo small.png" width={45} height={45}></img>
+                    <img src="/LogoSmall.png" width={45} height={45}></img>
                     <span className="flex flex-col justify-center leading-none">
                         <div className="font-['Oswald'] font-bold text-2xl tracking-wider uppercase">
                             <span className="bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] bg-clip-text text-transparent mr-1">GYM</span>
