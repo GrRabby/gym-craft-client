@@ -119,7 +119,7 @@ export default function RegisterPage() {
 
                 <div className="relative z-10 flex items-center gap-3">
                     <Link href={"/"} className="flex justify-center items-center gap-2 mb-5">
-                        <img src="/Logo small.png" width={40} height={40}></img>
+                        <img src="/LogoSmall.png" width={40} height={40}></img>
                         <div className="font-['Oswald'] font-bold text-2xl tracking-[2px] uppercase leading-none">
                             <span className="bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] bg-clip-text text-transparent">GYM</span>
                             <span className="text-white ml-1">CRAFT</span>
@@ -168,7 +168,7 @@ export default function RegisterPage() {
                 <div className="lg:hidden absolute top-6 left-6 right-6 flex items-center justify-between">
                     <div className="flex items-center gap-2">
                         <Link href={"/"} className="flex justify-center items-center gap-2 mb-5">
-                            <img src="/Logo small.png" width={40} height={40}></img>
+                            <img src="/LogoSmall.png" width={40} height={40}></img>
                             <div className="font-['Oswald'] font-bold text-2xl tracking-[2px] uppercase leading-none">
                                 <span className="bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] bg-clip-text text-transparent">GYM</span>
                                 <span className="text-white ml-1">CRAFT</span>
