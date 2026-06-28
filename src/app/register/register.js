@@ -57,7 +57,7 @@ export async function registerUserAction(formData) {
         if (password.length < 6) return { ok: false, error: "Password must be at least 6 characters.", field: "password" };
         if (!/[A-Z]/.test(password)) return { ok: false, error: "Password must include one uppercase letter.", field: "password" };
         if (!/[a-z]/.test(password)) return { ok: false, error: "Password must include one lowercase letter.", field: "password" };
-
+        if (!file) return { ok: false, error: "Image is required.", field: "file" };
         let imageUrl = null;
         try {
             imageUrl = await uploadAvatarFile(file);
