@@ -361,7 +361,7 @@ This project pushed me through several non-trivial technical decisions:
 
 [![GitHub](https://img.shields.io/badge/GitHub-GrRabby-181717?style=for-the-badge&logo=github)](https://github.com/GrRabby)
 [![Email](https://img.shields.io/badge/Email-grrabby9%40gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:grrabby9@gmail.com)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Your%20Name-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/gulam-robbani/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Gulam%20Robbani-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/gulam-robbani/)
 
 </div>
 

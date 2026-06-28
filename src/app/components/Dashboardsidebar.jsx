@@ -128,7 +128,7 @@ export default function DashboardSidebar() {
 
                 <div className="relative px-6 pt-6 pb-5 flex items-center justify-between">
                     <Link href="/" className="flex items-center gap-2.5 no-underline" aria-label="GymCraft home">
-                        <img src="/Logo small.png" width={45} height={45}></img>
+                        <img src="/LogoSmall.png" width={45} height={45}></img>
                         <div className="flex flex-col leading-none">
                             <span className="font-['Oswald'] font-bold text-lg tracking-wider uppercase">
                                 <span className="bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] bg-clip-text text-transparent mr-0.5">GYM</span>
