@@ -97,11 +97,11 @@ export default function TransactionsTable({ initialTransactions = [] }) {
                 </div>
             </div>
 
-            <div className="bg-[#0a0a0a] border border-[#C9962E]/15 overflow-hidden">
+            <div className="bg-[#0a0a0a] border border-[#C9962E]/30 overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-sm min-w-[800px]">
                         <thead>
-                            <tr className="border-b border-[#C9962E]/20 bg-black/40">
+                            <tr className="border-b border-[#C9962E]/30 bg-black/40">
                                 <Th>User Email</Th>
                                 <Th>Class Booked</Th>
                                 <Th>Amount</Th>
@@ -117,7 +117,7 @@ export default function TransactionsTable({ initialTransactions = [] }) {
                                     </td>
                                 </tr>
                             ) : paged.map((tx) => (
-                                <tr key={tx.id} className="border-b border-[#C9962E]/8 hover:bg-white/[0.02] transition-colors">
+                                <tr key={tx.id} className="border-b border-[#C9962E]/20 hover:bg-white/[0.02] transition-colors">
                                     <td className="px-5 py-3.5 text-[#cfc6b8] text-xs font-mono">{tx.userEmail}</td>
                                     <td className="px-5 py-3.5">
                                         <div className="flex items-center gap-2">

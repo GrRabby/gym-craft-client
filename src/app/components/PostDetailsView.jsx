@@ -25,7 +25,7 @@ export default function PostDetailsView({ post }) {
             </h1>
 
             { }
-            <div className="flex items-center gap-3 mt-5 pb-6 border-b border-[#C9962E]/15">
+            <div className="flex items-center gap-3 mt-5 pb-6 border-b border-[#C9962E]/20">
                 <Avatar user={post.author} size={36} />
                 <div className="min-w-0">
                     <div className="flex items-center gap-2">

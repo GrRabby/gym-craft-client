@@ -105,7 +105,7 @@ export default function AddForumPostForm({redirectOnSuccess = "/dashboard/traine
         <form onSubmit={handleSubmit}>
             { }
             <div
-                className={`relative bg-[#0a0a0a] border border-[#C9962E]/15 p-6 lg:p-8 ${CHAMFER_MD} overflow-hidden max-w-3xl`}
+                className={`relative bg-[#0a0a0a] border border-[#C9962E]/30 p-6 lg:p-8 ${CHAMFER_MD} overflow-hidden max-w-3xl`}
             >
                 { }
                 <div className="absolute top-0 right-0 h-40 w-40 bg-[radial-gradient(circle_at_top_right,rgba(232,198,103,0.10),transparent_60%)] pointer-events-none" />

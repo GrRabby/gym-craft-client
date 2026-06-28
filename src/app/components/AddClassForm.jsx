@@ -128,7 +128,7 @@ export default function AddClassForm() {
             { }
             <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="relative overflow-hidden mt-10 bg-[#0a0a0a] border border-[#C9962E]/15 p-6 lg:p-10 space-y-10 [clip-path:polygon(14px_0,100%_0,100%_calc(100%-14px),calc(100%-14px)_100%,0_100%,0_14px)]"
+                className="relative overflow-hidden mt-10 bg-[#0a0a0a] border border-[#C9962E]/30 p-6 lg:p-10 space-y-10 [clip-path:polygon(14px_0,100%_0,100%_calc(100%-14px),calc(100%-14px)_100%,0_100%,0_14px)]"
             >
                 { }
                 <div className="absolute -top-32 -right-32 w-64 h-64 bg-[radial-gradient(closest-side,rgba(201,150,46,0.10),transparent)] pointer-events-none" />

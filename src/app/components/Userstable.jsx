@@ -49,7 +49,6 @@ export default function UsersTable({ initialUsers = [] }) {
             if (res?.ok) toast.success(successMsg);
             else toast.error(res?.error || "Action failed");
             router.refresh();
-            setPendingRowId(null);
         });
     };
 
@@ -101,11 +100,11 @@ export default function UsersTable({ initialUsers = [] }) {
                     ]} />
                 </div>
             </div>
-            <div className="bg-[#0a0a0a] border border-[#C9962E]/15 overflow-hidden">
+            <div className="bg-[#0a0a0a] border border-[#C9962E]/30 overflow-hidden">
                 <div className="overflow-x-auto">
-                    <table className="w-full text-sm min-w-[800px]">
+                    <table className="w-full text-sm min-w-[900px]">
                         <thead>
-                            <tr className="border-b border-[#C9962E]/20 bg-black/40 whitespace-nowrap">
+                            <tr className="border-b border-[#C9962E]/30 bg-black/40 whitespace-nowrap">
                                 <Th>User</Th>
                                 <Th>Email</Th>
                                 <Th>Role</Th>
@@ -155,7 +154,7 @@ export default function UsersTable({ initialUsers = [] }) {
 function UserRow({ user, pending, onBlock, onUnblock, onPromote }) {
     const blocked = (user.status || "active") === "blocked";
     return (
-        <tr className="border-b border-[#C9962E]/8 hover:bg-white/[0.02] transition-colors">
+        <tr className="border-b border-[#C9962E]/20 hover:bg-white/[0.02] transition-colors">
             <td className="px-5 py-3.5">
                 <div className="flex items-center gap-3 min-w-0">
                     <Avatar user={user} />

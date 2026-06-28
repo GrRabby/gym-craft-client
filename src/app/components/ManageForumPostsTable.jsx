@@ -73,11 +73,11 @@ export default function ManageForumPostsTable({ initialPosts = [] }) {
                     </div>
 
                     { }
-                    <div className={`bg-[#0a0a0a] border border-[#C9962E]/15 overflow-hidden ${CHAMFER_MD}`}>
+                    <div className={`bg-[#0a0a0a] border border-[#C9962E]/30 overflow-hidden ${CHAMFER_MD}`}>
                         <div className="overflow-x-auto">
                             <table className="w-full text-left min-w-[800px]">
                                 <thead>
-                                    <tr className="border-b border-[#C9962E]/15">
+                                    <tr className="border-b border-[#C9962E]/30">
                                         <Th>Post</Th>
                                         <Th>Author</Th>
                                         <Th>Status</Th>
@@ -122,7 +122,7 @@ export default function ManageForumPostsTable({ initialPosts = [] }) {
                             <h3 className="font-['Bebas_Neue'] text-2xl tracking-wide leading-none">Delete Post?</h3>
                         </div>
                         <p className="text-[#cfc6b8] text-sm leading-relaxed mb-6">
-                            Are you sure you want to delete <span className="text-white font-semibold">"{deletingPost.title}"</span>? This action is permanent and cannot be undone.
+                            Are you sure you want to delete <span className="text-white font-semibold">&quot;{deletingPost.title}&quot;</span>? This action is permanent and cannot be undone.
                         </p>
                         <div className="flex justify-end gap-3">
                             <button
@@ -163,7 +163,7 @@ function PostRow({ post, isLast, isRemoving, onDelete }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, x: -24, transition: { duration: 0.25 } }}
             transition={{ duration: 0.2 }}
-            className={`group transition-colors hover:bg-[#C9962E]/[0.04] ${isLast ? "" : "border-b border-[#C9962E]/10"
+            className={`group transition-colors hover:bg-[#C9962E]/[0.04] ${isLast ? "" : "border-b border-[#C9962E]/20"
                 }`}
         >
             { }

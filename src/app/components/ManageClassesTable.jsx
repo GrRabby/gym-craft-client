@@ -92,11 +92,11 @@ export default function ManageClassesTable({ initialClasses = [] }) {
             </div>
 
             { }
-            <div className="bg-[#0a0a0a] border border-[#C9962E]/15 overflow-hidden">
+            <div className="bg-[#0a0a0a] border border-[#C9962E]/30 overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-sm min-w-[800px]">
                         <thead>
-                            <tr className="border-b border-[#C9962E]/20 bg-black/40">
+                            <tr className="border-b border-[#C9962E]/30 bg-black/40">
                                 <Th>Class</Th>
                                 <Th>Trainer</Th>
                                 <Th>Category</Th>
@@ -142,7 +142,7 @@ function ClassRow({ cls, onViewDetails }) {
     });
 
     return (
-        <tr className="border-b border-[#C9962E]/8 hover:bg-white/[0.02] transition-colors">
+        <tr className="border-b border-[#C9962E]/20 hover:bg-white/[0.02] transition-colors">
             <td className="px-5 py-3.5">
                 <div className="flex items-center gap-3 min-w-0">
                     {cls.image ? (

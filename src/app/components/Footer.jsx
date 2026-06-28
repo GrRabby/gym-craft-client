@@ -13,11 +13,11 @@ const QUICK_LINKS = [
 ];
 
 const RESOURCES = [
-    { label: "About Us", href: "/about" },
-    { label: "Help Center", href: "/help" },
-    { label: "Privacy Policy", href: "/privacy" },
-    { label: "Terms of Service", href: "/terms" },
-    { label: "Become a Trainer", href: "/careers/trainer" },
+    { label: "About Us", href: "/" },
+    { label: "Help Center", href: "/" },
+    { label: "Privacy Policy", href: "/" },
+    { label: "Terms of Service", href: "/" },
+    { label: "Become a Trainer", href: "/" },
 ];
 
 const SOCIAL = [

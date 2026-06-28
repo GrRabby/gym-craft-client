@@ -58,7 +58,7 @@ export default async function ForumPostDetailsPage({ params }) {
                         />
 
                         { }
-                        <hr className="my-10 border-[#C9962E]/15" />
+                        <hr className="my-10 border-[#C9962E]/20" />
 
                         { }
                         <CommentsSection

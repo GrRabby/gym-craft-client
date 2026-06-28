@@ -38,7 +38,7 @@ export default function AdminCharts({
 }) {
     return (
         <div className="space-y-5">
-            { }
+            
             <ChartCard
                 Icon={LineIcon}
                 title="Bookings Over 30 Days"
@@ -47,7 +47,7 @@ export default function AdminCharts({
                 <BookingsAreaChart data={bookingsTimeSeries} />
             </ChartCard>
 
-            { }
+            
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
                 <ChartCard
                     Icon={PieIcon}
@@ -72,7 +72,7 @@ export default function AdminCharts({
 
 function ChartCard({ Icon, title, subtitle, children }) {
     return (
-        <div className={`relative bg-[#0a0a0a] border border-[#C9962E]/15 overflow-hidden ${CHAMFER_MD}`}>
+        <div className={`relative bg-[#0a0a0a] border border-[#C9962E]/25 overflow-hidden ${CHAMFER_MD}`}>
             <div className="absolute -top-16 -right-16 h-40 w-40 rounded-full bg-[#E8C667]/8 blur-3xl pointer-events-none" />
 
             <div className="relative p-5 lg:p-6">
@@ -221,7 +221,7 @@ function UsersDonutChart({ data }) {
                     </PieChart>
                 </ResponsiveContainer>
 
-                { }
+                
                 <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
                     <p className="font-['Bebas_Neue'] text-4xl text-white leading-none">{total}</p>
                     <p className="font-['Oswald'] text-[9px] tracking-[2px] uppercase text-[#7c7468] mt-1">
@@ -230,7 +230,7 @@ function UsersDonutChart({ data }) {
                 </div>
             </div>
 
-            { }
+            
             <div className="flex justify-center gap-4 mt-4 flex-wrap">
                 {chartData.map((entry, i) => (
                     <div key={i} className="flex items-center gap-1.5 text-xs">

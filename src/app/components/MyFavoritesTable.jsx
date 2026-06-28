@@ -81,11 +81,11 @@ export default function MyFavoritesTable({ initialFavorites = [] }) {
     }
 
     return (
-        <div className={`bg-[#0a0a0a] border border-[#C9962E]/15 overflow-hidden ${CHAMFER_MD}`}>
+        <div className={`bg-[#0a0a0a] border border-[#C9962E]/30 overflow-hidden ${CHAMFER_MD}`}>
             <div className="overflow-x-auto">
                 <table className="w-full text-left min-w-[800px]">
                     <thead>
-                        <tr className="border-b border-[#C9962E]/15">
+                        <tr className="border-b border-[#C9962E]/30">
                             <Th>Class</Th>
                             <Th>Trainer</Th>
                             <Th>Schedule</Th>
@@ -123,7 +123,7 @@ function FavoriteRow({ favorite, isLast, isRemoving, onRemove }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, x: -24, transition: { duration: 0.25 } }}
             transition={{ duration: 0.2 }}
-            className={`group transition-colors hover:bg-[#C9962E]/[0.04] ${isLast ? "" : "border-b border-[#C9962E]/10"
+            className={`group transition-colors hover:bg-[#C9962E]/[0.04] ${isLast ? "" : "border-b border-[#C9962E]/20"
                 }`}
         >
             { }

@@ -134,7 +134,7 @@ export default function CommentsSection({ postId, initialComments = [], currentU
             </div>
 
             { }
-            <div className={`bg-[#0a0a0a] border border-[#C9962E]/15 p-5 mb-8 ${CHAMFER_MD}`}>
+            <div className={`bg-[#0a0a0a] border border-[#C9962E]/30 p-5 mb-8 ${CHAMFER_MD}`}>
                 <div className="flex items-start gap-3">
                     <Avatar user={currentUser} size={32} />
                     <div className="flex-1 min-w-0">
@@ -236,7 +236,7 @@ function CommentThread({ comment, replies, currentUser, onAddReply, onEdit, onDe
             { }
             {replyingTo === "thread" && (
                 <div className="ml-8 mt-3 pl-4 border-l-2 border-[#C9962E]/20">
-                    <div className={`bg-[#0a0a0a] border border-[#C9962E]/15 p-4 ${CHAMFER_SM}`}>
+                    <div className={`bg-[#0a0a0a] border border-[#C9962E]/30 p-4 ${CHAMFER_SM}`}>
                         <div className="flex items-start gap-2.5">
                             <Avatar user={currentUser} size={24} />
                             <div className="flex-1 min-w-0">
@@ -331,7 +331,7 @@ function CommentItem({ comment, currentUser, canReply, isReply, onReply, onEdit,
     }
 
     return (
-        <div className={`bg-[#0a0a0a] border border-[#C9962E]/15 p-4 ${CHAMFER_SM}`}>
+        <div className={`bg-[#0a0a0a] border border-[#C9962E]/30 p-4 ${CHAMFER_SM}`}>
             <div className="flex items-start gap-3">
                 <Avatar user={comment.author} size={isReply ? 26 : 30} />
 
@@ -476,7 +476,7 @@ function RoleBadge({ role }) {
 
 function EmptyComments() {
     return (
-        <div className={`bg-[#0a0a0a] border border-dashed border-[#C9962E]/15 p-10 text-center ${CHAMFER_SM}`}>
+        <div className={`bg-[#0a0a0a] border border-dashed border-[#C9962E]/40 p-10 text-center ${CHAMFER_SM}`}>
             <MessageCircle size={28} className="text-[#C9962E]/30 mx-auto mb-3" />
             <p className="text-[#7c7468] text-sm">
                 No comments yet. Be the first to share your thoughts.

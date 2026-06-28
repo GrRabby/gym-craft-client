@@ -108,7 +108,7 @@ function Form({ onSubmitted }) {
                                 min: { value: 0, message: "Must be 0 or more" },
                                 max: { value: 60, message: "That can't be right" },
                             })}
-                            className="w-full bg-transparent text-white placeholder:text-[#4a4339] text-[15px] outline-none pl-10 pr-3 py-3"
+                            className="w-full bg-transparent text-white placeholder:text-[#726758] text-[15px] outline-none pl-10 pr-3 py-3"
                         />
                     </div>
                     <p className="text-[#5a5247] text-[11px] mt-1.5">

@@ -110,11 +110,11 @@ export default function TrainerClassesTable({ initialClasses = [] }) {
             </div>
 
             { }
-            <div className="bg-[#0a0a0a] border border-[#C9962E]/15 overflow-hidden">
+            <div className="bg-[#0a0a0a] border border-[#C9962E]/30 overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-sm min-w-[1200px]">
                         <thead>
-                            <tr className="border-b border-[#C9962E]/20 bg-black/40">
+                            <tr className="border-b border-[#C9962E]/30 bg-black/40">
                                 <Th>Class Details</Th>
                                 <Th>Category</Th>
                                 <Th>Difficulty</Th>
@@ -141,7 +141,7 @@ export default function TrainerClassesTable({ initialClasses = [] }) {
                                 });
 
                                 return (
-                                    <tr key={cls.id} className="border-b border-[#C9962E]/8 hover:bg-white/[0.02] transition-colors">
+                                    <tr key={cls.id} className="border-b border-[#C9962E]/20 hover:bg-white/[0.02] transition-colors">
                                         <td className="px-5 py-3.5">
                                             <div className="flex items-center gap-3 min-w-0">
                                                 {cls.image ? (
@@ -168,7 +168,7 @@ export default function TrainerClassesTable({ initialClasses = [] }) {
                                                 <StatusBadge status={cls.status} />
                                                 {cls.status === "rejected" && cls.feedback && (
                                                     <p className="text-[#ff8585]/75 text-[11px] max-w-[200px] truncate italic" title={cls.feedback}>
-                                                        "{cls.feedback}"
+                                                        &quot;{cls.feedback}&quot;
                                                     </p>
                                                 )}
                                             </div>
@@ -235,7 +235,7 @@ export default function TrainerClassesTable({ initialClasses = [] }) {
                             <h3 className="font-['Bebas_Neue'] text-2xl tracking-wide leading-none">Delete Class?</h3>
                         </div>
                         <p className="text-[#cfc6b8] text-sm leading-relaxed mb-6">
-                            Are you sure you want to delete <span className="text-white font-semibold">"{deletingClass.title}"</span>? This action is permanent and cannot be undone.
+                            Are you sure you want to delete <span className="text-white font-semibold">&quot;{deletingClass.title}&quot;</span>? This action is permanent and cannot be undone.
                         </p>
                         <div className="flex justify-end gap-3">
                             <button

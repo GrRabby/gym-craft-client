@@ -146,7 +146,7 @@ function StatCard({ href, Icon, label, value, sublabel }) {
 
 function ProfileCard({ user }) {
     return (
-        <div className={`bg-[#0a0a0a] border border-[#C9962E]/15 p-6 lg:p-8 ${CHAMFER_MD}`}>
+        <div className={`bg-[#0a0a0a] border border-[#C9962E]/20 p-6 lg:p-8 ${CHAMFER_MD}`}>
             <div className="flex items-start gap-5 flex-wrap">
                 <Avatar user={user} size={96} />
                 <div className="flex-1 min-w-[200px]">

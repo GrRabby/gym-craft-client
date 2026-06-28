@@ -136,7 +136,7 @@ export default function NotificationBell({ user }) {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: -4, scale: 0.97, transition: { duration: 0.15 } }}
                         transition={{ duration: 0.18 }}
-                        className={`absolute right-0 top-full mt-2 w-80 sm:w-96 bg-[#0a0a0a] border border-[#C9962E]/25 shadow-[0_12px_40px_rgba(0,0,0,0.6)] z-50 ${CHAMFER_MD}`}
+                        className={`fixed sm:absolute right-3 sm:right-0 top-16 sm:top-full sm:mt-2 left-3 sm:left-auto w-auto sm:w-96 max-w-md sm:max-w-none bg-[#0a0a0a] border border-[#C9962E]/25 shadow-[0_12px_40px_rgba(0,0,0,0.6)] z-50 ${CHAMFER_MD}`}
                     >
                         { }
                         <div className="flex items-center justify-between px-4 py-3 border-b border-[#C9962E]/15">
