@@ -11,17 +11,17 @@ import { updateClassAction } from "@/actions/trainer/classes";
 
 const CATEGORIES = [
     { value: "strength", label: "Strength", Icon: Dumbbell },
-    { value: "cardio",   label: "Cardio",   Icon: HeartPulse },
-    { value: "hiit",     label: "HIIT",     Icon: Flame },
-    { value: "yoga",     label: "Yoga",     Icon: Sparkles },
-    { value: "pilates",  label: "Pilates",  Icon: Activity },
+    { value: "cardio", label: "Cardio", Icon: HeartPulse },
+    { value: "hiit", label: "HIIT", Icon: Flame },
+    { value: "yoga", label: "Yoga", Icon: Sparkles },
+    { value: "pilates", label: "Pilates", Icon: Activity },
     { value: "mobility", label: "Mobility", Icon: Move },
 ];
 
 const DIFFICULTIES = [
-    { value: "beginner",     label: "Beginner",     hint: "New to this" },
+    { value: "beginner", label: "Beginner", hint: "New to this" },
     { value: "intermediate", label: "Intermediate", hint: "Steady practice" },
-    { value: "advanced",     label: "Advanced",     hint: "Serious training" },
+    { value: "advanced", label: "Advanced", hint: "Serious training" },
 ];
 
 const DAYS = [
@@ -44,7 +44,7 @@ export default function EditClassModal({ cls, isOpen, onClose }) {
     const [isPending, startTransition] = useTransition();
 
     const {
-        register, handleSubmit, reset,
+        register, handleSubmit,
         formState: { errors },
     } = useForm({
         mode: "onTouched",
@@ -56,26 +56,6 @@ export default function EditClassModal({ cls, isOpen, onClose }) {
             scheduleTime: cls?.scheduleTime || "07:00",
         }
     });
-
-    
-    useEffect(() => {
-        if (cls) {
-            reset({
-                title: cls.title,
-                description: cls.description,
-                duration: cls.duration,
-                price: cls.price,
-                scheduleTime: cls.scheduleTime,
-            });
-            setCategory(cls.category);
-            setDifficulty(cls.difficulty);
-            setSelectedDays(cls.scheduleDays || []);
-            setImagePreview(cls.image);
-            setImageFile(null);
-        }
-    }, [cls, reset]);
-
-    
     useEffect(() => {
         if (!isOpen) return;
         const onEsc = (e) => e.key === "Escape" && !isPending && onClose();
@@ -83,7 +63,7 @@ export default function EditClassModal({ cls, isOpen, onClose }) {
         return () => document.removeEventListener("keydown", onEsc);
     }, [isOpen, isPending, onClose]);
 
-    
+
     useEffect(() => {
         if (!isOpen) return;
         document.body.style.overflow = "hidden";
@@ -118,8 +98,8 @@ export default function EditClassModal({ cls, isOpen, onClose }) {
         );
 
     const onSubmit = (values) => {
-        if (!category)                return toast.error("Pick a category.");
-        if (!difficulty)              return toast.error("Pick a difficulty level.");
+        if (!category) return toast.error("Pick a category.");
+        if (!difficulty) return toast.error("Pick a difficulty level.");
         if (selectedDays.length === 0) return toast.error("Pick at least one schedule day.");
 
         const fd = new FormData();
@@ -131,7 +111,7 @@ export default function EditClassModal({ cls, isOpen, onClose }) {
         fd.append("price", values.price);
         fd.append("scheduleTime", values.scheduleTime);
         selectedDays.forEach((d) => fd.append("scheduleDays", d));
-        
+
         if (imageFile) {
             fd.append("image", imageFile);
         }
@@ -159,8 +139,6 @@ export default function EditClassModal({ cls, isOpen, onClose }) {
                 className="absolute inset-0 bg-black/80 backdrop-blur-sm"
                 aria-hidden="true"
             />
-
-            { }
             <div
                 role="dialog"
                 aria-modal="true"
@@ -282,17 +260,15 @@ export default function EditClassModal({ cls, isOpen, onClose }) {
                                         key={value}
                                         onClick={() => setCategory(value)}
                                         aria-pressed={selected}
-                                        className={`flex flex-col items-center justify-center gap-1.5 p-3 transition-all cursor-pointer [clip-path:polygon(8px_0,100%_0,100%_calc(100%-8px),calc(100%-8px)_100%,0_100%,0_8px)] ${
-                                            selected
+                                        className={`flex flex-col items-center justify-center gap-1.5 p-3 transition-all cursor-pointer [clip-path:polygon(8px_0,100%_0,100%_calc(100%-8px),calc(100%-8px)_100%,0_100%,0_8px)] ${selected
                                                 ? "bg-linear-to-br from-[#C9962E]/25 via-[#C9962E]/10 to-transparent border border-[#E8C667]/55"
                                                 : "bg-white/[0.02] border border-[#C9962E]/20 hover:border-[#C9962E]/50"
-                                        }`}
+                                            }`}
                                     >
-                                        <span className={`inline-flex items-center justify-center h-9 w-9 [clip-path:polygon(6px_0,100%_0,100%_calc(100%-6px),calc(100%-6px)_100%,0_100%,0_6px)] ${
-                                            selected
+                                        <span className={`inline-flex items-center justify-center h-9 w-9 [clip-path:polygon(6px_0,100%_0,100%_calc(100%-6px),calc(100%-6px)_100%,0_100%,0_6px)] ${selected
                                                 ? "bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] text-[#1a1304]"
                                                 : "bg-[#0f0f0f] border border-[#C9962E]/25 text-[#cfc6b8]"
-                                        }`}>
+                                            }`}>
                                             <Icon size={16} strokeWidth={selected ? 2.2 : 1.8} />
                                         </span>
                                         <span className={`font-['Oswald'] text-[10px] tracking-[1px] uppercase font-semibold ${selected ? "text-white" : "text-[#cfc6b8]"}`}>
@@ -321,11 +297,10 @@ export default function EditClassModal({ cls, isOpen, onClose }) {
                                                 key={value}
                                                 onClick={() => setDifficulty(value)}
                                                 aria-pressed={selected}
-                                                className={`p-2.5 text-left transition-all cursor-pointer [clip-path:polygon(6px_0,100%_0,100%_calc(100%-6px),calc(100%-6px)_100%,0_100%,0_6px)] ${
-                                                    selected
+                                                className={`p-2.5 text-left transition-all cursor-pointer [clip-path:polygon(6px_0,100%_0,100%_calc(100%-6px),calc(100%-6px)_100%,0_100%,0_6px)] ${selected
                                                         ? "bg-linear-to-br from-[#C9962E]/25 via-[#C9962E]/10 to-transparent border border-[#E8C667]/55"
                                                         : "bg-white/[0.02] border border-[#C9962E]/20 hover:border-[#C9962E]/50"
-                                                }`}
+                                                    }`}
                                             >
                                                 <div className={`font-['Oswald'] text-[11px] tracking-[1px] uppercase font-semibold ${selected ? "text-white" : "text-[#cfc6b8]"}`}>
                                                     {label}
@@ -395,11 +370,10 @@ export default function EditClassModal({ cls, isOpen, onClose }) {
                                                 key={value}
                                                 onClick={() => toggleDay(value)}
                                                 aria-pressed={selected}
-                                                className={`px-3 py-1.5 font-['Oswald'] text-xs tracking-[1px] uppercase font-semibold cursor-pointer transition-all [clip-path:polygon(4px_0,100%_0,100%_calc(100%-4px),calc(100%-4px)_100%,0_100%,0_4px)] ${
-                                                    selected
+                                                className={`px-3 py-1.5 font-['Oswald'] text-xs tracking-[1px] uppercase font-semibold cursor-pointer transition-all [clip-path:polygon(4px_0,100%_0,100%_calc(100%-4px),calc(100%-4px)_100%,0_100%,0_4px)] ${selected
                                                         ? "bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] text-[#1a1304] shadow-[inset_0_1px_0_rgba(255,255,255,0.4)]"
                                                         : "bg-white/[0.02] border border-[#C9962E]/25 text-[#cfc6b8] hover:border-[#E8C667] hover:text-white"
-                                                }`}
+                                                    }`}
                                             >
                                                 {short}
                                             </button>

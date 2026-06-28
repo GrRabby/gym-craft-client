@@ -133,7 +133,6 @@ export async function updateClassAction(classId, formData) {
     if (error) return { ok: false, error, blocked };
     if (user.role !== "trainer")
         return { ok: false, error: "Only trainers can update classes." };
-
     const imageFile    = formData.get("image");
     const title        = String(formData.get("title") || "").trim();
     const description  = String(formData.get("description") || "").trim();
@@ -143,7 +142,6 @@ export async function updateClassAction(classId, formData) {
     const price        = Number(formData.get("price"));
     const scheduleTime = String(formData.get("scheduleTime") || "");
     const scheduleDays = formData.getAll("scheduleDays").map(String);
-
     let imageUrl;
     if (imageFile && imageFile.size > 0) {
         try {

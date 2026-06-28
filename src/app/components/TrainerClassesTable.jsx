@@ -37,7 +37,7 @@ export default function TrainerClassesTable({ initialClasses = [] }) {
     const [search, setSearch] = useState("");
     const [statusFilter, setStatusFilter] = useState("all");
 
-    
+
     const [editingClass, setEditingClass] = useState(null);
     const [attendeesClass, setAttendeesClass] = useState(null);
     const [deletingClass, setDeletingClass] = useState(null);
@@ -145,7 +145,7 @@ export default function TrainerClassesTable({ initialClasses = [] }) {
                                         <td className="px-5 py-3.5">
                                             <div className="flex items-center gap-3 min-w-0">
                                                 {cls.image ? (
-                                                    
+
                                                     <img src={cls.image} alt="" className="h-10 w-16 object-cover border border-[#C9962E]/30 shrink-0" />
                                                 ) : (
                                                     <div className="h-10 w-16 bg-[#0f0f0f] border border-[#C9962E]/20 shrink-0" />
@@ -208,22 +208,29 @@ export default function TrainerClassesTable({ initialClasses = [] }) {
                 </div>
             </div>
 
-            { }
-            <EditClassModal
-                cls={editingClass}
-                isOpen={!!editingClass}
-                onClose={() => {
-                    setEditingClass(null);
-                    router.refresh();
-                }}
-            />
-
-            <AttendeesModal
-                classId={attendeesClass?.id}
-                className={attendeesClass?.title}
-                isOpen={!!attendeesClass}
-                onClose={() => setAttendeesClass(null)}
-            />
+            {editingClass && (
+                <EditClassModal
+                    key={editingClass.id}
+                    cls={editingClass}
+                    isOpen={true}
+                    onClose={() => {
+                        setEditingClass(null);
+                        router.refresh();
+                    }}
+                />
+            )}
+            {attendeesClass && (
+                <AttendeesModal
+                    key={attendeesClass.id}
+                    classId={attendeesClass.id}
+                    className={attendeesClass.title}
+                    isOpen={true}
+                    onClose={() => {
+                        setAttendeesClass(null);
+                        router.refresh();
+                    }}
+                />
+            )}
 
             { }
             {deletingClass && (
