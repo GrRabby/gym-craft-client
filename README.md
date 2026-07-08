@@ -5,6 +5,9 @@
 **Forge Your Strongest Self.**
 
 A production-grade gym & fitness management platform with role-based dashboards, Stripe-powered class booking, a community forum, and rich platform analytics.
+<img width="1897" height="938" alt="Screenshot 2026-07-09 005956" src="https://github.com/user-attachments/assets/67af0e91-a303-49d5-8d4b-968711c10b53" />
+
+🔗 **Live Site:** [https://gym-craft-client.vercel.app/](https://gym-craft-client.vercel.app/)
 
 ![Next.js](https://img.shields.io/badge/Next.js-16-000000?style=for-the-badge&logo=next.js&logoColor=white)
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)
