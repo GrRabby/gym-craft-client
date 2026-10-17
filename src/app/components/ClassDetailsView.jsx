@@ -54,7 +54,7 @@ export default function ClassDetailsView({ cls, initialBooked, initialFavorited,
     const isBooked = initialBooked;
     const back = BACK_LINKS[from] || DEFAULT_BACK;
 
-     
+
 
     function handleBookClick() {
         if (isBooked) {
@@ -69,41 +69,27 @@ export default function ClassDetailsView({ cls, initialBooked, initialFavorited,
 
         const wasFavorited = isFavorited;
 
-        
+
         setIsFavorited(!wasFavorited);
 
         startFavoriteTransition(async () => {
-            try {
-                const res = await fetch(`/api/favorites/${cls.id}`, {
-                    method: wasFavorited ? "DELETE" : "POST",
-                });
+            const action = wasFavorited ? removeFavoriteAction : addFavoriteAction;
+            const result = await action(cls.id);
 
-                const data = await res.json().catch(() => ({}));
-
-                if (!res.ok) {
-                    
-                    setIsFavorited(wasFavorited);
-                    if (data.blocked) {
-                        toast.error("Action restricted by Admin");
-                    } else {
-                        toast.error(data.error || "Failed to update favorite");
-                    }
-                    return;
-                }
-
-                toast.success(
-                    wasFavorited
-                        ? "Removed from favorites"
-                        : "Successfully added to your favorites!",
-                );
-            } catch (err) {
-                setIsFavorited(wasFavorited);
-                toast.error("Network error. Please try again.");
+            if (!result.ok) {
+                setIsFavorited(wasFavorited); // rollback
+                toast.error(result.error || "Failed to update favorite");
+                return;
             }
+            toast.success(
+                wasFavorited
+                    ? "Removed from favorites"
+                    : "Successfully added to your favorites!",
+            );
         });
     }
 
-     
+
 
     const categoryMeta = CATEGORY_META[cls.category] || { label: cls.category, Icon: Dumbbell };
     const CatIcon = categoryMeta.Icon;
@@ -129,7 +115,7 @@ export default function ClassDetailsView({ cls, initialBooked, initialFavorited,
                     className={`mt-6 relative aspect-[21/9] overflow-hidden bg-[#0a0a0a] border border-[#C9962E]/20 ${CHAMFER_LG}`}
                 >
                     {cls.image ? (
-                        
+
                         <img src={cls.image} alt="" className="w-full h-full object-cover" />
                     ) : (
                         <div className="w-full h-full flex items-center justify-center">
@@ -189,7 +175,7 @@ export default function ClassDetailsView({ cls, initialBooked, initialFavorited,
     );
 }
 
- 
+
 
 function ActionCard({
     cls, isBooked, isFavorited, isFavoritePending, onBook, onToggleFavorite,
@@ -219,8 +205,8 @@ function ActionCard({
                     type="button"
                     onClick={onBook}
                     className={`w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 font-['Oswald'] font-semibold text-sm tracking-[2px] uppercase cursor-pointer transition-all ${CHAMFER_SM} ${isBooked
-                            ? "bg-[#0f0f0f] border-2 border-[#4ade80]/40 text-[#4ade80] hover:border-[#4ade80]/60"
-                            : "bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] text-[#1a1304] shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_4px_14px_rgba(201,150,46,0.25)] hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_6px_20px_rgba(201,150,46,0.35)]"
+                        ? "bg-[#0f0f0f] border-2 border-[#4ade80]/40 text-[#4ade80] hover:border-[#4ade80]/60"
+                        : "bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] text-[#1a1304] shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_4px_14px_rgba(201,150,46,0.25)] hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_6px_20px_rgba(201,150,46,0.35)]"
                         }`}
                 >
                     {isBooked ? (
@@ -243,8 +229,8 @@ function ActionCard({
                     disabled={isFavoritePending}
                     aria-pressed={isFavorited}
                     className={`w-full inline-flex items-center justify-center gap-2 px-5 py-3 font-['Oswald'] font-semibold text-xs tracking-[2px] uppercase cursor-pointer transition-all ${CHAMFER_SM} disabled:opacity-60 disabled:cursor-wait ${isFavorited
-                            ? "bg-[#C9962E]/10 border-2 border-[#E8C667]/50 text-[#E8C667] hover:bg-[#C9962E]/15"
-                            : "bg-white/[0.02] border-2 border-[#C9962E]/25 text-[#cfc6b8] hover:border-[#E8C667] hover:text-white"
+                        ? "bg-[#C9962E]/10 border-2 border-[#E8C667]/50 text-[#E8C667] hover:bg-[#C9962E]/15"
+                        : "bg-white/[0.02] border-2 border-[#C9962E]/25 text-[#cfc6b8] hover:border-[#E8C667] hover:text-white"
                         }`}
                 >
                     {isFavoritePending ? (
@@ -269,7 +255,7 @@ function ActionCard({
     );
 }
 
- 
+
 
 function DescriptionSection({ cls }) {
     return (
@@ -304,8 +290,8 @@ function ScheduleSection({ cls }) {
                             <div
                                 key={day}
                                 className={`text-center py-2.5 transition-colors ${CHAMFER_XS} ${active
-                                        ? "bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] text-[#1a1304] font-bold shadow-[inset_0_1px_0_rgba(255,255,255,0.4)]"
-                                        : "bg-white/[0.02] border border-[#C9962E]/15 text-[#5a5247]"
+                                    ? "bg-linear-to-br from-[#F7E4A3] via-[#E8C667] to-[#C9962E] text-[#1a1304] font-bold shadow-[inset_0_1px_0_rgba(255,255,255,0.4)]"
+                                    : "bg-white/[0.02] border border-[#C9962E]/15 text-[#5a5247]"
                                     }`}
                             >
                                 <span className="font-['Oswald'] text-xs tracking-[2px] uppercase">
@@ -352,7 +338,7 @@ function SectionTitle({ children }) {
 
 function Avatar({ user, size = 24 }) {
     if (user?.image) {
-        
+
         return (
             <img
                 src={user.image}
